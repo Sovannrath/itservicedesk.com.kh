@@ -1,0 +1,55 @@
+<!-- #HEADER -->
+<header id="header">
+  <div id="logo-group">
+
+    <!-- PLACE YOUR LOGO HERE -->
+    <span id="logo" style="padding-top:0px; margin-top:0px; margin-left:5px"> <img src="{{asset('img/logo.png')}}" style="height:50px; width: auto; padding-top:0px; margin-top:0px" alt="NVC Corporation"> </span>
+    <!-- END LOGO PLACEHOLDER -->
+  </div>
+
+    <!-- #SEARCH -->
+    <!-- input: search field -->
+    <form action="#" class="header-search pull-left">
+      <input id="search-fld"style="border-radius:50px; min-width:350px; background-color:fff" type="text" name="param" placeholder="Find reports and more">
+      <button type="submit">
+        <i class="fa fa-search"></i>
+      </button>
+      <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
+    </form>
+    <!-- end input: search field -->
+
+  <!-- #TOGGLE LAYOUT BUTTONS -->
+  <!-- pulled right: nav area -->
+  <div class="pull-right">
+
+    <!-- collapse menu button -->
+    <div id="hide-menu" class="btn-header pull-right">
+      <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+    </div>
+    <!-- end collapse menu -->
+
+
+    <!-- logout button -->
+    <div id="" class="pull-right" style="padding:15px 5px 5px 15px; font-size: 14px;">
+      <span> <a href="#" title="Sign Out" data-action="userLogout">Sign Out</a></span>
+    </div>
+    <div class="pull-right" style="padding:15px 5px 5px 15px; font-size: 14px; ">|</div>
+    <!-- end logout button -->
+    <div id="logout" class="pull-right" style="padding:15px 5px 5px 15px; font-size: 14px;">
+      <span> <a href="#" title="Sign Out" data-action="userLogout">Alert</a></span>
+    </div>
+    <div class="pull-right" style="padding:15px 5px 5px 15px; font-size: 14px; ">|</div>
+    <div id="logout" class="pull-right" style="padding:15px 5px 5px 15px; font-size: 14px;">
+      <span> <a href="#" title="Sign Out" data-action="userLogout">Account</a></span>
+    </div>
+
+    <!-- search mobile button (this is hidden till mobile view port) -->
+    <div id="search-mobile" class="btn-header transparent pull-right">
+      <span> <a href="javascript:void(0)" title="Search"><i class="fa fa-search"></i></a> </span>
+    </div>
+    <!-- end search mobile button -->
+  </div>
+  <!-- end pulled right: nav area -->
+
+</header>
+<!-- END HEADER -->

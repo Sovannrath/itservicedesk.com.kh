@@ -1,0 +1,239 @@
+<?php $__env->startSection('template_title'); ?>
+	Dashboard
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('content'); ?>
+
+<!-- #MAIN CONTENT -->
+<div id="content">
+		<div class="row">
+		<h1 class="page-title txt-color-blueDark">
+
+	      <!-- PAGE HEADER -->
+	      <i class="fa-fw fa fa-home"></i>
+        Dashboard    
+    	</h1>
+		</div>
+
+  <!-- col -->
+  <div class="col-sm-12">
+		<!-- NEW WIDGET START -->
+		<article class="col-xs-12 col-sm-6">
+							<!-- Widget ID (each widget will need unique ID)-->
+							<div class="jarviswidget" id="wid-id-2"
+									data-widget-colorbutton="false"
+									data-widget-editbutton="false"
+									data-widget-togglebutton="false"
+									data-widget-deletebutton="false"
+									data-widget-fullscreenbutton="false"
+									data-widget-custombutton="false"
+									data-widget-collapsed="false"
+									data-widget-sortable="false">
+								<header>
+									<span class="widget-icon"> <i class="fa fa-question-circle text-primary"></i> </span>
+									<h2>All Incidents</h2>
+
+								</header>
+
+								<!-- widget div-->
+								<div>
+
+									<!-- widget edit box -->
+									<div class="jarviswidget-editbox">
+										<!-- This area used as dropdown edit box -->
+										<input class="form-control" type="text">
+									</div>
+									<!-- end widget edit box -->
+
+									<!-- widget content -->
+									<div class="widget-body no-padding">
+
+										<!-- this is what the user will see -->
+										<div class="row">
+											<div class="col-sm-4 col-md-3 col-md-offset-1 text-center">
+												<h3 class="margin-bottom-0">
+													750
+													<br>
+													<small class="font-xs"><sup>All Incidents</sup></small>
+												</h3>
+											</div>
+											<div class="col-sm-4 col-md-3 text-center">
+												<h3 class="margin-bottom-0">
+													189
+													<br>
+													<small class="font-xs"><sup>Opened Incidents</sup></small>
+												</h3>
+											</div>
+											<div class="col-sm-4 col-md-3 text-center">
+												<h3 class="margin-bottom-0">
+													346
+													<br>
+													<small class="font-xs"><sup>Closed Incidents</sup></small>
+												</h3>
+											</div>
+										</div>
+
+										<hr class="margin-5">
+										<div id="linechart" class="chart"></div>
+									</div>
+									<!-- end widget content -->
+
+								</div>
+								<!-- end widget div -->
+
+							</div>
+							<!-- end widget -->
+						</article>
+
+				<article class="col-xs-12 col-sm-6">
+						<!-- Widget ID (each widget will need unique ID)-->
+						<div class="jarviswidget" id="wid-id-4"
+						data-widget-colorbutton="true"
+						data-widget-editbutton="true"
+						data-widget-togglebutton="true"
+						data-widget-deletebutton="true"
+						data-widget-fullscreenbutton="true"
+						data-widget-custombutton="true"
+						data-widget-collapsed="true"
+						data-widget-sortable="true">
+						<header>
+							<span class="widget-icon"> <i class="fa fa-envelope text-primary"></i> </span>
+							<h2>All Tickets</h2>
+
+						</header>
+
+						<!-- widget div-->
+						<div>
+
+							<!-- widget edit box -->
+							<div class="jarviswidget-editbox">
+								<!-- This area used as dropdown edit box -->
+								<input class="form-control" type="text">
+							</div>
+							<!-- end widget edit box -->
+
+							<!-- widget content -->
+							<div class="widget-body">
+
+								<!-- this is what the user will see -->
+								<canvas id="pieChart" height="120"></canvas>
+
+							</div>
+							<!-- end widget content -->
+
+						</div>
+						<!-- end widget div -->
+
+					</div>
+					<!-- end widget -->
+					<!-- WIDGET END -->
+		</article>
+		<!-- WIDGET END -->
+		<!-- NEW WIDGET START -->
+		<article class="col-xs-12 col-sm-12">
+
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget" id="wid-id-7"
+			data-widget-colorbutton="false"
+			data-widget-editbutton="false"
+			data-widget-togglebutton="false"
+			data-widget-deletebutton="false"
+			data-widget-fullscreenbutton="false"
+			data-widget-custombutton="false"
+			data-widget-collapsed="false"
+			data-widget-sortable="false">
+			<header>
+				<span class="widget-icon"> <i class="fa fa-rss text-info"></i> </span>
+				<h2>Recent update</h2>
+
+			</header>
+
+			<!-- widget div-->
+			<div>
+
+				<!-- widget edit box -->
+				<div class="jarviswidget-editbox">
+					<!-- This area used as dropdown edit box -->
+					<input class="form-control" type="text">
+				</div>
+				<!-- end widget edit box -->
+
+				<!-- widget content -->
+				<div class="widget-body no-padding">
+
+					<!-- this is what the user will see -->
+					<div class="chat-body custom-scroll">
+						<ul>
+							<li class="message margin-bottom-10">
+								<img src="<?php echo e(asset('img/avatars/5.png')); ?>" alt="" class="img-circle">
+								<div class="message-text">
+									<a href="#" class="username txt-color-blueDark">Cannot start outlook email</a>
+									<span class="font-xs">
+										Display Font too small in Telegram
+									</span>
+									<time class="p-relative d-block margin-top-5"> 2017-01-13 </time>
+								</div>
+							</li>
+							<li class="message margin-bottom-10">
+								<img src="<?php echo e(asset('img/avatars/1.png')); ?>" alt="" class="img-circle">
+								<div class="message-text">
+									<a href="javascript:void(0);" class="username txt-color-blueDark">Display Font too small in Telegram</a>
+									<span class="font-xs">
+										In my telegram, font khmer displayed to small but english font ok.
+									</span>
+									<time class="p-relative d-block margin-top-5"> 2017-01-13 </time>
+								</div>
+							</li>
+							<li class="message margin-bottom-10">
+								<img src="<?php echo e(asset('img/avatars/3.png')); ?>" alt="" class="img-circle">
+								<div class="message-text">
+									<a href="javascript:void(0);" class="username txt-color-blueDark">Zekarburg Almandalie</a>
+									<span class="font-xs">
+										Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
+									</span>
+									<time class="p-relative d-block margin-top-5"> 2017-01-13 </time>
+								</div>
+							</li>
+							<li class="message margin-bottom-10">
+								<img src="<?php echo e(asset('img/avatars/4.png')); ?>" alt="" class="img-circle">
+								<div class="message-text">
+									<a href="javascript:void(0);" class="username txt-color-blueDark">Barley Krazurkth</a>
+									<span class="font-xs">
+										Bring to the table win-win survival strategies to ensure proactive domination.
+									</span>
+									<time class="p-relative d-block margin-top-5"> 2017-01-13 </time>
+								</div>
+							</li>
+							<li class="v-align-m text-align-center">
+								<a href="javascript:void(0);" class="btn btn-primary no-margin btn-xs">Load more</a>
+							</li>
+						</ul>
+					</div>
+
+				</div>
+				<!-- end widget content -->
+
+			</div>
+			<!-- end widget div -->
+
+		</div>
+		<!-- end widget -->
+
+	</article>
+	<!-- WIDGET END -->
+
+  </div>
+  <!-- end col -->
+</div>
+
+<!-- end row -->
+
+<!-- END #MAIN CONTENT -->
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('script'); ?>
+	<?php echo $__env->make('admin.scripts.chart-script', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->yieldContent('register_form'); ?>
+
+
+<?php echo $__env->make('layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

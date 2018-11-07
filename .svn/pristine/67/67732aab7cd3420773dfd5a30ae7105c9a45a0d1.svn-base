@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
+use App\Http\Controllers\Session;
+use App\Http\Controllers\Auth;
+
+class HomeController extends Controller
+{
+    //
+
+	public function showLogin()
+	{
+	    // show the form
+	    return View('login');
+	}
+
+
+    public function doLogin(request $request)
+	{
+	// validate the info, create rules for the inputs
+	$request->validate([
+             'email' => 'required|email',
+             'password' => 'required',
+             'remember_token' => 'boolean'
+         ]);
+	     $client = new \GuzzleHttp\Client();
+         $username = $request->get('email');
+         $password = $request->get('password');
+         $business_app ='APP000002-TAKEN-KEY';
+
+         $getUser = json_decode(file_get_contents('http://10.0.8.239:8888/api/ERP_GetEnterpriseUserLogin/GetErp_userlogin?UserName='.$username.'&Password='.$password.'&BusinessApp='.$business_app), true);
+         //return dd($getUser);
+         if(!$getUser)
+         {
+            $messege ="You don't have account yet. Please contact IT for registration";
+            return response($messege);
+         }
+         dd(session_create());
+         $user_id = session()->get( 'id' );
+         $email_id = $getUser[0]["EmailID"];
+         $role = $getUser[0]["BusinessRoleID"];
+            switch ($role){
+            case "0":
+            return redirect('/user/admin')->with( [ 'user_id' => $user_id ]);
+            break;
+            case "1":
+            return redirect('/user/admin');
+            break;
+            case "2":
+            return redirect('/user/manager');
+            break;
+            case "3":
+            return redirect('/user/biz');
+            break;
+            default:
+            return '/login';
+            }
+         
+	}
+	// app/controllers/HomeController.php
+	public function doLogout()
+	{
+	    Auth::logout(); // log the user out of our application
+	    return Redirect::to('login'); // redirect the user to the login screen
+	}
+}

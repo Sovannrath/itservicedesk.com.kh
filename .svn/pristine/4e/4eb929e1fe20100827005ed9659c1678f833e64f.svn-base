@@ -1,0 +1,95 @@
+<?php
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+// route to show the login form
+Route::get('login', array('uses' => 'HomeController@showLogin'))->name('login');
+Route::post('login', array('uses' => 'HomeController@doLogin'));
+Route::get('/', array('uses' => 'HomeController@showLogin'))->middleware('checkUser');
+Route::get('/logout', array('uses' => 'HomeController@doLogout'))->name('logout')->middleware('checkUser');
+
+
+// Admin group
+Route::group(['middleware' => ['web','checkUser']], function () {
+
+   	Route::get('/dashboard', array('uses' => 'Admin\AdminController@index'))->name('dashboard')->middleware('isSuperAdmin');
+// Register Employee
+   	Route::get('/employees', array('uses' => 'EmployeeController@index'))->name('employees')->middleware('isSuperAdmin');
+	Route::get('/employee', array('uses' => 'EmployeeController@ajaxShow'))->middleware('isSuperAdmin');
+	Route::get('/employee/{EmployeeID}/profile', array('uses' => 'EmployeeController@ShowEmployee'))->middleware('isSuperAdmin');
+	Route::get('/employees/edit/{EmployeeID}', array('uses' => 'EmployeeController@edit'))->middleware('isSuperAdmin');
+	Route::post('/employees/edit/{EmployeeID}', array('uses' => 'EmployeeController@update'))->middleware('isSuperAdmin');
+	Route::get('/employees/delete/{EmployeeID}', array('uses' => 'EmployeeController@destroy'))->middleware('isSuperAdmin');
+  	Route::get('/employees/register', array('uses' => 'EmployeeController@getRegisterForm'))->name('getRegister')->middleware('isSuperAdmin');
+	Route::post('/employees/register', array('uses' => 'EmployeeController@store'))->middleware('isSuperAdmin');
+	Route::get('/employees/generate/{EmailID}', array('uses' => 'EmployeeController@generateLoginEmail'))->name('generate.email')->middleware('isSuperAdmin');
+
+	Route::get('/mail', array('uses' => 'Mail\sendNotifyEmail@build'))->middleware('isSuperAdmin');
+	Route::get('/sendmail/{Email}','EmployeeController@generateLoginConfirmation')->middleware('isSuperAdmin');
+
+	Route::get('/incidents','Admin\IncidentController@index')->name('incidents')->middleware('isSuperAdmin');
+	Route::get('/create-incident','Admin\IncidentController@showCreateIncident')->name('create.incident')->middleware('isSuperAdmin');
+	Route::post('/create-incident','Admin\IncidentController@store')->name('store.incident')->middleware('isSuperAdmin');
+	Route::get('/{case_id}/edit-incident','Admin\IncidentController@edit')->name('edit.incident')->middleware('isSuperAdmin');
+	Route::post('/{case_id}/update-incident','Admin\IncidentController@update')->name('update.incident')->middleware('isSuperAdmin');
+	Route::get('/{case_id}/delete','Admin\IncidentController@delete')->middleware('isSuperAdmin');
+	Route::get('/attachment/download/{file_name}','Admin\IncidentController@downloadAttachment')->middleware('isSuperAdmin');
+	Route::get('/ajax/incidents','Admin\IncidentController@ajax_call')->middleware('isSuperAdmin');
+	Route::get('/markAsRead','Admin\IncidentController@readNotifications')->middleware('isSuperAdmin');
+	Route::get('/ajax/All-Incidents','Admin\IncidentController@ajaxUnreadNotifications')->middleware('isSuperAdmin');
+	Route::get('/incidents/investigate','Admin\IncidentController@showInvestigate')->name('investigate')->middleware('isSuperAdmin');
+});
+
+
+// User Group
+Route:: group(['middleware' => ['checkUser', 'web']], function(){
+
+	Route::get('/home', array('uses' => 'User\UserController@index'))->name('home')->middleware('isManager');
+	Route::get('/user-home', array('uses' => 'User\UserController@getUserIndex'))->name('user.home')->middleware('isUser');
+	Route::get('/user/register', array('uses' => 'User\UserController@showRegisterUser'))->name('user.register')->middleware('isManager');
+
+	Route::get('/user/AuthorizeApp', array('uses' => 'User\UserController@checkBusinessAppAuthorize'))->middleware('isManager');
+	//test hashbytes encrypt
+	Route::get('/encrypt', function(){
+
+		return hash('SHA1', 'ERP@2018');
+
+	});
+
+	Route::get('/user/servicedesk', array('uses' => 'User\UserController@getServiceDesk'))->name('servicedesk')->middleware('isManager');
+	Route::get('/user/incident/create', array('uses' => 'User\IncidentController@create'))->name('incident.create')->middleware('isManager');
+	Route::post('/user/incident/create', array('uses' => 'User\IncidentController@store'))->name('incident.store')->middleware('isManager');
+	Route::get('/user/incident/{case_id}/edit', array('uses' => 'User\IncidentController@edit'))->name('incident.edit')->middleware('isManager');
+	Route::post('/user/incident/{case_id}/update', array('uses' => 'User\IncidentController@update'))->name('incident.update')->middleware('isManager');
+	Route::get('/getNotifications', array('uses' => 'User\IncidentController@getNotificationByUser'))->name('getNotification')->middleware('isManager');
+	Route::get('/readNotifications', array('uses' => 'User\IncidentController@readNotifications'))->name('getNotification')->middleware('isManager');
+
+
+
+});
+Route::group(['middleware' => ['web','checkUser']], function(){
+	Route::get('404',['as'=>'404','uses'=>'ErrorHandlerController@errorCode404']);
+	Route::get('405',['as'=>'405','uses'=>'ErrorHandlerController@errorCode405']);
+	Route::get('logout', array('uses' => 'HomeController@doLogout'));
+	Route::post('logout', array('uses' => 'HomeController@doLogout'))->name('logout');
+	Route::get('/user/app-setup', array('uses' => 'AppSetupController@userSetup'))->name('usersetup')->middleware('isManager');
+	Route::get('/app-setup', array('uses' => 'AppSetupController@index'))->name('setup')->middleware('isSuperAdmin');
+	Route::post('/app-setup', array('uses' => 'AppSetupController@update'))->name('update');
+});
+Route::get('/getAppSetup', 'Admin\AppSetupController@getAppSetup');
+Route::get('/testCase', array('uses' => 'Admin\IncidentController@sendNotifyManager'));
+
+use Illuminate\Notifications\Messages\NexmoMessage;
+Route::get('/testSms','Admin\IncidentController@getTextMessege');
+
+Route::get('/test/{id}','Admin\IncidentController@getLastUnread7daysNotifications');

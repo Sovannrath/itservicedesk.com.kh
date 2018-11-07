@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<?php echo $__env->make('admin.partials.head', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+	
+	<?php $__currentLoopData = App\AppSetUp::getAppSetup(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $SetUp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+		<?php
+			$theme = $SetUp->ThemeName;
+			$layout = $SetUp->Layouts;
+			$other_opt = $SetUp->OtherOpt;
+			$layouts = json_decode($layout, true);
+			$fh = $layouts[0]['fh'];
+			$fn = $layouts[0]['fn'];
+			$fr = $layouts[0]['fr'];
+			$ff = $layouts[0]['ff'];
+			$ic = $layouts[0]['ic'];
+			$rtl = $layouts[0]['rtl'];
+			$mot = $layouts[0]['mot'];
+			$space = '';
+			if($fh !== null){
+			$space = ' ';
+			}elseif($fn !== null){
+			$space = ' ';
+			}elseif($fr !== null){
+			$space !== ' ';
+			}elseif($ff !== null){
+			$space = ' ';
+			}elseif($ic !== null){
+			$space = ' ';
+			}elseif($rtl !== null){
+			$space = ' ';
+			}elseif($mot !== null){
+			$space = ' ';
+			}elseif($theme !== null){
+			$space = ' ';
+			}elseif($other_opt !== null){
+			$space = ' ';
+		}
+
+		?>
+
+	<body class="<?php echo e($space.$mot); ?><?php echo e($space.$theme); ?><?php echo e($space.$other_opt); ?><?php echo e($space.$rtl); ?><?php echo e($space.$fh); ?><?php echo e($space.$fn); ?><?php echo e($space.$fr); ?><?php echo e($space.$ff); ?><?php echo e($space.$ic); ?>">
+	<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+		
+			<?php echo $__env->make('admin.partials.dashboard-header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		
+
+		
+		
+		
+			<?php echo $__env->make('admin.partials.left-panel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		
+
+		
+		<div id="main" role="main">
+			
+			<div id="ribbon">
+				<ol class="breadcrumb">
+					<li>Home</li><li><?php echo $__env->yieldContent('template_title'); ?></li><li><?php echo $__env->yieldContent('sub_title'); ?></li>
+				</ol>
+				
+			</div>
+			
+
+			
+				<?php echo $__env->yieldContent('content'); ?>
+			
+
+			<?php echo $__env->make('admin.partials.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			
+			<div id="shortcut">
+				<ul>
+					<li>
+						<a href="#" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+		<?php echo $__env->make('admin.scripts.script', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<?php echo $__env->yieldContent('jquery_popup'); ?>
+		<?php echo $__env->yieldContent('script'); ?>
+	</body>
+</html>

@@ -1,0 +1,148 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Employee;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+
+class EmployeeController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+        $employees = DB::table('Employee')->get();
+        return view('admin.employee_account', compact('employees'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+        return view('user.create-employee');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+        if($request->hasfile('profile_img'))
+         {
+            $file = $request->file('profile_img');
+            $name=time().$file->getClientOriginalName();
+            $file->move(public_path().'/images/', $name);
+         }
+         return dd(DB::table('Employee')->insert([
+
+        'EmployeeID' => $request->get('employee_id'),
+        'BusinessPartnerType' => $request->get('business_partner_type'),
+        'FirstName'=> $request->get('first_name'),
+        'MiddleName' => $request->get('middle_name'),
+        'LastName' => $request->get('last_name'),
+        'Gender' => $request->get('gender'),
+        'JobTitle' => $request->get('job_title'),
+        'Position' => $request->get('position'),
+        'DepartmentID' => $request->get('department'),
+        'DivisionID' => $request->get('division'),
+        'Branch' => $request->get('branch'),
+        'Manager' => $request->get('manager'),
+        'UserCode' => $request->get('user_code'),
+        'SalesEmployeeID' => $request->get('sale_emp_id'),
+        'BusinessUnitID' => $request->get('business_unit_id'),
+        'RefEmployeeID' => $request->get('ref_emp_id'),
+        'Email' => $request->get('email'),
+        'Extention' => $request->get('extention'),
+        'ProfileImage' => $request->get('profile_img'),
+        'WorkStreet' => $request->get('work_street'),
+        'WorkStreetNo' => $request->get('work_street_no'),
+        'WorkBlock' => $request->get('work_block'),
+        'WorkZip' => $request->get('work_zip'),
+        'WorkCity' => $request->get('work_city'),
+        'WorkProvince' => $request->get('work_province'),
+        'WorkCountry' => $request->get('work_country'),
+        'WorkState' => $request->get('work_state'),
+        'HomeStreet' => $request->get('home_street'),
+        'HomeBlock' => $request->get('home_block'),
+        'HomeZip' => $request->get('home_zip'),
+        'HomeCity' => $request->get('home_city'),
+        'HomeProvince' => $request->get('home_province'),
+        'HomeCountry' => $request->get('home_country'),
+        'HomeState' => $request->get('home_state'),
+        'Remark' => $request->get('remarks'),
+        'AdminStartDate' => $request->get('admin_start_date'),
+        'AdminTerminateReason' => $request->get('admin_terminate_reason'),
+        'AdminDuration' => $request->get('admin_duration'),
+        'Attach1' => $request->get('attach1'),
+        'Attach2' => $request->get('attach2'),
+        'Attach3' => $request->get('attach3'),
+        'Attach4' => $request->get('attach4'),
+        'Attach5' => $request->get('attach5'),
+        'Attach6' => $request->get('attach6'),
+        'Attach7' => $request->get('attach7'),
+        'Attach8' => $request->get('attach8'),
+        'Attach9' => $request->get('attach9'),
+
+         ]));
+        
+        return redirect('home');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Employee  $employee
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Employee $employee)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Employee  $employee
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Employee $employee)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Employee  $employee
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Employee $employee)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Employee  $employee
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Employee $employee)
+    {
+        //
+    }
+}

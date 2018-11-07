@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<?php echo $__env->make('admin.partials.head', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+	<!-- #BODY -->
+	<body class="smart-style-6">
+
+		<!-- #HEADER -->
+		<?php echo $__env->make('admin.partials.dashboard-header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<!-- END HEADER -->
+
+		<!-- #NAVIGATION -->
+		<!-- Left panel : Navigation area -->
+		<!-- Note: This width of the aside area can be adjusted through LESS/SASS variables -->
+		<?php echo $__env->make('admin.partials.left-panel', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<!-- END NAVIGATION -->
+
+		<!-- #MAIN PANEL -->
+		<div id="main" role="main">
+
+			<!-- RIBBON -->
+			<div id="ribbon">
+
+				<!-- breadcrumb -->
+				<ol class="breadcrumb">
+					<?php echo $__env->yieldContent('template_title'); ?>
+				</ol>
+				<!-- end breadcrumb -->
+
+				<!-- You can also add more buttons to the
+				ribbon for further usability
+
+				Example below:
+
+				<span class="ribbon-button-alignment pull-right" style="margin-right:25px">
+					<a href="#" id="search" class="btn btn-ribbon hidden-xs" data-title="search"><i class="fa fa-grid"></i> Change Grid</a>
+					<span id="add" class="btn btn-ribbon hidden-xs" data-title="add"><i class="fa fa-plus"></i> Add</span>
+					<button id="search" class="btn btn-ribbon" data-title="search"><i class="fa fa-search"></i> <span class="hidden-mobile">Search</span></button>
+				</span> -->
+
+			</div>
+			<!-- END RIBBON -->
+
+			<!--Main contents)-->
+				<?php echo $__env->yieldContent('content'); ?>
+		</div>
+		<!-- END #MAIN PANEL -->
+		<?php echo $__env->make('admin.partials.footer', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<!-- #SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+			 Note: These tiles are completely responsive, you can add as many as you like -->
+		<div id="shortcut">
+			<ul>
+				<li>
+					<a href="#" class="jarvismetro-tile big-cubes bg-color-blue"> <span class="iconbox"> <i class="fa fa-envelope fa-4x"></i> <span>Mail <span class="label pull-right bg-color-darken">14</span></span> </span> </a>
+				</li>
+			</ul>
+		</div>
+		<!-- END SHORTCUT AREA -->
+
+		<!--================================================== -->
+
+		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+		<script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>-->
+
+
+		<?php echo $__env->make('admin.scripts.script', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<!-- Your GOOGLE ANALYTICS CODE Below -->
+		<?php echo $__env->yieldContent('jquery_popup'); ?>
+		<?php echo $__env->yieldContent('script'); ?>
+
+	</body>
+
+</html>

@@ -1,0 +1,95 @@
+<aside id="left-panel">
+  {{-- User info --}}
+  <div class="login-info">
+    <span> {{-- User image size is adjusted inside CSS, it should stay as it --}}
+      <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+        @php
+          $Email = Session::get('user.0.EmailID');
+          $Employee = App\Employee::getEmployeeByEmail($Email);
+        @endphp
+          @if(!$Employee)
+          <img src="{{asset('img/user-profile/Male.png')}}" alt="me" class="online" />
+          @elseif($Employee->ProfileImage != '')
+          <img src="{{$Employee->ProfileImage}}" alt="me" class="online" />
+          @else
+          <img src="{{asset('img/user-profile/Male.png')}}" alt="me" class="online" />
+          @endif
+        <span>
+          @if(Session::has('user.0.NameENG'))
+            {{ Session::get('user.0.NameENG')}}
+          @endif
+        </span>
+        <i class="fa fa-angle-down"></i>
+      </a>
+    </span>
+  </div>
+  {{-- end user info --}}
+
+  {{-- NAVIGATION : This navigation is also responsive To make this navigation dynamic please make sure to link the node (the reference to the nav > ul) after page load. Or the navigation will not initialize. --}}
+  <nav>
+  {{--  NOTE: Notice the gaps after each icon usage <i></i>.. Please note that these links work a bit different than traditional href="" links. See documentation for details. --}}
+    <ul>
+      {{-- Dashboard --}}
+      <li class="{{ (\Request::route()->getName() == 'dashboard') ? 'active' : '' }}">
+        <a href="{{ route('dashboard' )}}" title="Dashboard"><i class="fa fa-lg fa-fw fa-dashboard"></i><span class="menu-item-parent">Dashboard</span></a>
+      </li>
+      {{-- Employee Account --}}
+      <li class="{{ (\Request::route()->getName() == 'employees') ? 'active' : '' }}">
+        <a href="{{ route('employees')}}" title="Employee Account"><i class="fa fa-lg fa-fw fa-group"></i><span class="menu-item-parent">Employee Account</span></a>
+      </li>
+      {{-- Incidents Management --}}
+      <li class="{{ (\Request::route()->getName() == 'incidents' || \Request::route()->getName() == 'edit.incident' || \Request::route()->getName() == 'create.incident' ) ? 'active' : '' }}">
+        <a href="{{route('incidents')}}" title="Incidents Managemet"><i class="fa fa-lg fa-fw fa-question-circle"></i> <span class="menu-item-parent">Incident Management</span></a>
+      </li>
+      {{-- Services Management --}}
+      <li>
+        <a href="#" title="Services Management"><i class="fa fa-lg fa-fw fa-rss"></i> <span class="menu-item-parent">Service Management</span></a>
+          <ul>
+            <li {{{ (Request::is('nvc/app-dev') ? 'class=active' : '') }}}>
+              <a href="{{url('nvc/app-dev')}}" title="App Develop Request"><i class="fa fa-lg fa-fw fa-external-link-square"></i> <span class="menu-item-parent">Peripheral Request</span></a>
+            </li>
+            <li {{{ (Request::is('nvc/erp-consult') ? 'class=active' : '') }}}>
+              <a href="{{url('nvc/erp-consult')}}" title="ERP Consultant"><i class="fa fa-lg fa-fw fa-external-link-square"></i> <span class="menu-item-parent">ERP Consult</span></a>
+            </li>
+          </ul>
+      </li>
+      {{-- App Development --}}
+      <li>
+        <a href="#" title="Application Development"><i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent">App Development</span></a>
+        <ul>
+          <li>
+            <a href="{{ url('nvc/app-develop/new')}}" title="Request Application Develop"> Request Application Develop</a>
+          </li>
+        </ul>
+      </li>
+      {{-- Change Request --}}
+      <li>
+        <a href="#" title="Change Request Management"><i class="fa fa-lg fa-fw fa-exchange"></i> <span class="menu-item-parent">Change Management</span></a>
+          <ul>
+            <li>
+              <a href="{{ url('nvc/change-request/new')}}" title="Change Request"> Create Change Request</a>
+            </li>
+            <li {{{ (Request::is('nvc/change-request/all') ? 'class=active' : '') }}}>
+              <a href="{{ url('nvc/change-request/all')}}" title="Change Request"> All Change Request</a>
+            </li>
+          </ul>
+      </li>
+      {{-- Notification --}}
+      <li>
+        <a href="#" title="Report Management"><i class="fa fa-lg fa-fw fa-bell"></i> <span class="menu-item-parent">Notification</span></a>
+      </li>
+      {{-- Setup --}}
+      <li class="{{ (\Request::route()->getName() == 'setup') ? 'active' : '' }}">
+        <a href="{{ route('setup') }}" title="Services Management"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">Setup</span></a>
+      </li>
+      {{-- Report --}}
+      <li>
+        <a href="nvc/reports" title="Report Management"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Report</span></a>
+      </li>
+    </ul>
+  </nav>
+  {{-- Minify Menu --}}
+  <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i>
+  </span>
+
+</aside>

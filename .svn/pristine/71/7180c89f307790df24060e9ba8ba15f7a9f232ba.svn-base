@@ -1,0 +1,68 @@
+
+
+
+<aside id="left-panel">
+  
+  <div class="login-info">
+    <span>  
+      <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+        <img src="<?php echo e(asset('img/user-profile/Male.png')); ?>" alt="me" class="online" /> 
+        <span>
+          <?php if(Session::has('user')): ?>
+          <?php echo e(Session::get('user.0.NameENG')); ?>
+
+          <?php endif; ?>
+        </span>
+        <i class="fa fa-angle-down"></i>
+      </a>   
+    </span>
+  </div>
+  <nav>
+    <ul>
+      
+      <li class="<?php echo e((\Request::route()->getName() == 'home') ? 'active' : ''); ?>">
+        <a href="<?php echo e(route('home')); ?>" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i><span class="menu-item-parent">Dashboard</span></a>
+      </li>
+      
+      <li class="<?php echo e((\Request::route()->getName() == 'user.register') ? 'active' : ''); ?>">
+        <a href="<?php echo e(route('user.register')); ?>" title="Employee Account"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">Employee Register</span></a>
+      </li>
+      
+      <li class="">
+        <a href="#" title="Self-Service Portal"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Self-Service Portal</span></a>
+      </li>
+      
+    <li class="">
+      <a href="http://sms.vital.com.kh/sms/" target="_blank" title="Leave Management"><i class="fa fa-lg fa-fw fa-book"></i> <span class="menu-item-parent">Leave Management</span></a>
+    </li>
+    
+    <li class="">
+      <a href="#" title="Time and Attendance"><i class="fa fa-lg fa-fw fa-calendar-o"></i> <span class="menu-item-parent">Time and Attendance</span></a>
+    </li>
+    
+    <li class="">
+      <a href="#" title="Adminstrator Management"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Administrator Mgt</span></a>
+    </li>
+    
+    <li class="<?php echo e((\Request::route()->getName() == 'servicedesk') ? 'active' : ''); ?>">
+      <a href="<?php echo e(route('servicedesk')); ?>" title="IT Service Desk"><i class="fa fa-lg fa-fw fa-ticket"></i> <span class="menu-item-parent">IT Service Desk</span></a>
+    </li>
+    
+    <li class="">
+      <a href="#" title="Notification"><i class="fa fa-lg fa-fw fa-bell-o"></i> <span class="menu-item-parent">Notifiaction</span></a>
+    </li>
+    
+    <li class="<?php echo e((\Request::route()->getName() == 'usersetup') ? 'active' : ''); ?>">
+      <a href="<?php echo e(route('usersetup')); ?>" title="Setup"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">Setup</span></a>
+    </li>
+    
+    <li class="">
+      <a href="#" title="Reports"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Reports</span></a>
+    </li>
+  </ul>
+  </nav>
+    
+    <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i>
+  </span>
+</aside>
+

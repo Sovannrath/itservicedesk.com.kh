@@ -1,0 +1,59 @@
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<script>
+  if (!window.jQuery) {
+    document.write('<script src="js/libs/jquery-3.2.1.min.js"><\/script>');
+  }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+  if (!window.jQuery.ui) {
+    document.write('<script src="js/libs/jquery-ui.min.js"><\/script>');
+  }
+</script>
+
+<script src="<?php echo e(asset('js/app.config.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/plugin/jquery-touch/jquery.ui.touch-punch.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/bootstrap/bootstrap.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/notification/SmartNotification.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/smartwidgets/jarvis.widget.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/plugin/easy-pie-chart/jquery.easy-pie-chart.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/plugin/sparkline/jquery.sparkline.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/plugin/jquery-validate/jquery.validate.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/plugin/masked-input/jquery.maskedinput.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/plugin/select2/select2.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/plugin/bootstrap-slider/bootstrap-slider.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/plugin/msie-fix/jquery.mb.browser.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/plugin/fastclick/fastclick.min.js')); ?>"></script>
+
+
+<script src="<?php echo e(asset('js/demo.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/app.min.js')); ?>"></script>
+
+<script src="<?php echo e(asset('js/smart-chat-ui/smart.chat.ui.min.js')); ?>"></script>
+<script src="<?php echo e(asset('js/smart-chat-ui/smart.chat.manager.min.js')); ?>"></script>
+<script src="<?php echo e(asset('js/plugin/moment/moment.min.js')); ?>"></script>
+<script src="<?php echo e(asset('js/plugin/fullcalendar/fullcalendar.min.js')); ?>"></script>
+<script type="text/javascript">
+	$.ajax({
+	  url: "/ajax/incidents",
+	  success: function( result ) {
+	    $( "#incidents-notification" ).html( "<strong>" + result + "</strong> degrees" );
+	  }
+	});
+</script>

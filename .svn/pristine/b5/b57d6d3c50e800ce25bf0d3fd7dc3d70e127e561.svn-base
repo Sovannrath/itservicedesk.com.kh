@@ -1,0 +1,115 @@
+{
+    "data": [
+        {
+            "ID": "INC-0001",
+            "Subject": "ERP Price List",
+            "Description": "<div> My application were error during transferring …. </div> ",
+            "Status": "<span class='label label-warning'>Open</span>",
+            "CcManager": "kauvseth.pisal@vital.com.kh",
+            "CreatedDate": "<strong>02-30-2018</strong>",
+            "Attachment": "Attachment",
+            "comments": "This is a blank comments area, used to add comments and keep notes",
+            "action": "<button class='btn btn-xs'>Open case</button> <button class='btn btn-xs btn-danger pull-right' style='margin-left:5px'>Delete Record</button> <button class='btn btn-xs btn-success pull-right'>Save Changes</button> "
+        },
+        {
+            "ID": "INC-0002",
+            "Subject": "ERP Price List",
+            "Description": "<div> My application were error during transferring …. </div> ",
+            "Status": "<span class='label label-warning'>Open</span>",
+            "CcManager": "kauvseth.pisal@vital.com.kh",
+            "CreatedDate": "<strong>02-30-2018</strong>",
+            "Attachment": "Attachment",
+            "comments": "This is a blank comments area, used to add comments and keep notes",
+            "action": "<button class='btn btn-xs'>Open case</button> <button class='btn btn-xs btn-danger pull-right' style='margin-left:5px'>Delete Record</button> <button class='btn btn-xs btn-success pull-right'>Save Changes</button> "
+        },
+        {
+            "ID": "INC-0003",
+            "Subject": "ERP Price List",
+            "Description": "<div> My application were error during transferring …. </div> ",
+            "Status": "<span class='label label-warning'>Open</span>",
+            "CcManager": "kauvseth.pisal@vital.com.kh",
+            "CreatedDate": "<strong>02-30-2018</strong>",
+            "Attachment": "Attachment",
+            "comments": "This is a blank comments area, used to add comments and keep notes",
+            "action": "<button class='btn btn-xs'>Open case</button> <button class='btn btn-xs btn-danger pull-right' style='margin-left:5px'>Delete Record</button> <button class='btn btn-xs btn-success pull-right'>Save Changes</button> "
+        },
+        {
+            "ID": "INC-0004",
+            "Subject": "ERP Price List",
+            "Description": "<div> My application were error during transferring …. </div> ",
+            "Status": "<span class='label label-warning'>Open</span>",
+            "CcManager": "kauvseth.pisal@vital.com.kh",
+            "CreatedDate": "<strong>02-30-2018</strong>",
+            "Attachment": "Attachment",
+            "comments": "This is a blank comments area, used to add comments and keep notes",
+            "action": "<button class='btn btn-xs'>Open case</button> <button class='btn btn-xs btn-danger pull-right' style='margin-left:5px'>Delete Record</button> <button class='btn btn-xs btn-success pull-right'>Save Changes</button> "
+        },
+        {
+            "ID": "INC-0005",
+            "Subject": "ERP Price List",
+            "Description": "<div> My application were error during transferring …. </div> ",
+            "Status": "<span class='label label-warning'>Open</span>",
+            "CcManager": "kauvseth.pisal@vital.com.kh",
+            "CreatedDate": "<strong>02-30-2018</strong>",
+            "Attachment": "Attachment",
+            "comments": "This is a blank comments area, used to add comments and keep notes",
+            "action": "<button class='btn btn-xs'>Open case</button> <button class='btn btn-xs btn-danger pull-right' style='margin-left:5px'>Delete Record</button> <button class='btn btn-xs btn-success pull-right'>Save Changes</button> "
+        },
+        {
+            "ID": "INC-0006",
+            "Subject": "ERP Price List",
+            "Description": "<div> My application were error during transferring …. </div> ",
+            "Status": "<span class='label label-warning'>Open</span>",
+            "CcManager": "kauvseth.pisal@vital.com.kh",
+            "CreatedDate": "<strong>02-30-2018</strong>",
+            "Attachment": "Attachment",
+            "comments": "This is a blank comments area, used to add comments and keep notes",
+            "action": "<button class='btn btn-xs'>Open case</button> <button class='btn btn-xs btn-danger pull-right' style='margin-left:5px'>Delete Record</button> <button class='btn btn-xs btn-success pull-right'>Save Changes</button> "
+        },
+        {
+            "ID": "INC-0007",
+            "Subject": "ERP Price List",
+            "Description": "<div> My application were error during transferring …. </div> ",
+            "Status": "<span class='label label-warning'>Open</span>",
+            "CcManager": "kauvseth.pisal@vital.com.kh",
+            "CreatedDate": "<strong>02-30-2018</strong>",
+            "Attachment": "Attachment",
+            "comments": "This is a blank comments area, used to add comments and keep notes",
+            "action": "<button class='btn btn-xs'>Open case</button> <button class='btn btn-xs btn-danger pull-right' style='margin-left:5px'>Delete Record</button> <button class='btn btn-xs btn-success pull-right'>Save Changes</button> "
+        },
+        {
+            "ID": "INC-0008",
+            "Subject": "ERP Price List",
+            "Description": "<div> My application were error during transferring …. </div> ",
+            "Status": "<span class='label label-warning'>Open</span>",
+            "CcManager": "kauvseth.pisal@vital.com.kh",
+            "CreatedDate": "<strong>02-30-2018</strong>",
+            "Attachment": "Attachment",
+            "comments": "This is a blank comments area, used to add comments and keep notes",
+            "action": "<button class='btn btn-xs'>Open case</button> <button class='btn btn-xs btn-danger pull-right' style='margin-left:5px'>Delete Record</button> <button class='btn btn-xs btn-success pull-right'>Save Changes</button> "
+        },
+        {
+            "ID": "INC-0009",
+            "Subject": "ERP Price List",
+            "Description": "<div> My application were error during transferring …. </div> ",
+            "Status": "<span class='label label-warning'>Open</span>",
+            "CcManager": "kauvseth.pisal@vital.com.kh",
+            "CreatedDate": "<strong>02-30-2018</strong>",
+            "Attachment": "Attachment",
+            "comments": "This is a blank comments area, used to add comments and keep notes",
+            "action": "<button class='btn btn-xs'>Open case</button> <button class='btn btn-xs btn-danger pull-right' style='margin-left:5px'>Delete Record</button> <button class='btn btn-xs btn-success pull-right'>Save Changes</button> "
+        },
+        {
+            "ID": "INC-0010",
+            "Subject": "ERP Price List",
+            "Description": "<div> My application were error during transferring …. </div> ",
+            "Status": "<span class='label label-warning'>Open</span>",
+            "CcManager": "kauvseth.pisal@vital.com.kh",
+            "CreatedDate": "<strong>02-30-2018</strong>",
+            "Attachment": "Attachment",
+            "comments": "This is a blank comments area, used to add comments and keep notes",
+            "action": "<button class='btn btn-xs'>Open case</button> <button class='btn btn-xs btn-danger pull-right' style='margin-left:5px'>Delete Record</button> <button class='btn btn-xs btn-success pull-right'>Save Changes</button> "
+        }  
+        
+    ]
+}

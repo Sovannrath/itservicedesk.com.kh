@@ -1,0 +1,105 @@
+
+<?php
+use App\Http\Controllers\Admin\IncidentController;
+$EmailID = Session::get('user.0.EmailID');
+$Employee = App\Employee::where('Email', '=', $EmailID)->get();
+$EmpID = $Employee[0]->EmployeeID;
+$incidents = App\Employee::find($EmpID)->unreadNotifications;
+?>
+<header id="header">
+  <div id="logo-group">
+    
+    <span id="logo" style="padding-top:0px; margin-top:0px; margin-left:5px"> <img src="<?php echo e(asset('img/logo.png')); ?>" style="height:50px; width: auto; padding-top:0px; margin-top:0px" alt="NVC Corporation"> </span>
+    
+  </div>
+  
+  <div class="pull-right">
+    
+    <div id="hide-menu" class="btn-header pull-right">
+      <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+    </div>
+    
+    
+    
+    
+    <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+      <li class="">
+        <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown"> 
+          <img src="<?php echo e(asset('img/user-profile/Male.png')); ?>" alt="me" class="online" />  
+        </a>
+        <ul class="dropdown-menu pull-right">
+          <li>
+            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0"><i class="fa fa-cog"></i> Setting</a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="profile.html" class="padding-10 padding-top-0 padding-bottom-0"> <i class="fa fa-user"></i> <u>P</u>rofile</a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0" data-action="toggleShortcut"><i class="fa fa-arrow-down"></i> <u>S</u>hortcut</a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0" data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="login.html" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    
+    <div id="logout" class="btn-header transparent pull-right">
+      <span> <a href="<?php echo e(route('logout')); ?>" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST">
+                                <?php echo e(csrf_field()); ?>
+
+      </form><i class="fa fa-sign-out"></i></a> </span>
+    </div>
+    
+    
+    <div id="" class="btn-header transparent pull-right">
+        <span id="" class="activity-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a href="#" data-action=""><i class="fa fa-bell"></i><?php if(count($incidents)!= 0): ?> <span><b class="badge bg-color-orange" style="margin-left: -15px; margin-top: -20px;"><?php echo e(count($incidents)); ?></b></span><?php endif; ?></a></span>
+        <?php if(count($incidents) != 0): ?>
+
+                <ul class="dropdown-menu">
+                    <li><a href="#"><span class="fa fa-check"></span> Mark all as read</a></li>
+                    <li role="separator" class="divider"></li>
+                    <?php $__currentLoopData = App\Employee::find($EmpID)->unreadNotifications; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $incident): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <li><a href="/readNotifications"><div><p><?php echo e($incident->data['Data']['Subject']); ?></p></div></a></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </ul>
+        <?php else: ?>
+        <ul class="dropdown-menu">
+            <li><div style="padding: 0px 10px;">No notifications</div></li>
+        </ul>
+        <?php endif; ?>
+    </div>
+    
+    
+    <div id="" class="btn-header transparent pull-right">
+      <span> <a href="javascript:void(0);" data-action="" title="Account"><i class="fa fa-user"></i></a> </span>
+    </div>
+    
+    
+    <div id="fullscreen" class="btn-header transparent pull-right">
+      <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+    </div>
+    
+  </div>
+  
+  
+  
+  <form action="#" class="header-search pull-left">
+    <input id="search-fld"style="border-radius:0px; min-width:350px;" type="text" name="param" placeholder="Find reports and more">
+    <button type="submit">
+      <i class="fa fa-search"></i>
+    </button>
+    <a href="javascript:void(0);" id="cancel-search-js" title="Cancel Search"><i class="fa fa-times"></i></a>
+  </form>
+  
+
+  
+</header>
+

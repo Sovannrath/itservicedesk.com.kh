@@ -1,0 +1,139 @@
+<aside id="left-panel">
+
+  <!-- User info -->
+      <div class="login-info">
+        <span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+          
+          <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+            <img src="<?php echo e(asset('img/avatars/sovannrath.jpg')); ?>" alt="me" class="online" /> 
+            <span>
+              Admin
+            </span>
+            <i class="fa fa-angle-down"></i>
+          </a> 
+          
+        </span>
+      </div>
+      <!-- end user info -->
+
+  <!-- NAVIGATION : This navigation is also responsive
+
+  To make this navigation dynamic please make sure to link the node
+  (the reference to the nav > ul) after page load. Or the navigation
+  will not initialize.
+  -->
+  <nav>
+    <!--
+    NOTE: Notice the gaps after each icon usage <i></i>..
+    Please note that these links work a bit different than
+    traditional href="" links. See documentation for details.
+    -->
+
+    <ul>
+      <!-- Dashboard -->
+      <li <?php echo e((Request::is('nvc/dashboard') ? 'class=active' : '')); ?>>
+        <a href="<?php echo e(url('/user/admin')); ?>" title="Dashboard"><i class="fa fa-lg fa-fw fa-dashboard"></i><span class="menu-item-parent">Dashboard</span></a>
+      </li>
+
+      <!-- Employee Account -->
+      <li <?php echo e((Request::is('nvc/incidents-mgt/new') ? 'class=active' : '')); ?>>
+        <a href="<?php echo e(url('/user/employee-account')); ?>" title="Employee Account"><i class="fa fa-lg fa-fw fa-group"></i><span class="menu-item-parent">Employee Account</span></a>
+      </li>
+
+      <!-- Incidents Management -->
+      <li>
+        <a href="#" title="Incidents Managemet"><i class="fa fa-lg fa-fw fa-question-circle"></i> <span class="menu-item-parent">Incident Management</a>
+          <ul>
+            <li <?php echo e((Request::is('nvc/incidents-mgt/new') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/incidents-mgt/new')); ?>" title="Show all incidents"><i class="fa fa-fw fa-edit"></i> Create Incident</span></a>
+            </li>
+            <li <?php echo e((Request::is('nvc/incidents-mgt/open-case') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/incidents-mgt/open-case')); ?>" title="Open case incidents"><i class="fa fa-fw fa-question-circle"></i> Open Case Incidents</span></a>
+            </li>
+            <li <?php echo e((Request::is('nvc/incidents-mgt/all-resolve') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/incidents-mgt/all-resolve')); ?>" title="Show all incidents"><i class="fa fa-fw fa-check-circle"></i> Resolved Incidents</span></a>
+            </li>
+            <li <?php echo e((Request::is('nvc/incidents-mgt/all-closed') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/incidents-mgt/all-closed')); ?>" title="Show all incidents"><i class="fa fa-fw fa-check"></i> Close Incidents Case</span></a>
+            </li>
+          </ul>
+      </li>
+      <!-- Services Management -->
+      <li>
+        <a href="#" title="Services Management"><i class="fa fa-lg fa-fw fa-rss"></i> <span class="menu-item-parent">Service Management</span></a>
+          <ul>
+            <li <?php echo e((Request::is('nvc/app-dev') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/app-dev')); ?>" title="App Develop Request"><i class="fa fa-lg fa-fw fa-external-link-square"></i> <span class="menu-item-parent">Peripheral Request</span></a>
+            </li>
+            <li <?php echo e((Request::is('nvc/erp-consult') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/erp-consult')); ?>" title="ERP Consultant"><i class="fa fa-lg fa-fw fa-external-link-square"></i> <span class="menu-item-parent">ERP Consult</span></a>
+            </li>
+          </ul>
+      </li>
+
+      <!-- App Development -->
+      <li <?php echo e((Request::is('nvc/reports') ? 'class=active' : '')); ?>>
+        <a href="#" title="Application Development"><i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent">App Development</span></a>
+        <ul>
+          <li <?php echo e((Request::is('nvc/app-develop/new') ? 'class=active' : '')); ?>>
+            <a href="<?php echo e(url('nvc/app-develop/new')); ?>" title="Request Application Develop"> Request Application Develop</a>
+          </li>
+        </ul>
+      </li>
+      <!-- Change Request -->
+      <li>
+        <a href="#" title="Change Request Management"><i class="fa fa-lg fa-fw fa-exchange"></i> <span class="menu-item-parent">Change Management</span></a>
+          <ul>
+            <li <?php echo e((Request::is('nvc/change-request/new') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/change-request/new')); ?>" title="Change Request"> Create Change Request</a>
+            </li>
+            <li <?php echo e((Request::is('nvc/change-request/all') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/change-request/all')); ?>" title="Change Request"> All Change Request</a>
+            </li>
+          </ul>
+      </li>
+      <!-- Report -->
+      <li <?php echo e((Request::is('nvc/reports') ? 'class=active' : '')); ?>>
+        <a href="#" title="Report Management"><i class="fa fa-lg fa-fw fa-bell"></i> <span class="menu-item-parent">Notification</span></a>
+      </li>
+      
+      <!-- Setup -->
+      <li>
+        <a href="#" title="Services Management"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">Setup</span></a>
+      </li>
+      <!-- Report -->
+      <li <?php echo e((Request::is('nvc/reports') ? 'class=active' : '')); ?>>
+        <a href="nvc/reports" title="Report Management"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Report</span></a>
+      </li>
+      <!-- Users 
+      <li>
+        <a href="#" title="User Management"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">User Management</span></a>
+          <ul>
+            <li <?php echo e((Request::is('nvc/users/all-request') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/users/all-request')); ?>" title="Request Users"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Request Users</span></a>
+            </li>
+            <li <?php echo e((Request::is('nvc/users/register') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/users/register')); ?>" title="Register"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Register</span></a>
+            </li>
+            <li <?php echo e((Request::is('nvc/users/all') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/users/all')); ?>" title="All Users"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">View All Users</span></a>
+            </li>
+            <li <?php echo e((Request::is('nvc/users/reset-password') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/users/reset-password')); ?>" title="All Users"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Reset Password</span></a>
+            </li>
+          </ul>
+      </li>
+       Role & Permission
+      <li <?php echo e((Request::is('nvc/roles&permission') ? 'class=active' : '')); ?>>
+        <a href="nvc/roles&permission" title="Role and Permission"><i class="fa fa-lg fa-fw fa-sitemap"></i> <span class="menu-item-parent">Role and Permission</span></a>
+      </li> -->
+      <!-- System Preferences
+      <li <?php echo e((Request::is('nvc/system/') ? 'class=active' : '')); ?>>
+        <a href="<?php echo e(url('nvc/system/')); ?>" title="System Preferences"><i class="fa fa-lg fa-fw fa-gears"></i> <span class="menu-item-parent">System Preferences</span></a>
+      </li>-->
+    </ul>
+  </nav>
+
+  <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+
+</aside>

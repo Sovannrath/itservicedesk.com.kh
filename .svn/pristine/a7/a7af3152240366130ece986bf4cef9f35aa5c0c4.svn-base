@@ -1,0 +1,605 @@
+@extends('layouts.master')
+@section('template_title')
+	Dashboard
+@endsection
+@section('content')
+
+{{-- #MAIN CONTENT --}}
+<div id="content">
+	<div class="row">
+		{{-- col --}}
+		<div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+			<h1 class="page-title txt-color-blueDark">
+		      {{-- PAGE HEADER --}}
+		      <i class="fa-fw fa fa-home"></i>Dashboard
+			</h1>
+		</div>
+		{{-- end col --}}
+		{{-- col --}}
+	</div>
+
+	{{-- widget grid --}}
+	<section id="widget-grid" class="">
+		{{-- row --}}
+		<div class="row">
+			{{-- DASHBOARD ICON --}}
+			<article class="col-sm-6 col-md-6 col-lg-3">
+				<div class="jarviswidget" id="" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+						<h2>Total inbound call today</h2>
+					</header>
+					<div class="no-padding">
+						<div class="jarviswidget-editbox">
+						</div>
+						{{-- widget-body --}}
+						<div class="widget-body">
+							<div class="icon-wrap product-wrap clearfix">
+								<div class="row">
+									<div class="col-sm-5">
+										<div class="text-center">
+											<img class="img-responsive" src="{{asset('images/inbound-call-centre.svg')}}">
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="">
+										<p class="price-container"><span style="font-size:60px;">20</span></p>
+										<p style="margin-top:-25px;">Incidents</p>
+										</div>
+										<hr class="simple">
+										<div class="description">
+											<a href="#">More information</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>{{-- end widget-body --}}
+					</div>{{-- end no-padding --}}
+				</div>{{--end jarviswidget--}}
+			</article>			
+			{{-- DASHBOARD ICON --}}
+			<article class="col-sm-6 col-md-6 col-lg-3">
+				<div class="jarviswidget" id="" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+						<h2>Total InteractionsToday</h2>
+					</header>
+					<div class="no-padding">
+						<div class="jarviswidget-editbox">
+						</div>
+						<div class="widget-body">
+							<div class="icon-wrap product-wrap clearfix">
+								<div class="row">
+									<div class="col-sm-5">
+										<div class="text-center">
+											<img class="img-responsive" src="{{asset('images/call_features.png')}}">
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="">
+										<p class="price-container"><span style="font-size:60px;">120</span></p>
+										<p style="margin-top:-25px;">Incidents</p>
+										</div>
+										<hr class="simple">
+										<div class="description">
+											<a href="#">More information</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>{{-- end widget-body --}}
+					</div>{{-- end no-padding --}}
+				</div>{{--end jarviswidget--}}
+			</article>
+			{{-- DASHBOARD ICON --}}
+			<article class="col-sm-6 col-md-6 col-lg-3">
+				<div class="jarviswidget" id="" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+						<h2>Total Inbound Email Today</h2>
+					</header>
+					<div class="no-padding">
+						<div class="jarviswidget-editbox">
+							test
+						</div>
+						<div class="widget-body">
+							<div class="icon-wrap product-wrap clearfix">
+								<div class="row">
+									<div class="col-sm-5">
+										<div class="text-center">
+											<img class="img-responsive" src="{{asset('images/call_features.png')}}">
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="">
+										<p class="price-container"><span style="font-size:60px;">25</span></p>
+										<p style="margin-top:-25px;">Incidents</p>
+										</div>
+										<hr class="simple">
+										<div class="description">
+											<a href="#">More information</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>{{-- end widget-body --}}
+					</div>{{-- end no-padding --}}
+				</div>{{--end jarviswidget--}}
+			</article>
+			{{-- DASHBOARD ICON --}}
+			<article class="col-sm-6 col-md-6 col-lg-3">
+				<div class="jarviswidget" id="" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+						<h2>Total Opening Cases Today</h2>
+					</header>
+					<div class="no-padding">
+						<div class="jarviswidget-editbox">
+							test
+						</div>
+						<div class="widget-body">
+							<div class="icon-wrap product-wrap clearfix">
+								<div class="row">
+									<div class="col-sm-5">
+										<div class="text-center">
+											<img class="img-responsive" src="{{asset('images/call_features.png')}}">
+										</div>
+									</div>
+									<div class="col-sm-7">
+										<div class="">
+										<p class="price-container"><span style="font-size:60px;">18</span></p>
+										<p style="margin-top:-25px;">Incidents</p>
+										</div>
+										<hr class="simple">
+										<div class="description">
+											<a href="#">More information</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>{{-- end widget-body --}}
+					</div>{{-- end no-padding --}}
+				</div>{{--end jarviswidget--}}
+			</article>
+			{{--Incidents Table--}}
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div class="jarviswidget" id="" data-widget-editbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+						<h2>Incidents</h2>
+					</header>
+					<div>
+						<div class="jarviswidget-editbox">
+						</div>
+						<div class="widget-body no-padding">				
+							<table id="dt_basic" class="table-bordered table-striped table-condensed table-hover" width="100%">
+								<thead>			                
+									<tr>
+										<th data-hide="phone">Incident ID</th>
+										<th data-class="expand"> Subject</th>
+										<th data-hide="phone"> Status</th>
+										<th data-hide="phone,tablet"> Priority</th>
+										<th data-hide="phone,tablet">Tickets</th>
+										<th data-hide="phone,tablet"> %Complete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>CASE0001</td>
+										<td>ERP Price List</td>
+										<td><label class="label" style="color:#000; background-color: #e6e6e6">Open</label></td>
+										<td><label class="label bg-color-red">Very High</label></td>
+										<td>TS00001</td>
+										@php
+										date_default_timezone_set("Asia/Bangkok");
+										$dayToSeconds = 86400;
+										$cur_date = strtotime(date("Y-m-d h:i:sa"));
+										$stat_change_date =strtotime("7/31/18 12:00 AM");
+
+										$secs = $cur_date - $stat_change_date;
+
+										$day = ($secs/$dayToSeconds)*8;
+										$percent = (80 -$day);
+										@endphp
+
+										<td><div class='progress progress-xs' data-progressbar-value='100'><div class='progress-bar bg-color-blue'></div></div>
+										</td>
+									</tr>
+
+									<tr>
+										<td>CASE0002</td>
+										<td>Network</td>
+                                        <td><label class="label" style="color:#000; background-color: #e6e6e6">Open</label></td>
+										<td><label class="label bg-color-green">Low</label></td>
+										<td>TS00003</td>
+                                            <td><div class='progress progress-xs' data-progressbar-value='40'><div class='progress-bar bg-color-blue'></div></div></td>
+									</tr>
+									<tr>
+										<td>CASE0003</td>
+										<td>Leave Request</td>
+                                        <td><label class="label" style="color:#000; background-color: #e6e6e6">Open</label></td>
+										<td><label class="label bg-color-orange">High</label></td>
+										<td>TS00004</td>
+										<td><div class='progress progress-xs' data-progressbar-value='70'><div class='progress-bar bg-color-blue'></div></div></td>
+									</tr>
+									<tr>
+										<td>CASE0004</td>
+										<td>Computer</td>
+                                        <td><label class="label" style="color:#000; background-color: #e6e6e6">Open</label></td>
+										<td><label class="label bg-color-yellow" style="background-color:#8B0000; color: #000">Medium</label></td>
+										<td>TS00012</td>
+										<td><div class='progress progress-xs' data-progressbar-value='75'><div class='progress-bar bg-color-blue'></div></div></td>
+									</tr>
+									<tr>
+										<td>CASE0005</td>
+										<td>Computer</td>
+                                        <td><label class="label" style="color:#000; background-color: #e6e6e6">Open</label></td>
+										<td><label class="label" style="background-color:#8B0000;">Urgent</label></td>
+										<td>TS00011</td>
+										<td><div class='progress progress-xs' data-progressbar-value='45'><div class='progress-bar bg-color-blue'></div></div></td>
+									</tr>
+									<tr>
+										<td>CASE0006</td>
+										<td>Computer</td>
+                                        <td><label class="label" style="color:#000; background-color: #e6e6e6">Open</label></td>
+										<td><label class="label" style="background-color:#8B0000;">Urgent</label></td>
+										<td>TS00011</td>
+										<td><div class='progress progress-xs' data-progressbar-value='45'><div class='progress-bar bg-color-blue bg-color-blue'></div></div></td>
+									</tr>
+									<tr>
+										<td>CASE0007</td>
+										<td>Computer</td>
+                                        <td><label class="label" style="color:#000; background-color: #e6e6e6">Open</label></td>
+										<td><label class="label" style="background-color:#8B0000;">Urgent</label></td>
+										<td>TS00011</td>
+										<td><div class='progress progress-xs' data-progressbar-value='45'><div class='progress-bar bg-color-blue'></div></div></td>
+									</tr>
+									<tr>
+										<td>CASE0008</td>
+										<td>Computer</td>
+                                        <td><label class="label" style="color:#000; background-color: #e6e6e6">Open</label></td>
+										<td><label class="label" style="background-color:#8B0000;">Urgent</label></td>
+										<td>TS00011</td>
+										<td><div class='progress progress-xs' data-progressbar-value='45'><div class='progress-bar bg-color-blue'></div></div></td>
+									</tr>
+									<tr>
+										<td>CASE0009</td>
+										<td>Computer</td>
+                                        <td><label class="label" style="color:#000; background-color: #e6e6e6">Open</label></td>
+										<td><label class="label" style="background-color:#8B0000;">Urgent</label></td>
+										<td>TS00011</td>
+										<td><div class='progress progress-xs' data-progressbar-value='45'><div class='progress-bar bg-color-blue'></div></div></td>
+									</tr>
+									<tr>
+										<td>CASE00010</td>
+										<td>Computer</td>
+                                        <td><label class="label" style="color:#000; background-color: #e6e6e6">Open</label></td>
+										<td><label class="label" style="background-color:#8B0000;">Urgent</label></td>
+										<td>TS00011</td>
+										<td><div class='progress progress-xs' data-progressbar-value='45'><div class='progress-bar bg-color-blue'></div></div></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>{{-- end widget body --}}
+					</div>{{-- end widget div --}}	
+				</div>{{-- end jarviswidget --}}		
+			</article>
+			{{-- Incident Table--}}
+			<article class="col-sm-12 col-md-12 col-lg-12">
+				<div class="jarviswidget" id="" data-widget-editbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="glyphicon glyphicon-stats txt-color-darken"></i> </span>
+						<h2>Incidents</h2> <h2 class="pull-right"><span style="margin-right:10px"> Filter by: <div class="btn-group">
+										{{-- add: non-hidden - to disable auto hide --}}
+										<div class="btn-group">
+											<button class="btn dropdown-toggle btn-xs btn-default" data-toggle="dropdown">
+												Month <i class="fa fa-caret-down"></i>
+											</button>
+											<ul class="dropdown-menu js-status-update pull-right">
+												<li>
+													<a href="javascript:void(0);" id="ag">Day</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" id="mt">Month</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" id="td">Year</a>
+												</li>
+											</ul>
+										</div>
+									</div></span></h2>
+					</header>
+					<div>
+						<div class="jarviswidget-editbox">
+						</div>
+						<div class="widget-body">
+							<div class="col-sm-12 col-md-12 col-lg-6">{{-- this is what the user will see --}}
+							<div id="columnchart_values"></div>
+							</div>
+							<div class="col-sm-12 col-md-12 col-lg-6">{{-- this is what the user will see --}}
+							<div id="columnchart_values2"></div>
+							</div>
+						</div>{{-- end widget body --}}
+					</div>{{-- end widget div --}}
+				</div>{{-- end jarviswidget --}}
+
+			</article>{{--End Incidents Table--}}
+			{{--Tickets Services--}}
+			<article class="col-sm-12 col-md-12 col-lg-6">
+				<div class="jarviswidget" id="" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-ticket txt-color-darken"></i> </span>
+						<h2>My Tickets Services</h2><h2 class="pull-right"><span style="margin-right:10px"> Filter by:<a href="#"> IT Network</a> | <a href="#"> IT Programming</a></span></h2>
+					</header>
+					<div>
+						<div class="jarviswidget-editbox">	
+						</div>
+						<div class="widget-body">
+							<div class="row">
+								<div class="col-sm-12 col-md-8 col-lg-8">
+									<div class="col-md-6 col-lg-6">
+										<div class="well well-sm" style="margin-bottom: 10px">Open<br>
+											<div class="text-center">
+												<div style="font-size:25px;" class="txt-color-blue display-inline">
+													18
+												</div>
+											</div>
+										<hr class="simple"><a href="#">More information</a>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-6">
+										<div class="well well-sm" style="margin-bottom: 10px">Closed<br>
+											<div class="text-center">
+												<div style="font-size:25px;" class="txt-color-blue display-inline">
+													9
+												</div>
+											</div>
+											<hr class="simple"><a href="#">More information</a>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-6">
+										<div class="well well-sm" style="margin-bottom: 10px">All Tickets<br>
+											<div class="text-center">
+												<div style="font-size:25px;" class="txt-color-blue display-inline">
+													27
+												</div>
+											</div>
+											<hr class="simple"><a href="#">More information</a>
+										</div>
+									</div>
+							</div>{{-- end col-sm-12 col-md-8 col-lg-8 --}}
+							<div class="col-sm-12 col-md-4 col-lg-4">
+								<ul class="list-inline text-center">
+									<li>&nbsp;&nbsp;&nbsp;
+										@php 
+										$close =9; 
+										$open = 18;
+										$percent = ($close/($open+$close))*100; 
+										@endphp
+										<div class="easy-pie-chart txt-color-blue easyPieChart" data-percent="@php echo $percent @endphp" data-pie-size="140">
+											<span class="percent percent-sign txt-color-blue font-xl semi-bold">@php echo $percent @endphp</span>
+										</div>
+										&nbsp;&nbsp;&nbsp;
+									</li>
+										<p class="text-center">Recent tickets complete</p>
+										<p class="text-center">#TS-0001</p>
+										<p class="text-center">Networking Checking at site KOB SROV</p>
+								</ul>
+							</div>{{-- col-sm-12 col-md-4 col-lg-4 --}}
+						</div> {{-- end row --}}
+						</div>{{-- end widget body --}}
+					</div>{{-- end widget div --}}
+				</div>{{--endjarviswidget--}}
+				<div class="jarviswidget" id="" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-ticket txt-color-darken"></i> </span>
+						<h2>Incidents</h2><h2 class="pull-right"><span style="margin-right:10px"> Filter by:<a href="#"> IT Network</a> | <a href="#"> IT Programming</a></span></h2>
+					</header>
+					<div>
+						<div class="jarviswidget-editbox">	
+						</div>
+						<div class="widget-body">
+							<div class="row">
+								<div class="col-sm-12 col-md-8 col-lg-12">
+									<div class="col-md-6 col-lg-4">
+										<div class="well well-sm" style="margin-bottom: 10px">Open<br>
+											<div class="text-center">
+												<div style="font-size:25px;" class="txt-color-blue display-inline">
+													18
+												</div>
+											</div>
+										<hr class="simple"><a href="#">More information</a>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-4">
+										<div class="well well-sm" style="margin-bottom: 10px">Reject<br>
+											<div class="text-center">
+												<div style="font-size:25px;" class="txt-color-blue display-inline">
+													9
+												</div>
+											</div>
+											<hr class="simple"><a href="#">More information</a>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-4">
+										<div class="well well-sm" style="margin-bottom: 10px">In Progress<br>
+											<div class="text-center">
+												<div style="font-size:25px;" class="txt-color-blue display-inline">
+													27
+												</div>
+											</div>
+											<hr class="simple"><a href="#">More information</a>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-4">
+										<div class="well well-sm" style="margin-bottom: 10px">Resolved<br>
+											<div class="text-center">
+												<div style="font-size:25px;" class="txt-color-blue display-inline">
+													27
+												</div>
+											</div>
+											<hr class="simple"><a href="#">More information</a>
+										</div>
+									</div>
+									<div class="col-md-6 col-lg-4">
+										<div class="well well-sm" style="margin-bottom: 10px">Re-Open<br>
+											<div class="text-center">
+												<div style="font-size:25px;" class="txt-color-blue display-inline">
+													27
+												</div>
+											</div>
+											<hr class="simple"><a href="#">More information</a>
+										</div>
+									</div>
+							</div>{{-- end col-sm-12 col-md-8 col-lg-12 --}}
+						</div> {{-- end row --}}
+						</div>{{-- end widget body --}}
+					</div>{{-- end widget div --}}
+				</div>{{--endjarviswidget--}}
+				{{-- new widget --}}
+				<div class="jarviswidget" id="" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false" data-widget-togglebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-calendar txt-color-darken"></i> </span>
+						<h2> My Events </h2>
+					</header>
+					{{-- widget div--}}
+					<div>
+						{{-- widget edit box --}}
+						<div class="jarviswidget-editbox">
+							<input class="form-control" type="text">
+						</div>
+						{{-- end widget edit box --}}
+						<div class="widget-body no-padding">
+							{{-- content goes here --}}
+							<div class="widget-body-toolbar">
+
+								<div id="calendar-buttons">
+
+									<div class="btn-group">
+										{{-- add: non-hidden - to disable auto hide --}}
+										<div class="btn-group">
+											<button class="btn dropdown-toggle btn-xs btn-default" data-toggle="dropdown">
+												Showing <i class="fa fa-caret-down"></i>
+											</button>
+											<ul class="dropdown-menu js-status-update pull-right">
+												<li>
+													<a href="javascript:void(0);" id="mt">Month</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" id="ag">Agenda</a>
+												</li>
+												<li>
+													<a href="javascript:void(0);" id="td">Today</a>
+												</li>
+											</ul>
+										</div>
+										<a href="javascript:void(0)" class="btn btn-default btn-xs" id="btn-prev"><i class="fa fa-chevron-left"></i></a>
+										<a href="javascript:void(0)" class="btn btn-default btn-xs" id="btn-next"><i class="fa fa-chevron-right"></i></a>
+									</div>
+								</div>
+							</div>
+							<div id="calendar"></div>
+							{{-- end content --}}
+						</div>
+					</div>
+					{{-- end widget div --}}
+				</div>{{-- end jarviswidget --}}
+			</article>
+			{{--Tickets Services by Departments--}}
+			<article class="col-sm-12 col-md-12 col-lg-6">
+				{{--Tickets Services by Application--}}
+				<div class="jarviswidget" id="" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-ticket txt-color-darken"></i> </span>
+						<h2>Tickets Services by Departments</h2>
+					</header>
+					<div>
+						<div class="jarviswidget-editbox">		
+						</div>
+						<div class="widget-body">
+							{{-- this is what the user will see --}}
+							<div id="donutchart2" style="height:300px"></div>
+						</div>{{-- end widget body --}}
+					</div>{{-- end widget div --}}
+				</div>{{-- end jarviswidget --}}
+				{{--Tickets Services by Application--}}
+				<div class="jarviswidget" id="" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-ticket txt-color-darken"></i> </span>
+						<h2>Tickets Services by Application</h2>
+					</header>
+					<div>
+						<div class="jarviswidget-editbox">		
+						</div>
+						<div class="widget-body">
+							{{-- this is what the user will see --}}
+							<div id="donutchart1" style="height:300px"></div>
+						</div>{{-- end widget body --}}
+					</div>{{-- end widget div --}}
+				</div>{{-- end jarviswidget --}}
+				{{--Technician and Developers--}}
+				<div class="jarviswidget" id="" data-widget-togglebutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+					<header>
+						<span class="widget-icon"> <i class="fa fa-group txt-color-darken"></i> </span>
+						<h2>Technician and Developers</h2>
+                        <h2 class="pull-right">
+                            <span style="margin-right:10px">Filter by: <div class="btn-group">
+							{{-- add: non-hidden - to disable auto hide --}}
+							<div class="btn-group">
+								<button class="btn dropdown-toggle btn-xs btn-default" data-toggle="dropdown">
+												IT Network <i class="fa fa-caret-down"></i>
+                                </button>
+                                <ul class="dropdown-menu js-status-update pull-right">
+                                    <li>
+                                        <a href="javascript:void(0);" id="ag">IT Network</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" id="mt">IT Programming</a>
+                                    </li>
+                                </ul>
+                            </div>
+						    </span>
+                        </h2>
+					</header>
+					<div>
+						<div class="jarviswidget-editbox">	
+						</div>
+						<div class="widget-body">
+							<ul id="" class="list-inline" style="height:240px; overflow-x: auto;">
+		            		@foreach(App\Employee::all() as $employees)
+				                <li><div id="Employee{{$employees->EmployeeID}}" data-value="{{$employees->EmployeeID}}" class="text-center" style="padding: 2px; border: 1px solid #eee">
+				                    @if($employees->ProfileImage != null)
+				                    	<img src="{{$employees->ProfileImage}}" style="margin: 5px; width: 150px; height:150px; border-radius:100px; border:5px solid #eee;" alt="Profile Image" class="" />
+				                    @elseif($employees->Gender == 'F')
+					                	<img src="{{asset('img/user-profile/Female.png') }}" style="margin: 5px; width: 150px; height:150px; border-radius:100px; border:5px solid #eee;" alt="Profile Image" class="" />
+				                    @else($employees->Gender == 'M')
+				                    	<img src="{{asset('img/user-profile/Male.png') }}" style="margin: 5px; width: 150px; height:150px; border-radius:100px; border:5px solid #eee;" alt="Profile Image" class="" />
+				                    @endif
+				                    <br>
+				                	Employee ID : {{ $employees->EmployeeID}}<br>
+				                	{{ $employees->FirstName}}
+				                	{{ $employees->LastName}}<br>
+				                	Department : {{ $employees->DepartmentID}}<br>
+				                	{{ $employees->Email}}<br>
+				                	</div>
+				                </li>
+			                @endforeach
+			            	</ul>
+						</div>{{-- end widget body --}}
+					</div>{{-- end widget div --}}
+				</div>{{-- end jarviswidget --}}
+		</article>
+	  </div>
+	  {{-- end row --}}
+	</section>
+</div>
+{{-- END #MAIN CONTENT --}}
+
+@endsection
+@section('script')
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	@include('admin.scripts.google-chart')
+	@include('admin.scripts.column-chart')
+	@include('admin.scripts.calendar-script')
+	@include('admin.scripts.dataTable')
+@endsection

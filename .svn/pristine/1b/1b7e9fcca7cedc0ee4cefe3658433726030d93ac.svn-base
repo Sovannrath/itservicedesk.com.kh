@@ -1,0 +1,52 @@
+<head>
+  <meta charset="utf-8">
+  <title><?php echo $__env->yieldContent('template_title'); ?> | IT Service Desk</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
+  <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  
+  
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(asset('css/bootstrap.min.css')); ?>">
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(asset('css/font-awesome.min.css')); ?>">
+
+  
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(asset('css/smartadmin-production-plugins.min.css')); ?>">
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(asset('css/smartadmin-production.min.css')); ?>">
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(asset('css/smartadmin-skins.min.css')); ?>">
+
+  
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(asset('css/smartadmin-rtl.min.css')); ?>">
+
+  
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(asset('css/demo.min.css')); ?>">
+
+  
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo e(asset('css/nvc-custom.css')); ?>">
+  
+  <link rel="shortcut icon" href="<?php echo e(asset('img/favicon/favicon1.ico')); ?>" type="image/x-icon">
+  <link rel="icon" href="<?php echo e(asset('img/favicon/favicon1.ico')); ?>" type="image/x-icon">
+
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+  
+  
+  <link rel="apple-touch-icon" href="<?php echo e(asset('img/splash/sptouch-icon-iphone.png')); ?>">
+  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo e(asset('img/splash/touch-icon-ipad.png')); ?>">
+  <link rel="apple-touch-icon" sizes="120x120" href="<?php echo e(asset('img/splash/touch-icon-iphone-retina.png')); ?>">
+  <link rel="apple-touch-icon" sizes="152x152" href="<?php echo e(asset('img/splash/touch-icon-ipad-retina.png')); ?>">
+
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+  <link rel="apple-touch-startup-image" href="<?php echo e(asset('img/splash/ipad-landscape.png')); ?>" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+  <link rel="apple-touch-startup-image" href="<?php echo e(asset('img/splash/ipad-portrait.png')); ?>" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+  <link rel="apple-touch-startup-image" href="<?php echo e(asset('img/splash/iphone.png')); ?>" media="screen and (max-device-width: 320px)">
+  <?php echo $__env->yieldContent('style_css'); ?>
+
+</head>

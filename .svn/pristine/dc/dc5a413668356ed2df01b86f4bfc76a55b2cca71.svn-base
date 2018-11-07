@@ -1,0 +1,106 @@
+<!-- #NAVIGATION -->
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS/SASS variables -->
+<aside id="left-panel">
+  <!-- User info -->
+      <div class="login-info">
+        <span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+          
+          <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+            <img src="{{asset('img/avatars/sovannrath.jpg') }}" alt="me" class="online" /> 
+            <span>
+              Manager
+            </span>
+            <i class="fa fa-angle-down"></i>
+          </a> 
+          
+        </span>
+      </div>
+      <!-- end user info -->
+  <!-- User info
+  <div class="" style="padding:15px 0px 15px 0px;height:170px; text-align:center">
+    <span> User image size is adjusted inside CSS, it should stay as is 
+      <a href="javascript:void(0);">
+        <img src="{{asset('img/avatars/male.png') }}" style="width: 100px; height:auto; border-radius:50px; border:5px solid #ffffff;" alt="me" class="" />
+      </a>
+    </span>
+    <p>
+      
+    </p>
+
+
+    <div class="btn-group btn-group-justified" style="margin-bottom:0px;">
+      <a href="{{ url('/home') }}" class="btn btn-primary">Home</a>
+      <a href="{{ url('/profile') }}" class="btn btn-primary"> Profile</a>
+      <a href="{{ url('/email') }}" class="btn btn-primary"> Email</a>
+    </div>
+  </div>
+   end user info -->
+
+  <!-- NAVIGATION : This navigation is also responsive
+
+  To make this navigation dynamic please make sure to link the node
+  (the reference to the nav > ul) after page load. Or the navigation
+  will not initialize.
+  -->
+  <nav>
+    <!--
+    NOTE: Notice the gaps after each icon usage <i></i>..
+    Please note that these links work a bit different than
+    traditional href="" links. See documentation for details.
+    -->
+
+    <ul>
+      <li class="">
+        <a href="{{ url('/home') }}" class="active" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> Dashboard</a>
+      </li>
+    </ul>
+    <ul>
+      <li class="">
+        <a href="#" title="Employee Account"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">Employee Account</span></a>
+      </li>
+    </ul>
+    <ul>
+      <li class="">
+        <a href="#" title="Self-Service Portal"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Self-Service Portal</span></a>
+      </li>
+    </ul>
+  <ul>
+    <li class="">
+      <a href="#" title="Leave Management"><i class="fa fa-lg fa-fw fa-book"></i> <span class="menu-item-parent">Leave Management</span></a>
+    </li>
+  </ul>
+  <ul>
+    <li class="">
+      <a href="#" title="Time and Attendance"><i class="fa fa-lg fa-fw fa-calendar-o"></i> <span class="menu-item-parent">Time and Attendance</span></a>
+    </li>
+  </ul>
+  <ul>
+    <li class="">
+      <a href="#" title="Adminstrator Management"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Administrator Mgt</span></a>
+    </li>
+  </ul>
+  <ul>
+    <li class="">
+      <a href="#" title="Notification"><i class="fa fa-lg fa-fw fa-envelope"></i> <span class="menu-item-parent">IT Service Desk</span></a>
+    </li>
+  </ul>
+  <ul>
+    <li class="">
+      <a href="#" title="Notification"><i class="fa fa-lg fa-fw fa-bell-o"></i> <span class="menu-item-parent">Notifiaction</span></a>
+    </li>
+  </ul>
+  <ul>
+    <li class="">
+      <a href="#" title="Setup"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">Setup</span></a>
+    </li>
+  </ul>
+  <ul>
+    <li class="">
+      <a href="#" title="Reports"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Reports</span></a>
+    </li>
+  </ul>
+  </nav>
+
+</aside>
+<!-- END NAVIGATION -->

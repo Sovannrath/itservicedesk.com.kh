@@ -1,0 +1,96 @@
+<aside id="left-panel">
+  
+  <div class="login-info">
+    <span> 
+      <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+        <?php
+          $Email = Session::get('user.0.EmailID');
+          $Employee = App\Employee::getEmployeeByEmail($Email);
+        ?>
+          <?php if(!$Employee): ?>
+          <img src="<?php echo e(asset('img/user-profile/Male.png')); ?>" alt="me" class="online" />
+          <?php elseif($Employee->ProfileImage != ''): ?>
+          <img src="<?php echo e($Employee->ProfileImage); ?>" alt="me" class="online" />
+          <?php else: ?>
+          <img src="<?php echo e(asset('img/user-profile/Male.png')); ?>" alt="me" class="online" />
+          <?php endif; ?>
+        <span>
+          <?php if(Session::has('user.0.NameENG')): ?>
+            <?php echo e(Session::get('user.0.NameENG')); ?>
+
+          <?php endif; ?>
+        </span>
+        <i class="fa fa-angle-down"></i>
+      </a>
+    </span>
+  </div>
+  
+
+  
+  <nav>
+  
+    <ul>
+      
+      <li class="<?php echo e((\Request::route()->getName() == 'dashboard') ? 'active' : ''); ?>">
+        <a href="<?php echo e(route('dashboard' )); ?>" title="Dashboard"><i class="fa fa-lg fa-fw fa-dashboard"></i><span class="menu-item-parent">Dashboard</span></a>
+      </li>
+      
+      <li class="<?php echo e((\Request::route()->getName() == 'employees') ? 'active' : ''); ?>">
+        <a href="<?php echo e(route('employees')); ?>" title="Employee Account"><i class="fa fa-lg fa-fw fa-group"></i><span class="menu-item-parent">Employee Account</span></a>
+      </li>
+      
+      <li class="<?php echo e((\Request::route()->getName() == 'incidents' || \Request::route()->getName() == 'edit.incident' || \Request::route()->getName() == 'create.incident' ) ? 'active' : ''); ?>">
+        <a href="<?php echo e(route('incidents')); ?>" title="Incidents Managemet"><i class="fa fa-lg fa-fw fa-question-circle"></i> <span class="menu-item-parent">Incident Management</span></a>
+      </li>
+      
+      <li>
+        <a href="#" title="Services Management"><i class="fa fa-lg fa-fw fa-rss"></i> <span class="menu-item-parent">Service Management</span></a>
+          <ul>
+            <li <?php echo e((Request::is('nvc/app-dev') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/app-dev')); ?>" title="App Develop Request"><i class="fa fa-lg fa-fw fa-external-link-square"></i> <span class="menu-item-parent">Peripheral Request</span></a>
+            </li>
+            <li <?php echo e((Request::is('nvc/erp-consult') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/erp-consult')); ?>" title="ERP Consultant"><i class="fa fa-lg fa-fw fa-external-link-square"></i> <span class="menu-item-parent">ERP Consult</span></a>
+            </li>
+          </ul>
+      </li>
+      
+      <li>
+        <a href="#" title="Application Development"><i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent">App Development</span></a>
+        <ul>
+          <li>
+            <a href="<?php echo e(url('nvc/app-develop/new')); ?>" title="Request Application Develop"> Request Application Develop</a>
+          </li>
+        </ul>
+      </li>
+      
+      <li>
+        <a href="#" title="Change Request Management"><i class="fa fa-lg fa-fw fa-exchange"></i> <span class="menu-item-parent">Change Management</span></a>
+          <ul>
+            <li>
+              <a href="<?php echo e(url('nvc/change-request/new')); ?>" title="Change Request"> Create Change Request</a>
+            </li>
+            <li <?php echo e((Request::is('nvc/change-request/all') ? 'class=active' : '')); ?>>
+              <a href="<?php echo e(url('nvc/change-request/all')); ?>" title="Change Request"> All Change Request</a>
+            </li>
+          </ul>
+      </li>
+      
+      <li>
+        <a href="#" title="Report Management"><i class="fa fa-lg fa-fw fa-bell"></i> <span class="menu-item-parent">Notification</span></a>
+      </li>
+      
+      <li class="<?php echo e((\Request::route()->getName() == 'setup') ? 'active' : ''); ?>">
+        <a href="<?php echo e(route('setup')); ?>" title="Services Management"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">Setup</span></a>
+      </li>
+      
+      <li>
+        <a href="nvc/reports" title="Report Management"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Report</span></a>
+      </li>
+    </ul>
+  </nav>
+  
+  <span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i>
+  </span>
+
+</aside>

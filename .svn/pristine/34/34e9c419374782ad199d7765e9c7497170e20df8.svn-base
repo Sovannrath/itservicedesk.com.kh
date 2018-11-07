@@ -1,0 +1,57 @@
+<?php
+
+namespace App;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Repository
+{
+    //
+    protected $fillable = [
+        'BusinessUnitID', 
+        'DepartmentID', 
+        'DeptName',
+        'LegalName',
+        'BusinessActveStatus',
+        'BusinessAppID',
+        'BusinessAppDesc',
+        'BusinessStatus',
+        'BusinessRoleID',
+        'BusinessRoleDesc',
+        'UserID',
+        'EmailID',
+        'Password',
+        'BusinessPartnerID',
+        'DocumentID',
+        'NameENG',
+        'NameKHM',
+        'RequestTypeID',
+        'RequestTypeDesc',
+        'OperatorID',
+        'Profile',
+        'Active',
+    ];
+    public function getUser(){
+
+    $client = new \GuzzleHttp\Client();
+    $username = $request->get('email');
+    $password = $request->get('password');
+    $business_app ='APP000002-TAKEN-KEY';
+    $getUser = json_decode(file_get_contents('http://10.0.8.239:8888/api/ERP_GetEnterpriseUserLogin/GetErp_userlogin?UserName='.$username.'&Password='.$password.'&BusinessApp='.$business_app), true);
+    }
+    
+    
+    public function isManager(){
+
+        if($this->$getUser[0]["BusinessRoleID"] === 2)
+        { 
+            return true; 
+        } 
+        else 
+        { 
+            return false; 
+        }
+    }
+}
