@@ -124,10 +124,15 @@ class InvestigationController extends Controller
     }
 
     public function ajaxShowInvestigateLine(){
-    	$inv_line = InvestigateLine::all();
+	    $inv_line = InvestigateLine::all();
+//	    $data =json_encode(['data'=>$inv_line], true);
+    	return view('admin.investigation.tbl-investigate-line-step', compact('inv_line'));
+    }
+// Not use right now
+    public function ajaxGetInvestigateLineData(){
+	    $inv_line = InvestigateLine::all();
 	    $data =json_encode(['data'=>$inv_line], true);
     	return response($data, 200)->header('Content-Type','Application/json');
-//    	return view('admin.investigation.tbl-investigate-line-step', compact('inv_line'));
     }
 	public function ajaxCreateInvestigateLine(Request $request){
 		return view('admin.investigation.investigate-line-form');
@@ -151,9 +156,9 @@ class InvestigationController extends Controller
 //		dd($inv_line);
 	}
 	public function ajaxDeleteInvestigateLine($step_id){
-    	$inv_line = InvestigateLine::find($step_id);
-    	$inv_line->delete();
-    	return false;
+    	InvestigateLine::where('StepID', '=', $step_id)->delete();
+		return redirect()->back();
+//    	return $step_id;
 	}
     /**
      * Show the form for editing the specified resource.

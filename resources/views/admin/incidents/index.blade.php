@@ -258,8 +258,6 @@ Incident Management
 <script src="{{asset('js/plugin/bootstrapvalidator/bootstrapValidator.min.js') }}"></script>
 <script src="{{asset('dist/jquery-confirm.min.js') }}"></script>
 <script src="https://cdn.datatables.net/plug-ins/1.10.16/dataRender/ellipsis.js"></script>
-<script src="{{asset('js/plugin/bootstrap-wizard/jquery.bootstrap.wizard.min.js')}}"></script>
-<script src="{{asset('js/plugin/fuelux/wizard/wizard.min.js')}}"></script>
 <script>
     $(document).ready(function() {
         pageSetUp();

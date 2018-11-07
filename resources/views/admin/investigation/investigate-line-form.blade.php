@@ -1,13 +1,13 @@
 <form id="fm_add_step" class="smart-form">
 	{{ csrf_field() }}
 	<fieldset>
-		<div class="row"
+		<div class="row">
 			<section>
-				<label class="textarea"> <i class="icon-append fa fa-comment"></i>
-					<textarea rows="3" id="description" name="description" placeholder="Enter your description"></textarea>
+				<label class="input"> <i class="icon-append fa fa-comment"></i>
+					<input type="text" id="description" name="description" placeholder="Enter your description">
 				</label>
 			</section>
-		</div>
+        </div>
 		<div class="row">
 			<section>
 				<label class="input"> <i class="icon-append fa fa-calendar"></i>

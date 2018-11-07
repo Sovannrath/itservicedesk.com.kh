@@ -72,9 +72,10 @@ Route::group(['middleware' => ['web','checkUser', 'isSuperAdmin']], function () 
 	Route::post('/ajax/investigate/save','Admin\InvestigationController@ajaxSaveInvestigate');
 	// Ajax InvestigateLine /ajax/remove/
 	Route::get('/ajax/inv-line','Admin\InvestigationController@ajaxShowInvestigateLine');
+	Route::get('/ajax/inv-line/data','Admin\InvestigationController@ajaxGetInvestigateLineData');
 	Route::get('/ajax/inv-line/new','Admin\InvestigationController@ajaxCreateInvestigateLine');
 	Route::post('/ajax/inv-line/save','Admin\InvestigationController@ajaxSaveInvestigateLine');
-	Route::get('/ajax/inv-line/{step_id}/delete','Admin\InvestigationController@ajaxDeleteInvestigateLine');
+	Route::get('/ajax/inv-line/delete/{step_id}','Admin\InvestigationController@ajaxDeleteInvestigateLine');
 
 //	Route::get('/read_inv_ln','Admin\InvestigationController@readInvestigateLine')->name('investigate.read');
 //	Route::get('/create_inv_ln','Admin\InvestigationController@createInvestigateLine')->name('investigate.create');

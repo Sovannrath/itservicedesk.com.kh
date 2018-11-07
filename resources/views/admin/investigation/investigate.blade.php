@@ -141,7 +141,7 @@ Investigation Creation
                     </div>
                     <div id="show_step" style="border: 1px dashed #EEE9E9; padding: 10px; margin:10px">
                         <a href="#" title="Add step" id="add" class="btn btn-xs btn-default"><i class="fa fa-plus"></i> Add Step</a>
-                        <div id="load-table">
+                        <div id="load-table" style="margin-top: 10px">
 
                         </div>
                         <fieldset>
@@ -168,77 +168,68 @@ Investigation Creation
     $(document).ready(function() {
         $('#load-table').load('/ajax/inv-line', function () {
             var table = $('#tbl_investigate').DataTable({
-                "autoWidth": "true",
-                "columnDefs": [
-                    {
-                        "targets": [3,6],
-                        "render": function(data, type, row) {
-                            if ( type === 'display') {
-                                return renderedData = $.fn.dataTable.render.ellipsis(35)(data, type, row);
-                            }
-                            return data;
-                        }
-                    }
-                ],
-                "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
-                "t" +
-                "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-                "ajax": "/ajax/incidents",
-                "bDestroy": true,
-                "language": { "loadingRecords": "Please wait - loading..." },
-                "iDisplayLength": 10,
-                "oLanguage": {
-                    "sSearch": '<span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>'
-                },
-                "columns":
-                    [
-                        {
-                            "class": 'details-control',
-                            "orderable": false,
-                            "data": null,
-                            "defaultContent": ''
-                        },
-                        {"data": "CaseID"},
-                        {"data": "Subject"},
-                        {"data": "Description"},
-                        {"data": "Status"},
-                        {"data": "Priority"},
-                        {"data": "CreatedDate"},
-                        {"data": "AttachFile"},
-                    ],
-                "order": [[1, 'desc']],
-                "fnDrawCallback": function (oSettings) {
-                    runAllCharts()
-                }
                 paging: false,
                 searching:false,
                 info:false,
                 ordering:false,
                 scrollX:true,
             });
-            $('#tbl_investigate tbody').on('click', 'tr',function () {
-                var data = table.row(this).data();
-                var step_id = data[0];
-                console.log(step_id);
-                $('#inv_edit'+step_id).on('click', function () {
-                    var step = step_id;
-                    alert(step);
-                    // $.ajax({
-                    //     type: 'get',
-                    //     dataType: 'html',
-                    //     url: '/ajax/inv-line/new',
-                    //     // data: '',
-                    //     success: function (response) {
-                    //     }
-                    // });
-                })
 
-                // Remove
-                $('#inv_remove' + step_id).on('click', function () {
+            $('#tbl_investigate').on('click','#tr_investigate #inv_edit', function () {
+                var id=$(this).attr("data-id");
+                $.confirm({
+                    title:'Edit step',
+                    content: 'url:/ajax/inv-line/new',
+                    type: 'blue',
+                    buttons: {
+                        Update:{
+                            text:'Update',
+                            btnClass: 'btn btn-blue',
+                            action: function () {
+                                
+                            }
+                        },
+                        Cancel: function () {
+                            
+                        }
+                    }
 
-                    $.alert(step_id);
-                })
+                });
+
             });
+
+            // Remove
+            $('#tbl_investigate').on('click','#tr_investigate #inv_remove', function () {
+                var id=$(this).attr("data-id");
+                $.confirm({
+                    title:false,
+                    content: 'Do you want to delete?',
+                    type: 'red',
+                    closeIcon: true,
+                    buttons: {
+                        Delete:{
+                            text:'Delete',
+                            btnClass: 'btn-red',
+                            action: function () {
+                                $.ajax({
+                                    url:'/ajax/inv-line/delete/'+id,
+                                    type: 'get',
+                                    data: 'step_id='+id,
+                                    success: function () {
+                                        $('#load-table').load('/ajax/inv-line');
+                                    },
+                                    complete: function () {
+                                        $('#load-table').load('/ajax/inv-line');
+                                    }
+                                })
+                            }
+                        }
+                    }
+
+                });
+
+            });
+
         });
         $('#save').click(function () {
             var inv_id = $('#inv_id').val();

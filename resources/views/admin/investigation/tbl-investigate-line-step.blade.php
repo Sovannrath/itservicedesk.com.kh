@@ -10,15 +10,16 @@
 	</tr>
 	</thead>
 	<tbody>
+    @php $i =0; @endphp
 	@foreach($inv_line as $inv_line)
-		<tr>
-            <td>{{ $inv_line->StepID }}</td>
+		<tr id="tr_investigate">
+            <td>{{ $i+=1 }}</td>
 			<td>{{$inv_line->Description}}</td>
 			<td>{{$inv_line->Reference}}</td>
 			<td>{{$inv_line->Comment}}</td>
 			<td>{{$inv_line->Status}}</td>
-			<td><a href="#" title="Edit" id="inv_edit{{$inv_line->StepID}}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></a>
-				<a href="#" title="Remove" id="inv_remove{{$inv_line->StepID}}" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i></a></td>
+            <td class="action"><button type="button" title="Edit" id="inv_edit" data-id="{{ $inv_line->StepID }}" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></button>
+				<a href="#" type="button" title="Remove" id="inv_remove" data-id="{{ $inv_line->StepID }}" class="btn btn-xs btn-danger"><i class="fa fa-remove"></i></a></td>
 		</tr>
 	@endforeach
 	</tbody>
