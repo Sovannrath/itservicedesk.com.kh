@@ -1,6 +1,9 @@
 <?php
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -125,8 +128,9 @@ Route::group(['middleware' => ['web','checkUser']], function(){
 Route::get('/getAppSetup', 'Admin\AppSetupController@getAppSetup');
 Route::get('/testCase', array('uses' => 'Admin\IncidentController@sendNotifyManager'));
 
+//use Illuminate\Support\Facades\Cache;
 Route::get('/test', function (){
-	 return view('admin.investigation.tbl-investigate-line-step');
+	 return Session::get('INV00010');
 });
 
 

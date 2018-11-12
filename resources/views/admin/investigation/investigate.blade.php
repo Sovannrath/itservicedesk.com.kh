@@ -142,16 +142,30 @@ Investigation Creation
                     <div id="show_step" style="border: 1px dashed #EEE9E9; padding: 10px; margin:10px">
                         <a href="#" title="Add step" id="add" class="btn btn-xs btn-default"><i class="fa fa-plus"></i> Add Step</a>
                         <div id="load-table" style="margin-top: 10px">
+                            <table id="tbl_investigate" class="table table-condensed table-bordered display" style="width:100%; margin-top: 10px">
+                                <thead>
+                                <tr>
+                                    <th>Step</th>
+                                    <th>Description</th>
+                                    <th>Reference</th>
+                                    <th>Comment</th>
+                                    <th>Status</th>
+                                    <th width="10%">Remove</th>
+                                </tr>
+                                </thead>
+                                <tbody>
 
+
+                            </table>
                         </div>
-                        <fieldset>
-                                <div class="form-group" style="margin-top: 10px">
-                                    <div class="col-sm-12">
-                                        <button type="button" id="save" class="btn btn-primary">Save</button>
-                                    </div>
-                                </div>
-                        </fieldset>
                     </div>
+                    <fieldset>
+                        <div class="form-group" style="margin-top: 10px; margin-left:5px">
+                            <div class="col-sm-12">
+                                <button type="button" id="save" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </fieldset>
                 </form>
             </div>
           </div>{{-- end jarviswidget --}}
@@ -166,196 +180,26 @@ Investigation Creation
 <script src="{{asset('js/plugin/select2/select2.min.js')}}"></script>
 <script>
     $(document).ready(function() {
-        $('#load-table').load('/ajax/inv-line', function () {
-            var table = $('#tbl_investigate').DataTable({
-                paging: false,
-                searching:false,
-                info:false,
-                ordering:false,
-                scrollX:true,
+        var i = 1;
+        $("#add").click(function(){
+            var data = '<tr class="tb_row"><td id="step" style="width: 70px"><input type="text" id="inv_id" style="display: none" name="investigate_id[]" value="'+inv_id+'" /><input type="text" class="form-control" id="step" name="step[]" value="Step'+i+'" /></td>';
+            data +='<td><input type="text" class="form-control" id="description" name="description[]" value="" placeholder="Description" /></td>' +
+                '<td> <input type="text" class="form-control" id="reference" name="reference" value="" placeholder="Reference" /> </td> ' +
+                '<td> <input type="text" class="form-control" id="comment" name="comment" value="" placeholder="Comment" /> </td>' +
+                '<td> <select class="form-control" id="status" name="status"> <option value="1">True</option><option value="0">False</option></select> </td>' +
+                '<td> <a href="javascript:void(0);" id="remove" class="remove btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td></tr>';
+            $("#tbl_investigate").append(data);
+            $(".remove").on('click',function(){
+                $(this).parents('tr').remove();
             });
-
-            $('#tbl_investigate').on('click','#tr_investigate #inv_edit', function () {
-                var id=$(this).attr("data-id");
-                $.confirm({
-                    title:'Edit step',
-                    content: 'url:/ajax/inv-line/new',
-                    type: 'blue',
-                    buttons: {
-                        Update:{
-                            text:'Update',
-                            btnClass: 'btn btn-blue',
-                            action: function () {
-                                
-                            }
-                        },
-                        Cancel: function () {
-                            
-                        }
-                    }
-
-                });
-
-            });
-
-            // Remove
-            $('#tbl_investigate').on('click','#tr_investigate #inv_remove', function () {
-                var id=$(this).attr("data-id");
-                $.confirm({
-                    title:false,
-                    content: 'Do you want to delete?',
-                    type: 'red',
-                    closeIcon: true,
-                    buttons: {
-                        Delete:{
-                            text:'Delete',
-                            btnClass: 'btn-red',
-                            action: function () {
-                                $.ajax({
-                                    url:'/ajax/inv-line/delete/'+id,
-                                    type: 'get',
-                                    data: 'step_id='+id,
-                                    success: function () {
-                                        $('#load-table').load('/ajax/inv-line');
-                                    },
-                                    complete: function () {
-                                        $('#load-table').load('/ajax/inv-line');
-                                    }
-                                })
-                            }
-                        }
-                    }
-
-                });
-
-            });
-
+            i++;
         });
         $('#save').click(function () {
-            var inv_id = $('#inv_id').val();
-            var case_id = $('#select_case').val();
-            var inv_name = $('#inv_name').val();
-            var website = $('#website').val();
-            var source = $('#source').val();
-            var status = $('#status').val();
-            var remote_pc = $('#remote_pc').val();
-            // $.alert(remote_pc);
-            if(!case_id){
-                $.dialog({
-                    title:false,
-                    type: 'red',
-                    content:'Please select <strong>Incident N<sup>o</sup> </strong>!',
-                    animation: 'scale',
-                    animateFromElement: false,
-                    buttons: {
-                        Close: {
-                            text: 'Close',
-                            btnClass: 'btn-default',
-                            action: function(){
-                            }
-                        }
-                    }
-                });
-            }else if(!inv_name){
-                $.dialog({
-                    title:false,
-                    type: 'red',
-                    content:'Please input <strong>Investigate Name </strong>!',
-                    animation: 'scale',
-                    animateFromElement: false,
-                    buttons: {
-                        Close: {
-                            text: 'Close',
-                            btnClass: 'btn-default',
-                            action: function(){
-                            }
-                        }
-                    }
-                });
-            }else{
-                $.ajax({
-                    type: 'POST',
-                    url: '{{url("/ajax/investigate/save")}}',
-                    data: "case_id=" + case_id + "&inv_id=" + inv_id + "&name=" + inv_name + "&website=" +website+ "&source=" +source+ "&status=" +status+ "&remote_pc=" +remote_pc,
-                    success: function() {
-                        $.smallBox({
-                            title : "Your investigate has been created successfully!",
-                            content : "<i class='fa fa-clock-o'></i> <i>{{Carbon::now()->format('d / m / Y h:s A')}}</i>",
-                            color : "#97c51b",
-                            iconSmall : "fa fa-bell bounce animated",
-                            timeout : 4000
-                        });
-                    },
-                    error: function () {
-                        $.smallBox({
-                            title : "Something went wrong, please try again!",
-                            content : "<i class='fa fa-clock-o'></i> <i>{{Carbon::now()->format('d / m / Y h:s A')}}</i>",
-                            color : "#990009",
-                            iconSmall : "fa fa-bell bounce animated",
-                            timeout : 4000
-                        });
-                    }
-                })
-            }
-        });
-        $('#add').click(function () {
-            var case_id = $('#select_case').val();
-            if(!case_id)
-                $.dialog({
-                    title:false,
-                    type: 'red',
-                    content:'Please select <strong>Incident N<sup>o</sup> </strong>!',
-                    animation: 'scale',
-                    animateFromElement: false,
-                    buttons: {
-                        Close: {
-                            text: 'Close',
-                            btnClass: 'btn-default',
-                            action: function(){
-                            }
-                        }
-                    }
-                })
-            else
-            $.confirm({
-                title: 'Add step',
-                type: 'blue',
-                content: 'url:/ajax/inv-line/new',
-                columnClass: 'col-md-6 col-md-offset-4',
-                animation: 'scale',
-                animateFromElement: false,
-                buttons: {
-                    Add: {
-                        text: 'Add',
-                        btnClass: 'btn btn-primary',
-                        action: function () {
-                            var inv_id = '{{$investigate}}';
-                            var description = this.$content.find('#description').val();
-                            var reference = this.$content.find('#reference').val();
-                            var comment = this.$content.find('#comment').val();
-                            var status = this.$content.find('#status').val();
-                            $.ajax({
-                                type: 'POST',
-                                url: '/ajax/inv-line/save',
-                                data: "description="+ description +"&reference="+ reference + "&comment="+ comment +"&status="+ status +"&inv_id=" +inv_id,
-                                success: function () {
-                                    $('#load-table').load('/ajax/inv-line');
-                                },
-                                error: function () {
-                                    $.alert('Something went wrong!');
-                                }
-                            })
-                        }
-
-                    },
-                    Cancel: function () {
-                        //close
-                    }
-
-                }
+            $('.tb_row').each(function () {
+                var desc = $('.tb_row').find('input[name="description[]"]').val();
+                alert(desc);
             });
         });
-
 
         $('#select_case').change(function () {
             var case_id = $(this).val();

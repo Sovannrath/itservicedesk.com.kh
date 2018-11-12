@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Incident;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
 use App\Operator;
 use App\InvestigateLine;
 use App\Employee;
@@ -93,19 +94,12 @@ class InvestigationController extends Controller
 			'Timestamp'=>$timestamp,
 			'RemoteDesktopID'=>$remote_id,
 			'UsersMaintains'=>$user_maintains,
-			'RemoteDesktopID'=>$remote_id,
 		]);
 		if($query){
 			return redirect()->back();
 		}
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show()
     {
     	$InvestigateID = $this->getLastInvestigateID();
@@ -134,30 +128,40 @@ class InvestigationController extends Controller
 	    $data =json_encode(['data'=>$inv_line], true);
     	return response($data, 200)->header('Content-Type','Application/json');
     }
+    // Create Investigation Line Form Pop Up
 	public function ajaxCreateInvestigateLine(Request $request){
 		return view('admin.investigation.investigate-line-form');
 	}
 	public function ajaxSaveInvestigateLine(Request $request){
-		$inv_line = new InvestigateLine;
-//		$inv_line->StepID = $this->getStepID();
-		$inv_line->InvestigateID = $request->inv_id;
-		$inv_line->Description = $request->description;
-		$inv_line->Reference = $request->reference;
-		$inv_line->Comment = $request->comment;
-		$inv_line->Status = $request->status;
-		$inv_line->CreatedDate = Carbon::now()->format('d/m/Y h:i A');
-		$inv_line->UpdatedDate = null;
-		$inv_line->DeletedDate = null;
-		$inv_line->TimeStamp = Carbon::now();
-		$inv_line->UsersMaintains = $this->getEmployeeID();
-
-		$inv_line->save();
-//		return false;
-//		dd($inv_line);
+//		$inv_line = new InvestigateLine;
+////		$inv_line->StepID = $this->getStepID();
+//		$inv_line->InvestigateID = $request->inv_id;
+//		$inv_line->Description = $request->description;
+//		$inv_line->Reference = $request->reference;
+//		$inv_line->Comment = $request->comment;
+//		$inv_line->Status = $request->status;
+//		$inv_line->CreatedDate = Carbon::now()->format('d/m/Y h:i A');
+//		$inv_line->UpdatedDate = null;
+//		$inv_line->DeletedDate = null;
+//		$inv_line->TimeStamp = Carbon::now();
+//		$inv_line->UsersMaintains = $this->getEmployeeID();
+$arr = array([
+	'InvestigateID'=>$request->inv_id,
+	'Description'=>$request->description,
+	'Reference'=>$request->reference,
+	'Comment'=>$request->comment,
+	'Status'=>$request->status,
+	'CreatedDate'=>Carbon::now()->format('d/m/Y h:i A'),
+	'UpdatedDate'=>null,
+	'TimeStamp'=>Carbon::now(),
+	'UsersMaintains'=>$this->getEmployeeID()
+	]);
+dd($arr);
+//		$inv_line->save();
 	}
 	public function ajaxDeleteInvestigateLine($step_id){
     	InvestigateLine::where('StepID', '=', $step_id)->delete();
-		return redirect()->back();
+		return false;
 //    	return $step_id;
 	}
     /**
@@ -205,7 +209,4 @@ class InvestigationController extends Controller
 		return $getEmployeeID[0]->EmployeeID;
 	}
 
-	public function getStepID(){
-    	return $step = 1;
-	}
 }
