@@ -45,15 +45,15 @@ class InvestigationController extends Controller
      */
     public function ajaxSaveInvestigate(Request $request){
 		$investigate_header = new InvestigateHeader;
-	    $investigate_header->InvestigateID = $request->inv_id;
+	    $investigate_header->InvestigateID = $this->getLastInvestigateID();
 	    $investigate_header->OperatorID = $this->getOperator();
 	    $investigate_header->CaseID = $request->case_id;
 	    $investigate_header->Name = $request->name;
-	    $investigate_header->InvestigateDate = Carbon::now()->format('d/m/Y h:i A');
+	    $investigate_header->InvestigateDate = Carbon::now();
 	    $investigate_header->Website = $request->website;
 	    $investigate_header->Source = $request->source;
 	    $investigate_header->Status = $request->status;
-	    $investigate_header->CreatedDate = Carbon::now()->format('d/m/Y h:i A');
+	    $investigate_header->CreatedDate = Carbon::now();
 	    $investigate_header->UpdatedDate = null;
 	    $investigate_header->DeletedDate = null;
 	    $investigate_header->Timestamp = Carbon::now();
@@ -95,9 +95,6 @@ class InvestigationController extends Controller
 			'RemoteDesktopID'=>$remote_id,
 			'UsersMaintains'=>$user_maintains,
 		]);
-		if($query){
-			return redirect()->back();
-		}
     }
 
     public function show()
@@ -145,18 +142,28 @@ class InvestigationController extends Controller
 //		$inv_line->DeletedDate = null;
 //		$inv_line->TimeStamp = Carbon::now();
 //		$inv_line->UsersMaintains = $this->getEmployeeID();
-$arr = array([
-	'InvestigateID'=>$request->inv_id,
-	'Description'=>$request->description,
-	'Reference'=>$request->reference,
-	'Comment'=>$request->comment,
-	'Status'=>$request->status,
-	'CreatedDate'=>Carbon::now()->format('d/m/Y h:i A'),
-	'UpdatedDate'=>null,
-	'TimeStamp'=>Carbon::now(),
-	'UsersMaintains'=>$this->getEmployeeID()
-	]);
-dd($arr);
+//	$arr = array([
+//		'InvestigateID'=>$request->inv_id,
+//		'Description'=>$request->description,
+//		'Reference'=>$request->reference,
+//		'Comment'=>$request->comment,
+//		'Status'=>$request->status,
+//		'CreatedDate'=>Carbon::now()->format('d/m/Y h:i A'),
+//		'UpdatedDate'=>null,
+//		'TimeStamp'=>Carbon::now(),
+//		'UsersMaintains'=>$this->getEmployeeID()
+//		]);
+		DB::table('InvestigateLine')->insert([
+			'InvestigateID'=>$request->inv_id,
+			'Description'=>$request->description,
+			'Reference'=>$request->reference,
+			'Comment'=>$request->comment,
+			'Status'=>$request->status,
+			'CreatedDate'=>Carbon::now(),
+			'UpdatedDate'=>null,
+			'TimeStamp'=>Carbon::now(),
+			'UsersMaintains'=>$this->getEmployeeID()
+		]);
 //		$inv_line->save();
 	}
 	public function ajaxDeleteInvestigateLine($step_id){

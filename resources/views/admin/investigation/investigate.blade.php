@@ -181,23 +181,54 @@ Investigation Creation
 <script>
     $(document).ready(function() {
         var i = 1;
+        var investigate_id = $('#inv_id').val();
         $("#add").click(function(){
-            var data = '<tr class="tb_row"><td id="step" style="width: 70px"><input type="text" id="inv_id" style="display: none" name="investigate_id[]" value="'+inv_id+'" /><input type="text" class="form-control" id="step" name="step[]" value="Step'+i+'" /></td>';
+            var data = '<tr class="tb_row"><td id="step" style="width: 70px"><input type="text" id="inv_id" style="display: none" name="investigate_id[]" value="'+investigate_id+'" /><input type="text" class="form-control" id="step" name="step[]" placeholder="Step'+i+'" /></td>';
             data +='<td><input type="text" class="form-control" id="description" name="description[]" value="" placeholder="Description" /></td>' +
-                '<td> <input type="text" class="form-control" id="reference" name="reference" value="" placeholder="Reference" /> </td> ' +
-                '<td> <input type="text" class="form-control" id="comment" name="comment" value="" placeholder="Comment" /> </td>' +
-                '<td> <select class="form-control" id="status" name="status"> <option value="1">True</option><option value="0">False</option></select> </td>' +
+                '<td> <input type="text" class="form-control" id="reference" name="reference[]" value="" placeholder="Reference" /> </td> ' +
+                '<td> <input type="text" class="form-control" id="comment" name="comment[]" value="" placeholder="Comment" /> </td>' +
+                '<td> <select class="form-control" id="status" name="status[]"> <option value="1">True</option><option value="0">False</option></select> </td>' +
                 '<td> <a href="javascript:void(0);" id="remove" class="remove btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td></tr>';
-            $("#tbl_investigate").append(data);
-            $(".remove").on('click',function(){
-                $(this).parents('tr').remove();
-            });
-            i++;
+            if($('#tbl_investigate tr').length>10){
+                return;
+            }else{
+                $("#tbl_investigate").append(data);
+                i++;
+            }
         });
+        $("#tbl_investigate tbody").on('click','#remove', function(){
+            $(this).parents('tr').remove();
+        });
+
         $('#save').click(function () {
-            $('.tb_row').each(function () {
-                var desc = $('.tb_row').find('input[name="description[]"]').val();
-                alert(desc);
+            var inv_id , description ,reference , comment, line_status;
+            var investigate_id = $('#inv_id').val();
+            var case_id = $('#select_case').val();
+            var inv_name = $('#inv_name').val();
+            var website = $('#website').val();
+            var source = $('#source').val();
+            var status = $('#status').val();
+            var remote_pc = $('#remote_pc').val();
+        // function add Investigate
+            addInvestigateHeader(investigate_id, case_id, inv_name, website, source, status);
+
+            var table = $('#tbl_investigate tbody');
+            table.find('tr').each(function (i, el) {
+                    /*var $tds = $(this).find('td'),
+                    inv_id = $tds.find("td:eq(0) input[type='text']").val(),
+                    description = $tds.eq(1).text(),
+                    reference = $tds.eq(2).text();*/
+                 inv_id = $(this).find("td:eq(0) input[type='text']").val();
+                 description = $(this).find("td:eq(1) input[type='text']").val();
+                 reference = $(this).find("td:eq(2) input[type='text']").val();
+                 comment = $(this).find("td:eq(3) input[type='text']").val();
+                 line_status =$(this).find("td:eq(4) option:selected").val();
+             // function add Investigate Line
+                addInvestigateLine(inv_id , description ,reference , comment, line_status);
+                /*alert('Row ' + (i + 1) + ':\ninv_id: ' + inv_id
+                    + '\ndescription: ' + description
+                    + '\nreference: ' + reference + '\ncomment: ' + comment
+                    + '\nline_status: ' + line_status);*/
             });
         });
 
@@ -225,5 +256,44 @@ Investigation Creation
             })
         })
     });
+    function addInvestigateLine(inv_id , description ,reference , comment, line_status){
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/inv-line/save',
+            data: "description="+ description +"&reference="+ reference + "&comment="+ comment +"&status="+ line_status +"&inv_id=" +inv_id,
+            success: function (result) {
+                console.log(result);
+            },
+            error: function () {
+                $.alert('Something went wrong!');
+            }
+        })
+    }
+    function addInvestigateHeader(case_id, inv_name, website, source, status) {
+        $.ajax({
+            type: 'POST',
+            url: '/ajax/investigate/save',
+            data: "case_id="+ case_id +"&name="+ inv_name + "&website="+ website +"&source="+ source +"&status=" +status+ "&remote_pc="+remote_pc,
+            success: function (result) {
+                $.smallBox({
+                    title: 'Investigate added successfully ! ',
+                    content: '<i class="fa fa-clock-o"></i> <i>{{Carbon::now()->format("d / m / Y h:s A")}}</i>',
+                    color : "#32c508",
+                    iconSmall: 'fa fa-bell',
+                    timeout: 2800,
+                });
+                window.setTimeout(function(){window.location.reload()}, 3000);
+            },
+            error: function () {
+                $.smallBox({
+                    title: 'Oop! Something went wrong. ',
+                    content: '<i class="fa fa-clock-o"></i> <i>{{Carbon::now()->format("d / m / Y h:s A")}}</i>',
+                    color : "#ff0208",
+                    iconSmall: 'fa fa-bell',
+                    timeout: 3000,
+                });
+            }
+        })
+    }
 </script>
 @endsection

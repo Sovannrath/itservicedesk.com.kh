@@ -47,7 +47,7 @@
               <li class="{{ (\Request::route()->getName() == 'incidents' || \Request::route()->getName() == 'edit.incident') ? 'active' : '' }}">
               <a href="{{route('incidents')}}" title="All incidents"><i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">All Incidents</span></a>
               </li>
-              <li class="{{ (\Request::route()->getName() == 'investigate' || \Request::route()->getName() == 'create.investigate') ? 'active' : '' }}">
+              <li class="{{ (\Request::route()->getName() == 'investigate' || \Request::route()->getName() == 'investigate.create') ? 'active' : '' }}">
                   <a href="{{route('investigate')}}" title="ERP Consultant"><i class="fa fa-lg fa-fw fa-crosshairs"></i> <span class="menu-item-parent">Investigation</span></a>
               </li>
               <li class="{{ (\Request::route()->getName() == 'complaint') ? 'active' : '' }}">
