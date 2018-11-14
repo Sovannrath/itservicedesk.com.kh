@@ -66,12 +66,15 @@ Route::group(['middleware' => ['web','checkUser', 'isSuperAdmin']], function () 
 
 	// Investigation
 	Route::get('/investigate','Admin\InvestigationController@index')->name('investigate');
+
 	Route::get('/investigate/new','Admin\InvestigationController@create')->name('investigate.create');
 	Route::post('/investigate','Admin\InvestigationController@store')->name('investigate.store');
 //	Route::get('/{case_id}/investigate','Admin\InvestigationController@show')->name('investigate.show');
 
 	// Ajax Investigate
-	Route::get('/ajax/investigate','Admin\InvestigationController@ajaxShowInvestigate')->name('ajax.investigate.show');
+	Route::get('/ajax/investigate','Admin\InvestigationController@ajaxShowInvestigateHeader');
+	Route::get('/ajax/investigate/details/{inv_id}','Admin\InvestigationController@ajaxShowInvestigateHeaderByID');
+
 	Route::post('/ajax/investigate/save','Admin\InvestigationController@ajaxSaveInvestigate');
 	// Ajax InvestigateLine /ajax/remove/
 	Route::get('/ajax/inv-line','Admin\InvestigationController@ajaxShowInvestigateLine');
@@ -129,9 +132,7 @@ Route::get('/getAppSetup', 'Admin\AppSetupController@getAppSetup');
 Route::get('/testCase', array('uses' => 'Admin\IncidentController@sendNotifyManager'));
 
 //use Illuminate\Support\Facades\Cache;
-Route::get('/test', function (){
-	 return Session::get('INV00010');
-});
+Route::get('/test/{inv_id}','Admin\InvestigationController@ajaxShowInvestigateHeaderByID' );
 
 
 Route::get('/testMail', 'Admin\IncidentController@sendMailCreate');

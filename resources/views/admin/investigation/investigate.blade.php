@@ -1,19 +1,23 @@
 @php
 use Carbon\Carbon;
 @endphp
+
 @extends('layouts.master')
+
 @section('template_title')
-Investigation Creation
+    Investigation Creation
 @endsection
+
 @section('sub_title')
-Investigation Creation
+    Investigation Creation
 @endsection
 
 @section('style_css')
 <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('dist/jquery-confirm.min.css') }}">
 @endsection
+
 @section('content')
-<div id="content" style="padding-top:0px;">
+<div id="content" style="padding-top:0px; min-height: 790px">
     <div class="row">
         {{-- col --}}
         <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
@@ -35,15 +39,15 @@ Investigation Creation
 
     {{-- widget grid --}}
     <section id="widget-grid" class="">
-      {{-- row --}}
-      <div class="row">
+        {{-- row --}}
+        <div class="row">
         {{-- NEW WIDGET START --}}
         <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          {{-- Widget ID (each widget will need unique ID)--}}
-          <div class="jarviswidget" id="" data-widget-editbutton="false" data-widget-deletebutton="false">
+            {{-- Widget ID (each widget will need unique ID)--}}
+            <div class="jarviswidget" id="" data-widget-editbutton="false" data-widget-deletebutton="false">
             <header>
-              <span class="widget-icon"> <i class="fa fa-crosshairs"></i> </span>
-              <h2>Investigation Creation Form</h2>
+                <span class="widget-icon"> <i class="fa fa-crosshairs"></i> </span>
+                <h2>Investigation Creation Form</h2>
             </header>
             <div class="widget-body">
                 <form class="form-horizontal" id="fm_investigate">
@@ -53,7 +57,7 @@ Investigation Creation
                             <label class="control-label col-md-2">Incident N<sup>o</sup> <span class="text-danger">*</span></label>
                             <div class="col-md-10">
                                 <div class="icon-addon addon-sm">
-                                    <select class="form-control select2" id="select_case" name="case_id">
+                                    <select class="form-control select2" id="select_case" name="select_case">
                                         <option value="" disabled selected>Please select Incident Number</option>
                                         @foreach(App\Incident::all() as $incident)
                                         <option value="{{ $incident->CaseID }}">{{$incident->CaseID}} - {{$incident->Subject}}</option>
@@ -74,14 +78,14 @@ Investigation Creation
                                 <label class="control-label col-md-2">Investigate ID <span class="text-danger">*</span></label>
                                 <div class="col-md-4">
                                     <div class="icon-addon addon-sm">
-                                        <input type="text" readonly value="{{$investigate}}" style="background-color: #fafafa" class="form-control" id="inv_id" name="inv_id" required="">
+                                        <input type="text" readonly value="{{$investigate}}" style="background-color: #fafafa" class="form-control" id="inv_id" name="inv_id">
                                         <label class="fa fa-key" rel="tooltip" title="Investigate ID"></label>
                                     </div>
                                 </div>
                                 <label class="control-label col-md-2">Investigate Name <span class="text-danger">*</span></label>
                                 <div class="col-md-4">
                                     <div class="icon-addon addon-sm">
-                                        <input type="text" id="inv_name" placeholder="Investigation name" style="background-color: #fafafa" class="form-control" name="name">
+                                        <input type="text" id="inv_name" placeholder="Investigation Name" style="background-color: #fafafa" class="form-control" name="name">
                                         <label class="fa fa-question-circle" rel="tooltip" title="Investigate Name"></label>
                                     </div>
                                 </div>
@@ -119,7 +123,7 @@ Investigation Creation
                                 </div>
                                 <label class="control-label col-md-2">Created Date</label>
                                 @php
-                                $date = Carbon::now();
+                                $date = Carbon::now()->format('d/m/Y');
                                 @endphp
                                 <div class="col-md-4">
                                     <div class="icon-addon addon-sm">
@@ -175,15 +179,20 @@ Investigation Creation
 </div>{{-- end content --}}
 @endsection
 @section('script')
-  @include('admin.scripts.dataTable')
+@include('admin.scripts.dataTable')
 <script src="{{asset('dist/jquery-confirm.min.js') }}"></script>
 <script src="{{asset('js/plugin/select2/select2.min.js')}}"></script>
 <script>
     $(document).ready(function() {
+    // Variables
         var i = 1;
         var investigate_id = $('#inv_id').val();
+        var table = $('#tbl_investigate tbody');
+        var inc_case = $('#select_case');
+
+    // Add row
         $("#add").click(function(){
-            var data = '<tr class="tb_row"><td id="step" style="width: 70px"><input type="text" id="inv_id" style="display: none" name="investigate_id[]" value="'+investigate_id+'" /><input type="text" class="form-control" id="step" name="step[]" placeholder="Step'+i+'" /></td>';
+            var data = '<tr class="tb_row"><td style="width: 70px"><input type="text" id="inv_id" style="display: none" name="investigate_id[]" value="'+investigate_id+'" /><input type="text" class="form-control" id="step" name="step[]" value="'+i+'" /></td>';
             data +='<td><input type="text" class="form-control" id="description" name="description[]" value="" placeholder="Description" /></td>' +
                 '<td> <input type="text" class="form-control" id="reference" name="reference[]" value="" placeholder="Reference" /> </td> ' +
                 '<td> <input type="text" class="form-control" id="comment" name="comment[]" value="" placeholder="Comment" /> </td>' +
@@ -196,45 +205,57 @@ Investigation Creation
                 i++;
             }
         });
-        $("#tbl_investigate tbody").on('click','#remove', function(){
+    // Remove row
+        table.on('click','#remove', function(){
             $(this).parents('tr').remove();
         });
-
+    // Save Investigation Header
         $('#save').click(function () {
             var inv_id , description ,reference , comment, line_status;
-            var investigate_id = $('#inv_id').val();
             var case_id = $('#select_case').val();
             var inv_name = $('#inv_name').val();
             var website = $('#website').val();
             var source = $('#source').val();
             var status = $('#status').val();
             var remote_pc = $('#remote_pc').val();
-        // function add Investigate
-            addInvestigateHeader(investigate_id, case_id, inv_name, website, source, status);
 
-            var table = $('#tbl_investigate tbody');
-            table.find('tr').each(function (i, el) {
-                    /*var $tds = $(this).find('td'),
-                    inv_id = $tds.find("td:eq(0) input[type='text']").val(),
-                    description = $tds.eq(1).text(),
-                    reference = $tds.eq(2).text();*/
-                 inv_id = $(this).find("td:eq(0) input[type='text']").val();
-                 description = $(this).find("td:eq(1) input[type='text']").val();
-                 reference = $(this).find("td:eq(2) input[type='text']").val();
-                 comment = $(this).find("td:eq(3) input[type='text']").val();
-                 line_status =$(this).find("td:eq(4) option:selected").val();
-             // function add Investigate Line
-                addInvestigateLine(inv_id , description ,reference , comment, line_status);
-                /*alert('Row ' + (i + 1) + ':\ninv_id: ' + inv_id
-                    + '\ndescription: ' + description
-                    + '\nreference: ' + reference + '\ncomment: ' + comment
-                    + '\nline_status: ' + line_status);*/
-            });
+            if(!case_id){
+                $.dialog({
+                    title:false,
+                    type:'red',
+                    animateFromElement: false,
+                    backgroundDismiss:true,
+                    content: 'Please select an <strong> Incident N<sup>o</sup>!</strong>',
+                });
+            }else if(!inv_name){
+                $.dialog({
+                    title:false,
+                    type:'red',
+                    animateFromElement: false,
+                    backgroundDismiss:true,
+                    content: 'Please input <strong> Investigate Name!</strong>',
+                });
+            }else {
+                // Function add Investigate
+                addInvestigateHeader(case_id, inv_name, website, source, status, remote_pc);
+
+                // Investigate Line
+                table.find('tr').each(function (i, el) {
+                    step_id = $(this).find("#step").val();
+                    inv_id = $(this).find("td:eq(0) input[type='text']").val();
+                    description = $(this).find("td:eq(1) input[type='text']").val();
+                    reference = $(this).find("td:eq(2) input[type='text']").val();
+                    comment = $(this).find("td:eq(3) input[type='text']").val();
+                    line_status =$(this).find("td:eq(4) option:selected").val();
+
+                    // Function add Investigate Line
+                    addInvestigateLine(step_id, inv_id , description ,reference , comment, line_status);
+                });
+            }
         });
-
-        $('#select_case').change(function () {
+    // Function select case details
+        inc_case.change(function () {
             var case_id = $(this).val();
-            console.log(case_id);
             $.ajax({
                 type: 'get',
                 dataType: 'html',
@@ -254,46 +275,54 @@ Investigation Creation
                     );
                 }
             })
-        })
-    });
-    function addInvestigateLine(inv_id , description ,reference , comment, line_status){
+        });
+        inc_case.select2({
+            placeholder: "Select an incident number",
+            allowClear: true
+        });
+
+    // Function Investigate Line
+    function addInvestigateLine(step_id, inv_id , description ,reference , comment, line_status){
         $.ajax({
             type: 'POST',
             url: '/ajax/inv-line/save',
-            data: "description="+ description +"&reference="+ reference + "&comment="+ comment +"&status="+ line_status +"&inv_id=" +inv_id,
+            data: "step="+ step_id+"&description="+ description +"&reference="+ reference + "&comment="+ comment +"&status="+ line_status +"&inv_id=" +inv_id,
             success: function (result) {
-                console.log(result);
+
             },
             error: function () {
-                $.alert('Something went wrong!');
+                $.alert('Something went wrong with investigate step!');
             }
         })
-    }
-    function addInvestigateHeader(case_id, inv_name, website, source, status) {
+    } // End function
+
+    // Function Investigate Headeer
+    function addInvestigateHeader(case_id, inv_name, website, source, status, remote_pc) {
         $.ajax({
             type: 'POST',
             url: '/ajax/investigate/save',
             data: "case_id="+ case_id +"&name="+ inv_name + "&website="+ website +"&source="+ source +"&status=" +status+ "&remote_pc="+remote_pc,
-            success: function (result) {
+            success: function () {
                 $.smallBox({
                     title: 'Investigate added successfully ! ',
                     content: '<i class="fa fa-clock-o"></i> <i>{{Carbon::now()->format("d / m / Y h:s A")}}</i>',
-                    color : "#32c508",
+                    color : "#2196f3",
                     iconSmall: 'fa fa-bell',
                     timeout: 2800,
                 });
-                window.setTimeout(function(){window.location.reload()}, 3000);
+                window.setTimeout(function(){window.location.reload()}, 3000); // Reload page
             },
             error: function () {
                 $.smallBox({
                     title: 'Oop! Something went wrong. ',
                     content: '<i class="fa fa-clock-o"></i> <i>{{Carbon::now()->format("d / m / Y h:s A")}}</i>',
-                    color : "#ff0208",
+                    color : "#ff9800",
                     iconSmall: 'fa fa-bell',
                     timeout: 3000,
                 });
             }
         })
-    }
+    } // End function
+});// End function
 </script>
 @endsection
