@@ -74,8 +74,8 @@ class IncidentController extends Controller
 	    $incident->Impact = $request->impact;
 	    $incident->Urgency = $request->urgency;
 	    $incident->UsersMaintains = $this->getEmployeeID();
-		$incident->CreatedDate = $request->created_date;
-		$incident->Timestamp = date('Y-m-d H:i:s');
+		$incident->CreatedDate = Carbon::now();
+		$incident->Timestamp = Carbon::now();
 		$incident->CcManager = $request->cc_manager;
 	    $incident->UsersMaintains = $this->getEmployeeID();
 	    $incident->AssignedTo = $this->getOperator();
@@ -137,8 +137,7 @@ class IncidentController extends Controller
 		$incident->Impact = $request->input('impact');
 		$incident->Urgency = $request->input('urgency');
 		$incident->Priority = $request->input('priority');
-		$incident->CreatedDate = $request->input('created_date');
-		$incident->Timestamp = date('Y-m-d H:i:s');
+		$incident->Timestamp = Carbon::now();
 		$incident->CcManager = $request->input('cc_manager');
 		$incident->UsersMaintains = $this->getEmployeeID();
 		$incident->AssignedTo = $this->getOperator();

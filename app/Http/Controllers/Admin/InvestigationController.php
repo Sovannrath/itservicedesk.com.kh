@@ -18,15 +18,32 @@ class InvestigationController extends Controller
 
     public function index()
     {
-	    return view('admin.investigation.index');
+    	$investigate = $this->getLastInvestigateHeader();
+    	if(empty($investigate)){
+		    $inv_id = $this->getLastInvestigateID();
+    		return view('admin.investigation.index', compact('investigate','inv_id'));
+	    }else{
+		    $inv_id = $investigate->InvestigateID;
+		    $emp_id = $investigate->OperatorID;
+		    $investigate_line = $this->getInvestigateLine($inv_id);
+		    $inv_opt = $this->getInvestigateOperator($emp_id);
+		    return view('admin.investigation.index', compact('investigate', 'inv_opt', 'investigate_line'));
+	    }
     }
+
 
     public function create()
     {
     	$investigate = $this->getLastInvestigateID();
-        return view('admin.investigation.investigate', compact('investigate'));
+	    $case= NULL;
+        return view('admin.investigation.investigate', compact('investigate', 'case'));
     }
 
+    public function investigateWithCaseID($case_id){
+	    $investigate = $this->getLastInvestigateID();
+	    $case = Incident::where('CaseID', '=', $case_id)->get();
+	    return view('admin.investigation.investigate', compact('investigate', 'case'));
+    }
     public function ajaxSaveInvestigate(Request $request){
 		$investigate_header = new InvestigateHeader;
 	    $investigate_header->InvestigateID = $this->getLastInvestigateID();
@@ -52,6 +69,36 @@ class InvestigationController extends Controller
         return view('admin.investigation.investigate', compact( 'InvestigateID'));
     }
 
+	public function getLastInvestigateHeader(){
+		$last_inv = InvestigateHeader::orderBy('InvestigateID', 'DESC')->first();
+		return $last_inv;
+	}
+
+	public function getInvestigateLine($inv_id){
+		$inv_line = InvestigateLine::where('InvestigateID', '=', $inv_id)->get();
+		if(empty($inv_line)){
+			return;
+		}
+		else{
+			return $inv_line;
+		}
+	}
+
+	public function getInvestigateOperator($operator_id){
+    	$count_emp = Operator::where('EmployeeID', '=', $operator_id)->get();
+    	if(count($count_emp) != 0){
+		    $inv_opt = DB::table('Operator')
+			    ->join('Employee', 'Operator.EmployeeID', '=', 'Employee.EmployeeID')
+			    ->select('Operator.*', 'Employee.FirstName', 'Employee.LastName', 'Employee.Position', 'Employee.ProfileImage')
+			    ->where('Operator.EmployeeID', '=', $operator_id)
+			    ->get();
+		    return $inv_opt;
+	    }else{
+    		$employee = Employee::select('Employee.FirstName', 'Employee.LastName', 'Employee.Position', 'Employee.ProfileImage')->where('EmployeeID', '=', $operator_id)->get();
+    		return $employee;
+	    }
+	}
+
     public function getLastInvestigateID(){
     	$count = DB::table('InvestigateHeader')->get();
     	if(count($count) == 0){
@@ -73,14 +120,18 @@ class InvestigationController extends Controller
 
     public function ajaxShowInvestigateHeader(){
     	$inv_header = InvestigateHeader::orderBy('InvestigateID', 'desc')->get();
-
 	    $data =json_encode(['data'=>$inv_header], true);
 	    return response($data, 200)->header('Content-Type','Application/json');
     }
 
 	public function ajaxShowInvestigateHeaderByID($inv_id){
 		$inv_header = InvestigateHeader::where('InvestigateID', '=', $inv_id)->get();
-		return view('admin.investigation.investigate-detail', compact('inv_header'));
+		$get_inv_id = $inv_header[0]->InvestigateID;
+		$operator = $inv_header[0]->OperatorID;
+		$inv_opt = $this->getInvestigateOperator($operator);
+		$inv_line = $this->getInvestigateLine($get_inv_id);
+//		dd($inv_opt);
+		return view('admin.investigation.investigate-detail', compact('inv_header', 'inv_line', 'inv_opt'));
 	}
 // Not use right now
     public function ajaxShowInvestigateLine(){
@@ -116,6 +167,7 @@ class InvestigationController extends Controller
     	InvestigateLine::where('StepID', '=', $step_id)->delete();
 		return false;
 	}
+
     public function edit($id)
     {
         //
@@ -132,13 +184,26 @@ class InvestigationController extends Controller
     }
 
 	public function getOperator(){
-		$operator = Operator::where('EmployeeID', '=', '3368')->get();
-		return $operator[0]->EmployeeID;
+    	return $this->getEmployeeID();
+    	/*$operator = $emp;
+    	if( count(Operator::where('EmployeeID','=',$emp)->get()) != 0){
+		    $operator = Operator::where('EmployeeID', '=', $emp)->get();
+		    return $operator[0]->OperatorID;
+	    }else{
+    		return $operator;
+	    }*/
 	}
 	public function getEmployeeID(){
 		$EmailID = Session::get('user.0.EmailID');
 		$getEmployeeID = Employee::where('Email', '=', $EmailID)->get();
 		return $getEmployeeID[0]->EmployeeID;
+	}
+
+	public function investigateStartNotification(){
+	//
+	}
+	public function investigateEndNotification(){
+	//
 	}
 
 }

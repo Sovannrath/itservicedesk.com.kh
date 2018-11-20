@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\UserComplaint;
 use Session;
 use App\Incident;
 use App\Employee;
@@ -12,7 +13,6 @@ use App\Notifications\NewIncidentCreation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Model;
 
 class IncidentController extends Controller
 {
@@ -27,7 +27,7 @@ class IncidentController extends Controller
 		$active = Incident::where('EmployeeID','=', $id)
 			->where(function ($query){ $query->where('Status', 1)->orWhere('Status', 8);})
 			->get();
-		$reject = Incident::where('EmployeeID', '=', $id)->where('Status', 2)->get();
+		$reject = UserComplaint::where('EmployeeID', '=', $id)->get();
 		$resolved = Incident::where('EmployeeID', '=', $id)->where('Status', 9)->get();
 		$closed = Incident::where('EmployeeID', '=', $id)->where('Status', 10)->get();
 		$incidents = Incident::where('EmployeeID', '=', $id)->get();
@@ -42,6 +42,15 @@ class IncidentController extends Controller
 			->get();
 //		dd($last_inc);
 		return view('user.servicedesk', compact('incidents', 'active', 'reject', 'resolved', 'closed', 'last_inc'));
+	}
+	public function getEmployeeRejected(){
+		$complain = DB::table('UserComplaints')->get();
+//		$content = $complain[0]->Description;
+		foreach($complain as $value){
+			$getDesc = $value->Description;
+			$getRejectedEmployee = json_decode($getDesc, true);
+			return $getRejectedEmployee;
+		}
 	}
     public function ajaxAll()
     {
@@ -78,13 +87,13 @@ class IncidentController extends Controller
         $incident->Description = $request->description;
         $incident->AttachFile = $attach;
         $incident->Status = 1;
-	    $incident->Impact = null;
-	    $incident->Urgency = null;
-	    $incident->Priority = null;
+	    $incident->Impact = 1;
+	    $incident->Urgency = 1;
+	    $incident->Priority = 1;
 	    $incident->Comment = null;
 	    $incident->SourceFrom = 2;
-        $incident->CreatedDate = $request->created_date;
-        $incident->Timestamp = Carbon::now()->format('d/m/Y H:s:i');
+        $incident->CreatedDate = Carbon::now();
+        $incident->Timestamp = Carbon::now();
         $incident->CcManager = $request->cc_manager;
 	    $incident->UsersMaintains = null;
 	    if($incident->CcManager == 1){
@@ -162,8 +171,8 @@ class IncidentController extends Controller
 	    $incident->Priority = 1;
 	    $incident->SourceFrom = 2;
 	    $incident->Comment = null;
-		$incident->CreatedDate = $request->created_date;
-		$incident->Timestamp = Carbon::now()->format('d/m/Y H:s:i');
+//		$incident->CreatedDate = Carbon::now();
+		$incident->Timestamp = Carbon::now();
 		$incident->CcManager = $request->cc_manager;
 	    $incident->UsersMaintains = null;
 		$incident->save();

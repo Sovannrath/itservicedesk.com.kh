@@ -66,6 +66,14 @@
     <div id="main" role="main">
       <div id="content" class="container">
         <div class="row">
+            <div class="col-sm-12"><div id="alert_message"class="flash-message" data-expires="5000">
+                    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                    @if(Session::has('alert-' . $msg))
+                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                    @endif
+                    @endforeach
+                </div> {{-- end .flash-message --}}
+            </div>
           <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
             <h1 class="text-primary login-header-big"><strong>Employee Self-Service Portal</strong></h1>
             <div class="hero">
@@ -130,13 +138,6 @@
                       @endforeach
                     </ul>
                     @endif
-                    <div id="alert_message"class="flash-message" data-expires="5000">
-                      @foreach (['danger', 'warning', 'success', 'info'] as $msg)
-                        @if(Session::has('alert-' . $msg))
-                        <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
-                        @endif
-                      @endforeach
-                  </div> <!-- end .flash-message -->
                 </fieldset>
                 <footer>
                   <button type="submit" class="btn btn-primary" >

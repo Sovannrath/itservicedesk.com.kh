@@ -85,9 +85,9 @@ use App\GlobalDeclare;
                                 <dt>Description : </dt>
                                 <dd>{{$data->Description}}</dd>
                                 <dt>Created Date :</dt>
-                                <dd>{{$data->CreatedDate}}</dd>
+                                <dd>{{ GlobalDeclare::setDateFormat($data->CreatedDate) }}</dd>
                                 <dt>Updated Date :</dt>
-                                <dd>{{$data->Timestamp}}</dd>
+                                <dd>{{ GlobalDeclare::setDateFormat($data->Timestamp) }}</dd>
                                 <dt>Status :</dt>
                                 <dd>{{ GlobalDeclare::getStatus($data->Status)}}</dd>
                             </dl>
@@ -188,7 +188,7 @@ use App\GlobalDeclare;
                     <td>{{ $incident->CaseID}}</td>
                     <td>{{ $incident->Subject}}</td>
                       <td>{{GlobalDeclare::getStatusColor($incident->Status)}}<span id="status"> {{ GlobalDeclare::getStatus($incident->Status)}}</span></td>
-                    <td>{{ $incident->CreatedDate}}</td>
+                    <td>{{ GlobalDeclare::setDateFormat($incident->CreatedDate)}}</td>
                       @php
                       switch($percent = $incident->Status){
                       case 1:

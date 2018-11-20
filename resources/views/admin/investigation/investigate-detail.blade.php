@@ -10,13 +10,13 @@
 				<dt>Website : </dt>
 				<dd>{{$investigate->Website}}</dd>
 				<dt>Source    : </dt>
-				<dd>Mr. / Operator or IT Supports</dd>
+				<dd>{{$investigate->Source}}</dd>
 				<dt>Clients IP Address  : </dt>
 				<dd>{{$investigate->RemoteDesktopID}}</dd>
 				<dt>Created Date  : </dt>
-				<dd>{{ $investigate->CreatedDate}}</dd>
+				<dd>{{ App\GlobalDeclare::setDateFormat($investigate->CreatedDate)}}</dd>
 				<dt>Expected Date : </dt>
-				<dd>15-july-2018</dd>
+				<dd></dd>
 				<dt>Timestamp   : </dt>
 				<dd>{{ $investigate->TimeStamp}}</dd>
 			</dl>
@@ -24,9 +24,9 @@
 		<div class="col-sm-4">
 			<div>
 				<center>
-					<img style="max-height: 150px; max-width: 150px;" class="img-responsive img-circle" id="preview" src="{{ isset($employee) && $employee->ProfileImage !='' ? $employee->ProfileImage : '/img/user-profile/Male.png'}} " alt="Profile Image" />
+					<img style="max-height: 150px; max-width: 150px;" class="img-responsive img-circle" id="preview" src="{{ ($inv_opt[0]->ProfileImage != null)? $inv_opt[0]->ProfileImage : '/img/user-profile/Male.png' }}" alt="Profile Image" />
 					<div class="upload-btn-wrapper">
-						<p>Employee ID – OPT0001<br>Name : Kosal (Sy)<br>Position : ERP Project Manager</p>
+                        <p> Employee ID – {{$inv_opt[0]->OperatorID}}<br>Name : {{$inv_opt[0]->FirstName}} ({{$inv_opt[0]->LastName}})<br>Position : {{$inv_opt[0]->Position}}</p>
 					</div>
 				</center>
 			</div>
@@ -46,16 +46,16 @@
 				</tr>
 				</thead>
 				<tbody>
-				@for($i=1; $i<=5; $i++)
-				<tr>
-					<td>{{$i}}</td>
-					<td>ERP Price List</td>
-					<td>My application were error</td>
-					<td>Reference </td>
-					<td><label class="label label-danger">Open</label></td>
-					<td>11-July-2018</td>
-				</tr>
-				@endfor
+                @foreach($inv_line as $inv_step)
+                <tr>
+                    <td>{{$inv_step->StepID}}</td>
+                    <td>{{$inv_step->Description}}</td>
+                    <td>{{$inv_step->Reference}}</td>
+                    <td>{{$inv_step->Comment}}</td>
+                    <td>{{$inv_step->Status}}</td>
+                    <td>{{App\GlobalDeclare::setDateFormat($investigate->CreatedDate)}}</td>
+                </tr>
+                @endforeach
 				</tbody>
 			</table>
 		</div>

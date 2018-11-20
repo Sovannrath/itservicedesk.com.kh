@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Employee;
 use App\GlobalDeclare;
 use Carbon\Carbon;
 use DB;
@@ -18,10 +19,19 @@ class UserComplaintController extends Controller
 		return view('admin.incidents.user-complaints', compact('complaints'));
 	}
 	public function ajaxAllComplaints(){
-		$complaints = UserComplaint::all();
+		$complaints = DB::table('Employee')
+			->join('UserComplaints','UserComplaints.EmployeeID','=','Employee.EmployeeID')
+			->select('UserComplaints.*', 'Employee.LastName', 'Employee.FirstName')
+			->get();
+//		$complaints = UserComplaint::all();
 
 		$data =json_encode(['data'=>$complaints], true);
 //		dd($data);
 		return response($data, 200)->header('Content-Type','Application/json');
+	}
+
+	//
+	public function changeEmployeeToName($employee_id){
+		return GlobalDeclare::getEmployeeName($employee_id);
 	}
 }

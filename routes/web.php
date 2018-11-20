@@ -37,6 +37,8 @@ Route::group(['middleware' => ['web','checkUser', 'isSuperAdmin']], function () 
 	Route::post('/employees/register', array('uses' => 'EmployeeController@store'));
 	Route::get('/employees/generate/{EmailID}', array('uses' => 'EmployeeController@generateLoginEmail'))->name('generate.email');
 
+	Route::get('/employees/confirm/{EmailID}', array('uses' => 'EmployeeController@generateLoginEmail'))->name('confirm.email');
+
 	Route::get('/mail', array('uses' => 'Mail\sendNotifyEmail@build'));
 	Route::get('/sendmail/{Email}','EmployeeController@generateLoginConfirmation');
 
@@ -68,6 +70,7 @@ Route::group(['middleware' => ['web','checkUser', 'isSuperAdmin']], function () 
 	Route::get('/investigate','Admin\InvestigationController@index')->name('investigate');
 
 	Route::get('/investigate/new','Admin\InvestigationController@create')->name('investigate.create');
+	Route::get('{case_id}/investigate/new','Admin\InvestigationController@investigateWithCaseID')->name('investigate-case.create');
 	Route::post('/investigate','Admin\InvestigationController@store')->name('investigate.store');
 //	Route::get('/{case_id}/investigate','Admin\InvestigationController@show')->name('investigate.show');
 
@@ -87,6 +90,7 @@ Route::group(['middleware' => ['web','checkUser', 'isSuperAdmin']], function () 
 //	Route::get('/create_inv_ln','Admin\InvestigationController@createInvestigateLine')->name('investigate.create');
 	// Operator
 	Route::get('/operators','Admin\OperatorController@index')->name('operators');
+	Route::get('ajax/EmployeeName/{employee_id}','Admin\UserComplaintController@ajaxGetEmployee');
 
 	// Ticket
 
@@ -131,8 +135,7 @@ Route::group(['middleware' => ['web','checkUser']], function(){
 Route::get('/getAppSetup', 'Admin\AppSetupController@getAppSetup');
 Route::get('/testCase', array('uses' => 'Admin\IncidentController@sendNotifyManager'));
 
-//use Illuminate\Support\Facades\Cache;
-Route::get('/test/{inv_id}','Admin\InvestigationController@ajaxShowInvestigateHeaderByID' );
+//Test
+Route::get('/api/user/approve/{user_id}/{request_id}','EmployeeController@confirmEmail')->name('email_confirm');
+Route::get('decrypt/{user_id}', 'EmployeeController@decryptLink');
 
-
-Route::get('/testMail', 'Admin\IncidentController@sendMailCreate');

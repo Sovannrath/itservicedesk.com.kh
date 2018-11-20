@@ -40,7 +40,7 @@
                             $today = Carbon::today()->toFormattedDateString();
                             $open_today = App\Incident::whereDate('CreatedDate', '=',$today)->where('Status', '=', '1')->get();
                             $inc_call = App\Incident::whereDate('CreatedDate', '=',$today)->where('Status', '=', '1')->where('SourceFrom', '=', 1)->get();
-                            $inc_interact = App\Incident::whereDate('CreatedDate', '=',$today)->where('Status', '=', '1')->where('SourceFrom', '=', 2)->get();
+                            $inc_interact = App\Incident::whereDate('CreatedDate', '=',$today)->where('SourceFrom', '=', 2)->get();
                             $inc_email = App\Incident::whereDate('CreatedDate', '=',$today)->where('Status', '=', '1')->where('SourceFrom', '=', 3)->get();
                             @endphp
 						</div>

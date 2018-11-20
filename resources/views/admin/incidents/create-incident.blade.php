@@ -47,11 +47,6 @@ Incident Creation
 						<div class="widget-body">
 							<form action="{{route('store.incident')}}" method="post" id="fm_incident" class="form-horizontal" enctype="multipart/form-data">
 								{{ csrf_field() }}
-								@php
-								date_default_timezone_set("Asia/Bangkok");
-								$dayToSeconds = 86400;
-								$cur_date = date("Y-m-d h:i:s");
-								@endphp
 								<fieldset>
 									<div id="alert_message"class="flash-message" data-expires="5000">
 										@foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -90,7 +85,7 @@ Incident Creation
                                         <label class="control-label col-md-2">Requested Date <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <div class="icon-addon addon-sm">
-                                                <input type="text" value="{{$cur_date}}" class="form-control" name="created_date" style="background-color: #fafafa" readonly="readonly">
+                                                <input type="text" value="{{ Carbon\Carbon::now()->format('d/m/Y') }}" class="form-control" name="created_date" style="background-color: #fafafa" readonly="readonly">
                                                 <label class="fa fa-calendar" rel="tooltip" title="Created Date"></label>
                                             </div>
                                         </div>

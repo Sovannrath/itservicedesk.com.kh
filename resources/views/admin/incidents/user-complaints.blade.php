@@ -111,16 +111,19 @@ Incident Management
         /* Formatting function for row details - modify as you need */
         function format(d) {
             // `d` is the original data object for the row
+            // console.log(employee);
             var description = d.Description;
             var Desc = JSON.parse(description);
-            var Employee = Desc['EmployeeID'];
             var Subject = Desc['Subject'];
+            // console.log(employee_id);
             var Description = Desc['Description'];
+            var comDate = new Date(d.ComplaintDate);
+            var complainDate = (comDate.getDate() + '/' + (comDate.getMonth()+1) + '/' +  comDate.getFullYear());
             // console.log(Description);
             return '<div class="well well-light">'+
                     '<dl class="dl-horizontal">'+
-                    '<dt>Complaint Date</dt>'+'<dd>'+ d.ComplaintDate+'</dd>'+
-                    '<dt>Requested By</dt>'+'<dd>'+Employee+'</dd>'+
+                    '<dt>Complaint Date</dt>'+'<dd>'+ complainDate +'</dd>'+
+                    '<dt>Requested By</dt>'+'<dd>'+d.LastName+' '+ d.FirstName+'</dd>'+
                     '<dt>Subject</dt>'+'<dd>'+Subject+'</dd>'+
                     '<dt>Description</dt>'+'<dd>'+Description+'</dd>'+
                     '<dt>Rejected By</dt>'+'<dd>'+d.RejectedBy+'</dd>'+
@@ -151,8 +154,20 @@ Incident Management
                     {"data": "ComplaintID"},
                     {"data": "CaseID"},
                     {"data": "OperatorID"},
-                    {"data": "ComplaintDate"},
-                    {"data": "TransactionDate"},
+                    {"data": "ComplaintDate",
+                        "render": function ( data, type, row, meta ) {
+                            var d = new Date(data);
+                            return (d.getDate() + '/' + (d.getMonth()+1) + '/' +  d.getFullYear());
+                            // return d;
+                        }
+                    },
+                    {"data": "TransactionDate",
+                        "render": function ( data, type, row, meta ) {
+                            var d = new Date(data);
+                            return (d.getDate() + '/' + (d.getMonth()+1) + '/' +  d.getFullYear());
+                            // return d;
+                        }
+                    },
                     {"data": "Reason"},
                 ],
             "order": [[1, 'desc']],
@@ -178,35 +193,6 @@ Incident Management
                 tr.addClass('shown');
             }//end else
         });
-        $('#new_comp').click(function () {
-            $.confirm({
-                animation: 'scale',
-                closeAnimation: 'top',
-                type: 'orange',
-                title: 'Create new complaint',
-                content: 'Hello',
-                columnClass: 'col-md-8 col-md-offset-2',
-                buttons: {
-                    formSubmit: {
-                        text: 'Save',
-                        btnClass: 'btn-orange',
-                        content: 'Hello',
-                        action: function () {
-                            var name = this.$content.find('#reason').val();
-                            if(!name){
-                                $.alert('Please choose your reason!');
-                                return false;
-                            }
-                            $('#fm_complaint_update').submit();
-                            // $.alert('Your reason is <strong>' + reason + '</strong>');
-                        }
-                    },
-                    cancel: function () {
-                        //close
-                    },
-                },
-            });
-        })
     });
 </script>
 @endsection

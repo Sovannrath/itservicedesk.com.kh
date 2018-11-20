@@ -8,12 +8,15 @@ use App\Province;
 use App\BusinessUnit;
 use App\Department;
 use Validator;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 use App\Mail\sendNotifyEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Validation;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Database\Eloquent\Model;
 
 class EmployeeController extends Controller
@@ -387,5 +390,31 @@ class EmployeeController extends Controller
 	{
 		$userData = DB::select(DB::raw('EXEC usp_GenerateLoginEmail :Email'),['Email'=>$Email]);
 		return $this->sendEmail($userData, $Email);
+	}
+
+	public function encryptLink($user_id, $request_id){
+		$userID = Crypt::encrypt($user_id);
+		$requestID = Crypt::encrypt($request_id);
+		return $userID;
+	}
+	public function decryptLink($user_id){
+		$userID = Crypt::decrypt($user_id);
+//		$requestID = Crypt::decrypt($request_id);
+		return 'UserID='.$userID;
+	}
+	public function confirmEmail(Request $request, $user_id, $request_id){
+
+//		return $user_id.' & '.$request_id;
+		$client = new \GuzzleHttp\Client();
+		$res = $client->request('POST','http://10.0.8.239:8888/api/user/approve?UserID='.$user_id.'&RequestID='.$request_id);
+//
+		if($res){
+			$request->session()->flash('alert-success', 'Your account has been confirmed successfully !');
+			return redirect('login');
+		}
+		else{
+			return 'Error';
+		}
+//		$checkApproval ='http://10.0.8.239:8888/api/user/approve?UserID='.$user_id.'&RequestID='.$request_id;
 	}
 }

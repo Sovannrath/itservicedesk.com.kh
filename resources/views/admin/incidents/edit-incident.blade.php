@@ -49,11 +49,6 @@ Incident Edition
 							@foreach($incident as $Incident)
 							<form id="fm_incident" action="/{{$Incident->CaseID}}/update-incident" method="post" class="form-horizontal" enctype="multipart/form-data">
 								{{ csrf_field() }}
-								@php
-								date_default_timezone_set("Asia/Bangkok");
-								$dayToSeconds = 86400;
-								$cur_date = date("Y-m-d h:i:s");
-								@endphp
 
 								<fieldset>
 									<div id="alert_message"class="flash-message" data-expires="5000">
@@ -91,7 +86,7 @@ Incident Edition
                                         <label class="control-label col-md-2">Created Date <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <div class="icon-addon addon-sm">
-                                                <input type="text" value="{{$cur_date}}" class="form-control" name="created_date" style="background-color: #fafafa" readonly="readonly">
+                                                <input type="text" value="{{ App\GlobalDeclare::setDateFormat($Incident->CreatedDate) }}" class="form-control" name="created_date" style="background-color: #fafafa" readonly="readonly">
                                                 <label class="fa fa-calendar" rel="tooltip" title="Created Date"></label>
                                             </div>
                                         </div>
@@ -107,7 +102,7 @@ Incident Edition
                                                     <option value="2" {{($Incident->Status == 2)? 'selected' : ''}}>Rejected</option>
                                                     <option value="3" {{($Incident->Status == 3)? 'selected' : ''}}>Internal</option>
                                                     <option value="4" {{($Incident->Status == 4)? 'selected' : ''}}>In Process</option>
-                                                    <option value="5" {{($Incident->Status ==   5)? 'selected' : ''}}>In Progress</option>
+                                                    <option value="5" {{($Incident->Status == 5)? 'selected' : ''}}>In Progress</option>
                                                     <option value="6" {{($Incident->Status == 6)? 'selected' : ''}}>On Hold</option>
                                                     <option value="7" {{($Incident->Status == 7)? 'selected' : ''}}>Resolved</option>
                                                     <option value="8" {{($Incident->Status == 8)? 'selected' : ''}}>Pending</option>

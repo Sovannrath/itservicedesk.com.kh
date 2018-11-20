@@ -30,7 +30,7 @@ use Carbon\Carbon;
         {{-- col --}}
         <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
             <div class="pull-right">
-                <a href="{{route('create.incident')}}" title="New Investigation" class="btn icon-btn btn-lg btn-warning" style="font-size: 12px;"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle" style="color:#FF9800"></span>Create</a>
+                <a href="{{route('investigate.create')}}" title="New Investigation" class="btn icon-btn btn-lg btn-warning" style="font-size: 12px;"><span class="glyphicon btn-glyphicon glyphicon-plus img-circle" style="color:#FF9800"></span>Create</a>
                 <a href="{{route('investigate')}}" title="Investigation" class="btn icon-btn btn-lg btn-warning" style="font-size: 12px;"><span class="glyphicon btn-glyphicon glyphicon-question-sign img-circle" style="color:#FF9800"></span>Investigate</a>
                 <a href="{{route('investigate')}}" title="Assign Ticket" class="btn icon-btn btn-lg btn-warning" style="font-size: 12px;"><span class="glyphicon btn-glyphicon glyphicon-th-list img-circle" style="color:#FF9800"></span>Assign</a>
             </div>
@@ -57,6 +57,12 @@ use Carbon\Carbon;
                             <label class="control-label col-md-2">Incident N<sup>o</sup> <span class="text-danger">*</span></label>
                             <div class="col-md-10">
                                 <div class="icon-addon addon-sm">
+                                    @if(count($case) > 0)
+                                    <select class="form-control" id="select_case" name="select_case">
+                                        <option value="{{ $case[0]->CaseID }}"> {{ $case[0]->CaseID }}  {{ $case[0]->Description }}</option>
+                                    </select>
+                                    <label class="fa fa-key" rel="tooltip" title="Case ID"></label>
+                                    @else
                                     <select class="form-control select2" id="select_case" name="select_case">
                                         <option value="" disabled selected>Please select Incident Number</option>
                                         @foreach(App\Incident::all() as $incident)
@@ -64,13 +70,24 @@ use Carbon\Carbon;
                                         @endforeach
                                     </select>
                                     <label class="fa fa-key" rel="tooltip" title="Case ID"></label>
+                                    @endif
                                 </div>
                             </div>
                         </div>
+                        @if(count($case) > 0)
+                        <div class="col-md-offset-2 col-md-10">
+                            <ul class="list-unstyled">
+                                <li><div class="col-md-3"><i class="fa fa-book"></i> Subject </div><div class="col-md-9"> {{ $case[0]->Subject }}</div></li>
+                                <li><div class="col-md-3"><i class="fa fa-pencil"></i> Description </div><div class="col-md-9">{{ $case[0]->Description }}</div></li>
+                                <li><div class="col-md-3"><i class="fa fa-user"></i> Requested By </div><div class="col-md-9">{{ $case[0]->EmployeeID }}</div></li>
+                                <li><div class="col-md-3"><i class="fa fa-calendar"></i> Requested Date </div><div class="col-md-9">{{ $case[0]->CreatedDate }}</div></li>
+                                </ul>
+                            </div>
+                        @else
                         <div class="form-group" id="inc_detail">
 
                         </div>
-                        <div id="success-alert"></div>
+                        @endif
                     </fieldset>
                     <div style="border: 1px dashed #EEE9E9; padding: 10px; margin:10px">
                         <fieldset>
@@ -237,20 +254,8 @@ use Carbon\Carbon;
                 });
             }else {
                 // Function add Investigate
-                addInvestigateHeader(case_id, inv_name, website, source, status, remote_pc);
+               addInvestigateHeader(case_id, inv_name, website, source, status, remote_pc);
 
-                // Investigate Line
-                table.find('tr').each(function (i, el) {
-                    step_id = $(this).find("#step").val();
-                    inv_id = $(this).find("td:eq(0) input[type='text']").val();
-                    description = $(this).find("td:eq(1) input[type='text']").val();
-                    reference = $(this).find("td:eq(2) input[type='text']").val();
-                    comment = $(this).find("td:eq(3) input[type='text']").val();
-                    line_status =$(this).find("td:eq(4) option:selected").val();
-
-                    // Function add Investigate Line
-                    addInvestigateLine(step_id, inv_id , description ,reference , comment, line_status);
-                });
             }
         });
     // Function select case details
@@ -291,7 +296,7 @@ use Carbon\Carbon;
 
             },
             error: function () {
-                $.alert('Something went wrong with investigate step!');
+
             }
         })
     } // End function
@@ -303,6 +308,18 @@ use Carbon\Carbon;
             url: '/ajax/investigate/save',
             data: "case_id="+ case_id +"&name="+ inv_name + "&website="+ website +"&source="+ source +"&status=" +status+ "&remote_pc="+remote_pc,
             success: function () {
+                // Investigate Line
+                table.find('tr').each(function (i, el) {
+                    step_id = $(this).find("#step").val();
+                    inv_id = $(this).find("td:eq(0) input[type='text']").val();
+                    description = $(this).find("td:eq(1) input[type='text']").val();
+                    reference = $(this).find("td:eq(2) input[type='text']").val();
+                    comment = $(this).find("td:eq(3) input[type='text']").val();
+                    line_status =$(this).find("td:eq(4) option:selected").val();
+
+                    // Function add Investigate Line
+                    addInvestigateLine(step_id, inv_id , description ,reference , comment, line_status);
+                });
                 $.smallBox({
                     title: 'Investigate added successfully ! ',
                     content: '<i class="fa fa-clock-o"></i> <i>{{Carbon::now()->format("d / m / Y h:s A")}}</i>',

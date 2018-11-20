@@ -56,33 +56,67 @@ Investigation
 						{{-- widget content --}}
 						<div class="widget-body">
                             <div id="InvestigateDetail" style="border: 1px dashed #ccc; padding:10px">
+                                @if(!($investigate))
                                 <div class="row">
                                     <div class="col-sm-8">
                                         <dl class="dl-horizontal">
                                             <dt>Investigate ID  : </dt>
-                                            <dd>INE-0000001</dd>
+                                            <dd></dd>
                                             <dt>Topic   : </dt>
-                                            <dd>Networking of Database Traffic</dd>
+                                            <dd></dd>
                                             <dt>Website : </dt>
-                                            <dd>www.google.com/….</dd>
+                                            <dd></dd>
                                             <dt>Source    : </dt>
-                                            <dd>Mr. / Operator or IT Supports</dd>
+                                            <dd></dd>
                                             <dt>Clients IP Address  : </dt>
-                                            <dd>10.0.8.246</dd>
+                                            <dd></dd>
                                             <dt>Created Date  : </dt>
-                                            <dd>09-July-2018</dd>
+                                            <dd></dd>
                                             <dt>Expected Date : </dt>
-                                            <dd>15-july-2018</dd>
+                                            <dd></dd>
                                             <dt>Timestamp   : </dt>
-                                            <dd>11:41 AM</dd>
+                                            <dd></dd>
                                         </dl>
                                     </div>
                                     <div class="col-sm-4">
                                         <div>
                                             <center>
-                                                <img style="max-height: 150px; max-width: 150px;" class="img-responsive img-circle" id="preview" src="{{ isset($employee) && $employee->ProfileImage !='' ? $employee->ProfileImage : '/img/user-profile/Male.png'}} " alt="Profile Image" />
+                                                <img style="max-height: 150px; max-width: 150px;" class="img-responsive img-circle" id="preview" src="/img/user-profile/Male.png" alt="Profile Image" />
                                                 <div class="upload-btn-wrapper">
-                                                    <p>Employee ID – OPT0001<br>Name : Kosal (Sy)<br>Position : ERP Project Manager</p>
+                                                    <p>Employee ID – <br>Name : <br>Position : </p>
+                                                </div>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>{{-- end row --}}
+                                @else
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <dl class="dl-horizontal">
+                                            <dt>Investigate ID  : </dt>
+                                            <dd>{{$investigate->InvestigateID}}</dd>
+                                            <dt>Topic   : </dt>
+                                            <dd>{{$investigate->Name}}</dd>
+                                            <dt>Website : </dt>
+                                            <dd>{{$investigate->Website}}</dd>
+                                            <dt>Source    : </dt>
+                                            <dd>{{$investigate->Source}}</dd>
+                                            <dt>Clients IP Address  : </dt>
+                                            <dd>{{$investigate->RemoteDesktopID}}</dd>
+                                            <dt>Created Date  : </dt>
+                                            <dd>{{ App\GlobalDeclare::setDateFormat($investigate->CreatedDate)}}</dd>
+                                            <dt>Expected Date : </dt>
+                                            <dd></dd>
+                                            <dt>Timestamp   : </dt>
+                                            <dd>{{$investigate->TimeStamp}}</dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div>
+                                            <center>
+                                                <img style="max-height: 150px; max-width: 150px;" class="img-responsive img-circle" id="preview" src="{{ ($inv_opt[0]->ProfileImage != null)? $inv_opt[0]->ProfileImage : '/img/user-profile/Male.png' }}" alt="Profile Image" />
+                                                <div class="upload-btn-wrapper">
+                                                    <p>Employee ID – {{$inv_opt[0]->OperatorID}}<br>Name : {{$inv_opt[0]->FirstName}} ({{$inv_opt[0]->LastName}})<br>Position : {{$inv_opt[0]->Position}}</p>
                                                 </div>
                                             </center>
                                         </div>
@@ -95,28 +129,30 @@ Investigation
                                             <tr>
                                                 <th data-hide="phone">Step ID</th>
                                                 <th data-class="expand"> Description</th>
-                                                <th data-hide="phone"> Comment</th>
                                                 <th data-hide="phone,tablet"> References</th>
+                                                <th data-hide="phone"> Comment</th>
                                                 <th data-hide="phone,tablet"> Status</th>
                                                 <th data-hide="phone,tablet"> Created Date</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @for($i=1; $i<=5; $i++)
+                                            @foreach($investigate_line as $inv_step)
                                             <tr>
-                                                <td>{{$i}}</td>
-                                                <td>ERP Price List</td>
-                                                <td>My application were error</td>
-                                                <td>Reference </td>
-                                                <td><label class="label label-danger">Open</label></td>
-                                                <td>11-July-2018</td>
+                                                <td>{{$inv_step->StepID}}</td>
+                                                <td>{{$inv_step->Description}}</td>
+                                                <td>{{$inv_step->Reference}}</td>
+                                                <td>{{$inv_step->Comment}}</td>
+                                                <td>{{$inv_step->Status}}</td>
+                                                <td>{{App\GlobalDeclare::setDateFormat($investigate->CreatedDate)}}</td>
                                             </tr>
-                                            @endfor
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
+                                @endif
                             </div>
+
                             <div style="margin-top: 10px">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -125,7 +161,6 @@ Investigation
                                             <tr>
                                                 <th width="40"></th>
                                                 <th data-hide="phone">InvestigateID</th>
-                                                <th data-hide="phone">OperatorID</th>
                                                 <th data-class="expand">CaseID</th>
                                                 <th data-hide="phone,tablet">Name</th>
                                                 <th data-hide="phone,tablet">InvestigateDate</th>
@@ -186,10 +221,15 @@ Investigation
                         "defaultContent": ''
                     },
                     {"data": "InvestigateID"},
-                    {"data": "OperatorID"},
                     {"data": "CaseID"},
                     {"data": "Name"},
-                    {"data": "InvestigateDate"},
+                    {"data": "InvestigateDate",
+                        "render": function ( data, type, row, meta ) {
+                        var d = new Date(data);
+                            return (d.getDate() + '/' + (d.getMonth()+1) + '/' +  d.getFullYear());
+                            // return d;
+                        }
+                    },
                 ],
             "order": [[1, 'desc']],
             "fnDrawCallback": function (oSettings) {
@@ -202,7 +242,6 @@ Investigation
             var row = table.row(tr);
             var d = table.row(this).data();
             var inv_id = d["InvestigateID"];
-            console.log(inv_id);
             if ( $(this).hasClass('selected') ) {
                 $(this).removeClass('selected');
             }

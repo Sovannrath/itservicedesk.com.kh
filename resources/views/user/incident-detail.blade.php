@@ -33,7 +33,7 @@ use Carbon\Carbon;
             </div>
             <label class="col-md-2 control-label">Requested Date</label>
             <div class="col-md-4">
-                <input readonly name="created_date" class="text-primary form-control" value="{{$data->CreatedDate}}" type="text"  style="background-color: #fafafa">
+                <input readonly name="created_date" class="text-primary form-control" value="{{ GlobalDeclare::setDateFormat($data->CreatedDate)}}" type="text"  style="background-color: #fafafa">
             </div>
         </div>
     </fieldset>

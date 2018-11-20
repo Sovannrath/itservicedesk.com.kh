@@ -274,6 +274,10 @@ Incident Management
 
         /* Formatting function for row details - modify as you need */
         function format(d) {
+            var getTimeStamp = new Date(d.Timestamp);
+            var toDateFormat = (getTimeStamp.getDate() + '/' + (getTimeStamp.getMonth()+1) + '/' +  getTimeStamp.getFullYear());
+            var toTimeFormat = getTimeStamp.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+            // console.log(timeFormat);
             if (d.AttachFile == null) {
                 file_src = '';
                 attach = 'No File';
@@ -309,7 +313,7 @@ Incident Management
                                     '<li><a href="#" class="replythis" id="deleteCase' + d.CaseID + '"><i class="fa fa-trash"></i> Delete</a></li>' +
                                     '<li><a href="#" id="assign'+d.CaseID+'" class="replythis" id="deleteCase' + d.CaseID + '"><i class="fa fa-arrow-circle-right"></i> Assign</a></li>' +
                                     '<li><a href="javascript:void(0);" class="replythis"><i class="fa fa-check"></i> Resolve</a></li>' +
-                                    '<li><a href="/'+d.CaseID+'/investigate" class="replythis"><i class="fa fa-search"></i> Investigate</a></li>' +
+                                    '<li><a href="/'+d.CaseID+'/investigate/new" class="replythis"><i class="fa fa-search"></i> Investigate</a></li>' +
                                     '</ul>' +
                                 '</div>' +
                             '</div>' +
@@ -319,7 +323,7 @@ Incident Management
                     '<div>'+
                         '<img src="'+ profile +'" alt="me" class="away">'+
                         '<a href="#" id="Employee' + d.EmployeeID + '"><strong>'+ d.EmployeeName +'</strong></a>'+
-                        '<span class="hidden-mobile" style="padding-left:50px">  <i class="fa fa-calendar"></i> '+ d.Timestamp+'</span>'+
+                        '<span class="hidden-mobile" style="padding-left:50px">  <i class="fa fa-calendar"></i> '+ toDateFormat+ ' '+ toTimeFormat +'</span>'+
                     '</div>'+
                 '</div>'+
                 '<div class="inbox-message" style="margin:0px; padding:10px; background:transparent"><i class="fa fa-pencil"></i><strong> Description</strong>'+

@@ -33,10 +33,15 @@ class sendNotifyEmail extends Mailable
     public function build()
     {
         $employee = $this->userData;
+//        dd($employee);
+        $user_id = $employee[0]->UserID;
+        $request_id = $employee[0]->RequestID;
+        $url = route('email_confirm', ['user_id'=>$user_id, 'request_id'=>$request_id]);
+//        dd($url);
 
         return $this->from('operator@itservicedesk.com.kh', 'Operator')
                 ->subject('Confirm your registration account')
                 ->markdown('emails.sendMail')
-                ->with(['userData', $this->userData]);
+                ->with(['userData'=>$employee, 'url'=>$url]);
     }
 }
