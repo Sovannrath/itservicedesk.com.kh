@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\App;
 use Session;
 use App\AppSetUp;
 use Carbon\Carbon;
@@ -28,7 +29,8 @@ class AppSetupController extends Controller
      */
     public function userSetup()
     {
-        return view('apps-setup-user');
+    	$appSetup = AppSetUp::getAppSetup();
+        return view('apps-setup-user', compact('appSetup'));
     }
 
 

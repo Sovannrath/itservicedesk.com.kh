@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use PDO;
 use App\Employee;
 use App\Province;
 use App\BusinessUnit;
@@ -45,14 +44,17 @@ class EmployeeController extends Controller
     /**
      Show employee detail using Ajax
      */
-    public function ajaxShow(Request $request){
-        $EmployeeID = $request->emp_id;
-        $data = Employee::getEmployeeByID($EmployeeID);
+    public function ajaxShow($emp_id){
+        $data = Employee::getEmployeeByID($emp_id);
         //$data = DB::select(DB::raw('EXEC usp_Employee_SearchByID :EmployeeID'),['EmployeeID'=>$emp_id]);
         $provinces = Province::all();
         $business_unit = BusinessUnit::all();
         $departments = Department::all();
         return view('admin.ajax.showEmployeeByID', ['data'=>array($data),'provinces'=>$provinces,'business_unit'=>$business_unit,'departments'=>$departments]);
+    }
+    public function ajaxGetEmployee($emp_id){
+    	$data = Employee::where('EmployeeID','=',$emp_id)->first();
+    	return $data->LastName;
     }
 	/**
 	Show employee detail
@@ -407,13 +409,14 @@ class EmployeeController extends Controller
 //		return $user_id.' & '.$request_id;
 		$client = new \GuzzleHttp\Client();
 		$res = $client->request('POST','http://10.0.8.239:8888/api/user/approve?UserID='.$user_id.'&RequestID='.$request_id);
-//
+//      return $res;
 		if($res){
-			$request->session()->flash('alert-success', 'Your account has been confirmed successfully !');
-			return redirect('login');
+//			$request->session()->flash('alert-success', 'Your account has been confirmed successfully !');
+//			return redirect()->route('login');
+			return redirect()->route('login');
 		}
 		else{
-			return 'Error';
+			return 'Something went wrong';
 		}
 //		$checkApproval ='http://10.0.8.239:8888/api/user/approve?UserID='.$user_id.'&RequestID='.$request_id;
 	}

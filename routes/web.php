@@ -28,7 +28,8 @@ Route::group(['middleware' => ['web','checkUser', 'isSuperAdmin']], function () 
    	Route::get('/dashboard', array('uses' => 'Admin\AdminController@index'))->name('dashboard');
 // Register Employee
    	Route::get('/employees', array('uses' => 'EmployeeController@index'))->name('employees');
-	Route::get('/employee', array('uses' => 'EmployeeController@ajaxShow'));
+	Route::get('/employee/{emp_id}', array('uses' => 'EmployeeController@ajaxShow'));
+	Route::get('/ajax/employee/{emp_id}', array('uses' => 'EmployeeController@ajaxGetEmployee'));
 	Route::get('/employee/{EmployeeID}/profile', array('uses' => 'EmployeeController@ShowEmployee'));
 	Route::get('/employees/edit/{EmployeeID}', array('uses' => 'EmployeeController@edit'));
 	Route::post('/employees/edit/{EmployeeID}', array('uses' => 'EmployeeController@update'));
@@ -50,7 +51,7 @@ Route::group(['middleware' => ['web','checkUser', 'isSuperAdmin']], function () 
 	Route::post('/{case_id}/reject-incident','Admin\IncidentController@reject')->name('reject.incident');
 	Route::get('/{case_id}/delete','Admin\IncidentController@delete');
 	Route::get('/attachment/download/{file_name}','Admin\IncidentController@downloadAttachment');
-	Route::get('/ajax/incidents','Admin\IncidentController@ajax_call');
+	Route::get('/ajax/incidents','Admin\IncidentController@ajaxGetIncidents');
 	Route::get('/ajax/incidents/show/{case_id}','Admin\IncidentController@ajaxShow');
 	Route::get('/ajax/incidents/assign/{case_id}','Admin\IncidentController@ajaxEdit');
 	Route::get('/markAsRead','Admin\IncidentController@readNotifications');
@@ -59,9 +60,9 @@ Route::group(['middleware' => ['web','checkUser', 'isSuperAdmin']], function () 
 	Route::post('/{case_id}/assign','Admin\IncidentController@assign');
 
 	Route::get('/incidents/investigate','Admin\IncidentController@showInvestigate')->name('investigate');
-
+// Complaints
 	Route::get('/complaint','Admin\UserComplaintController@index')->name('complaint');
-	Route::get('/AllComplaint','Admin\UserComplaintController@ajaxAllComplaints')->name('ajax.allComplaint');
+	Route::get('/ajax/complaints','Admin\UserComplaintController@ajaxAllComplaints')->name('ajax.allComplaint');
 	Route::get('/complaint/delete/{complaint_id}','Admin\UserComplaintController@ajaxComplaintDelete')->name('ajax.deleteComplaint');
 	Route::get('/complaint/edit/{complaint_id}','Admin\UserComplaintController@ajaxComplaintEdit')->name('ajax.editComplaint');
 	Route::post('/complaint/edit/{complaint_id}','Admin\UserComplaintController@ajaxComplaintUpdate')->name('ajax.updateComplaint');
@@ -136,6 +137,8 @@ Route::get('/getAppSetup', 'Admin\AppSetupController@getAppSetup');
 Route::get('/testCase', array('uses' => 'Admin\IncidentController@sendNotifyManager'));
 
 //Test
-Route::get('/api/user/approve/{user_id}/{request_id}','EmployeeController@confirmEmail')->name('email_confirm');
-Route::get('decrypt/{user_id}', 'EmployeeController@decryptLink');
+Route::get('/user-confirm/{user_id}/{request_id}','EmployeeController@confirmEmail')->name('email_confirm');
+Route::get('/test', function (){
+	return App\AppSetUp::getAppSetup();
+});
 

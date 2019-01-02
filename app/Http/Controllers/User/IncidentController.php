@@ -24,6 +24,7 @@ class IncidentController extends Controller
 	public function getServiceDesk()
 	{
 		$id = $this->getEmployeeID();
+//		dd($id);
 		$active = Incident::where('EmployeeID','=', $id)
 			->where(function ($query){ $query->where('Status', 1)->orWhere('Status', 8);})
 			->get();
@@ -310,6 +311,7 @@ class IncidentController extends Controller
 	public function getEmployeeID(){
 		$EmailID = Session::get('user.0.EmailID');
 		$getEmployee = Employee::where('Email','=', $EmailID)->get();
+//		dd($getEmployee);
 		return $getEmployee[0]->EmployeeID;
 	}
 

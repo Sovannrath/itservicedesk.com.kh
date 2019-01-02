@@ -2,6 +2,9 @@
 @section('template_title')
 Incident Management
 @endsection
+@php
+use App\Employee;
+@endphp
 @section('content')
 @section('style_css')
 <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('dist/jquery-confirm.min.css') }}">
@@ -17,9 +20,7 @@ Incident Management
 		</div>
 		<div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
 			<div class="pull-right">
-				<a href="#" id="new_comp" title="New Complaint"><button type="button" class="btn btn-circle btn-lg btn-warning"><i class="glyphicon glyphicon-plus-sign"></i></button>
-					<a href="#" title="Update"><button class="btn btn-circle btn-lg btn-warning"><i class="glyphicon glyphicon-import"></i></button></a>
-					<a href="#" title="Assign"><button class="btn btn-circle btn-lg btn-warning"><i class="glyphicon glyphicon-th-list"></i></button></a>
+
 			</div>
 		</div>
 		{{-- end col --}}
@@ -115,7 +116,8 @@ Incident Management
             var description = d.Description;
             var Desc = JSON.parse(description);
             var Subject = Desc['Subject'];
-            // console.log(employee_id);
+            var EmployeeID = Desc['EmployeeID'];
+            // console.log(EmployeeID);
             var Description = Desc['Description'];
             var comDate = new Date(d.ComplaintDate);
             var complainDate = (comDate.getDate() + '/' + (comDate.getMonth()+1) + '/' +  comDate.getFullYear());
@@ -123,10 +125,10 @@ Incident Management
             return '<div class="well well-light">'+
                     '<dl class="dl-horizontal">'+
                     '<dt>Complaint Date</dt>'+'<dd>'+ complainDate +'</dd>'+
-                    '<dt>Requested By</dt>'+'<dd>'+d.LastName+' '+ d.FirstName+'</dd>'+
+                    '<dt>Requested By</dt>'+'<dd>'+ EmployeeID +'</dd>'+
                     '<dt>Subject</dt>'+'<dd>'+Subject+'</dd>'+
                     '<dt>Description</dt>'+'<dd>'+Description+'</dd>'+
-                    '<dt>Rejected By</dt>'+'<dd>'+d.RejectedBy+'</dd>'+
+                    '<dt>Rejected By</dt>'+'<dd>'+d.FirstName+' '+d.LastName+'</dd>'+
                 '</dl>'+
                 '</div>';
         }
@@ -136,7 +138,7 @@ Incident Management
             "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-12 hidden-xs'l>r>" +
             "t" +
             "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
-            "ajax": "/AllComplaint",
+            "ajax": "/ajax/complaints",
             "bDestroy": true,
             "language": { "loadingRecords": "Please wait - loading..." },
             "iDisplayLength": 10,

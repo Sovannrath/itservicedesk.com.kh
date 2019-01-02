@@ -1,9 +1,10 @@
 <script>
 	$(document).ready(function(){
-		@foreach($employees as $employee)
-		$("#Employee{{$employee->EmployeeID}}").click(function(){
-			var emp_id =('{{$employee->EmployeeID}}');
-			$.ajax({
+		$("#Employee").click(function(){
+		    alert('Hi');
+		    var emp_id = $this.attr('data-value');
+			alert(emp_id);
+			/*$.ajax({
 				type: 'get',
 				dataType: 'html',
 				url: '{{url('/employee')}}',
@@ -12,8 +13,7 @@
 					//console.log(response);
 					$("#emp_detail").html(response);
 				}
-			});
+			});*/
 		});
-		@endforeach
 	});
 </script>

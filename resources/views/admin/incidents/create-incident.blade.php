@@ -66,6 +66,15 @@ Incident Creation
 									</div>
                                 </fieldset>
                                 <fieldset>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2 col-lg-2">Description <span class="text-danger">*</span></label>
+                                        <div class="col-md-10 col-lg-10">
+                                            <textarea class="form-control" rows="4" name="description" style="background-color: #fafafa"></textarea>
+                                            <small class="text-danger">{{$errors->first('description')}}</small>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
 									<div class="form-group">
 										<label class="control-label col-md-2">Requested By <span class="text-danger">*</span></label>
 										<div class="col-md-4">
@@ -96,17 +105,11 @@ Incident Creation
                                         <label class="control-label col-md-2">Status <span class="text-danger">*</span></label>
                                         <div class="col-md-4">
                                             <div class="icon-addon addon-sm">
+
                                                 <select class="form-control " name="status" style="background-color: #fafafa">
-                                                    <option value="1">Open</option>
-                                                    <option value="2">Rejected</option>
-                                                    <option value="3">Internal</option>
-                                                    <option value="4">In Process</option>
-                                                    <option value="5">In Progress</option>
-                                                    <option value="6">On Hold</option>
-                                                    <option value="7">Resolved</option>
-                                                    <option value="8">Pending</option>
-                                                    <option value="9">Re-opened</option>
-                                                    <option value="10">Closed</option>
+                                                    @foreach(App\Status::all() as $status)
+                                                    <option value="{{ $status->StatusID}}">{{$status->StatusType}}</option>
+                                                    @endforeach
                                                 </select>
                                                 <label class="fa fa-tasks" rel="tooltip" title="Status"></label>
                                             </div>
@@ -115,9 +118,9 @@ Incident Creation
                                         <div class="col-md-4">
                                             <div class="icon-addon addon-sm">
                                                 <select class="form-control" name="impact" style="background-color: #fafafa">
-                                                    <option value="1">Low</option>
-                                                    <option value="2">Medium</option>
-                                                    <option value="3">High</option>
+                                                    @foreach(App\Impact::all() as $impact)
+                                                    <option value="{{$impact->ImpactID}}">{{$impact->ImpactType}}</option>
+                                                    @endforeach
                                                 </select>
                                                 <label class="fa fa-flash" rel="tooltip" title="Impact"></label>
                                             </div>
@@ -130,9 +133,9 @@ Incident Creation
 										<div class="col-md-4">
 											<div class="icon-addon addon-sm">
 												<select class="form-control" name="urgency" style="background-color: #fafafa">
-													<option value="1">Low</option>
-													<option value="2">Medium</option>
-													<option value="3">High</option>
+                                                    @foreach(App\Urgency::all() as $urgency)
+													<option value="{{$urgency->UrgencyID}}">{{$urgency->UrgencyType}}</option>
+                                                    @endforeach
 												</select>
 												<label class="fa fa-fire" rel="tooltip" title="Urgency"></label>
 											</div>
@@ -141,24 +144,13 @@ Incident Creation
                                         <div class="col-md-4">
                                             <div class="icon-addon addon-sm">
                                                 <select class="form-control" name="priority" style="background-color: #fafafa">
-                                                    <option value="1">Low</option>
-                                                    <option value="2">Medium</option>
-                                                    <option value="3">High</option>
-                                                    <option value="4">Very High</option>
-                                                    <option value="5">Urgent</option>
+                                                    @foreach(App\Priority::all() as $priority)
+                                                    <option value="{{$priority->PriorityID}}">{{$priority->PriorityType}}</option>
+                                                    @endforeach
                                                 </select>
                                                 <label class="fa fa-fire" rel="tooltip" title="Urgency"></label>
                                             </div>
                                         </div>
-									</div>
-                                </fieldset>
-                                <fieldset>
-									<div class="form-group">
-										<label class="control-label col-md-2 col-lg-2">Description <span class="text-danger">*</span></label>
-										<div class="col-md-10 col-lg-10">
-											<textarea class="form-control" rows="4" name="description" style="background-color: #fafafa"></textarea>
-											<small class="text-danger">{{$errors->first('description')}}</small>
-										</div>
 									</div>
                                 </fieldset>
                                 <fieldset>

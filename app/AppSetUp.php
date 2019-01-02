@@ -11,15 +11,11 @@ class AppSetUp extends Model
 	protected $table = 'AppSetUp';
     public static function getAppSetup()
     {
-        $user = Session::get('user.0.UserID');
-        $appSetup = DB::table('AppSetup')->where('UserID', $user)->get();
-        // $layout = $appSetup[0]->Layouts;
-        // $layouts = json_decode($layout, true);
-		
-		// $fh = $layouts[0]['fh'];
-
-		// dd($fh);
-        return $appSetup;
-        // return dd($appSetup);
+	    $user = Session::get('user.0.UserID');
+	    $Setup = DB::table('AppSetUp')->where('UserID', $user)->get();
+	    if(count($Setup) == 0 ){
+	    	return null;
+	    }
+	    return $Setup;
     }
 }

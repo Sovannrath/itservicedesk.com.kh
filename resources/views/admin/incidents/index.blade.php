@@ -322,7 +322,7 @@ Incident Management
                 '<div class="inbox-info-bar" style="padding:10px; margin-right:0px;">'+
                     '<div>'+
                         '<img src="'+ profile +'" alt="me" class="away">'+
-                        '<a href="#" id="Employee' + d.EmployeeID + '"><strong>'+ d.EmployeeName +'</strong></a>'+
+                        '<a href="#" id="Employee' + d.EmployeeID + '"><strong>'+ d.LastName +' '+ d.FirstName+'</strong></a>'+
                         '<span class="hidden-mobile" style="padding-left:50px">  <i class="fa fa-calendar"></i> '+ toDateFormat+ ' '+ toTimeFormat +'</span>'+
                     '</div>'+
                 '</div>'+
@@ -379,9 +379,20 @@ Incident Management
                     {"data": "CaseID"},
                     {"data": "Subject"},
                     {"data": "Description"},
-                    {"data": "Status"},
-                    {"data": "Priority"},
-                    {"data": "CreatedDate"},
+                    {"data": "StatusType"},
+                    {"data": "PriorityType",
+                        "render": function ( data, type, row, meta ) {
+                            return data;
+                            // return d;
+                        }
+                    },
+                    {"data": "CreatedDate",
+                        "render": function ( data, type, row, meta ) {
+                            var d = new Date(data);
+                            return (d.getDate() + '/' + (d.getMonth()+1) + '/' +  d.getFullYear());
+                            // return d;
+                        }
+                    },
                     {"data": "AttachFile"},
                 ],
             "order": [[1, 'desc']],

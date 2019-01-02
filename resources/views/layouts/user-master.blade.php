@@ -49,6 +49,7 @@
 		<link rel="apple-touch-startup-image" href="{{ asset('img/splash/ipad-portrait.png') }}" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 		<link rel="apple-touch-startup-image" href="{{ asset('img/splash/iphone.png') }}" media="screen and (max-device-width: 320px)">
 	</head>
+    @if(count(App\AppSetUp::getAppSetup()) > 0)
     @foreach(App\AppSetUp::getAppSetup() as $SetUp)
 
     @php
@@ -87,6 +88,7 @@
     @endphp
 	<body class="{{$space.$mot}}{{$space.$theme}}{{$space.$other_opt}}{{$space.$rtl}}{{$space.$fh}}{{$space.$fn}}{{$space.$fr}}{{$space.$ff}}{{$space.$ic}}">
 	@endforeach
+    @endif
     @include('user.partials.nav-left')
 		@include('user.partials.nav-head')
 

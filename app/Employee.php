@@ -35,12 +35,26 @@ class Employee extends Model
     // }
     public static function getEmployeeByID($EmployeeID){
         $employee = DB::table('Employee')->where('EmployeeID', $EmployeeID)->first();
-        return $employee;
+        if(coount($employee)>0){
+	        return $employee;
+        }
+        return false;
     }
     public static function getEmployeeByEmail($Email)
     {
        $employee = DB::table('Employee')->where('Email', $Email)->first();
-        return $employee;
+       if(count($employee) > 0){
+	       return $employee;
+       }
+       return false;
     }
+
+	public static function getEmployeeName($EmployeeID){
+		$result = Employee::where('EmployeeID', '=', $EmployeeID)->first();
+		if(count($result) > 0){
+			return $result->LastName.' '.$result->FirstName;
+		}
+		return false;
+	}
 
 }

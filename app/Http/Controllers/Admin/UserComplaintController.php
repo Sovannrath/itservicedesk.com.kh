@@ -20,7 +20,7 @@ class UserComplaintController extends Controller
 	}
 	public function ajaxAllComplaints(){
 		$complaints = DB::table('Employee')
-			->join('UserComplaints','UserComplaints.EmployeeID','=','Employee.EmployeeID')
+			->join('UserComplaints','UserComplaints.RejectedBy','=','Employee.EmployeeID')
 			->select('UserComplaints.*', 'Employee.LastName', 'Employee.FirstName')
 			->get();
 //		$complaints = UserComplaint::all();

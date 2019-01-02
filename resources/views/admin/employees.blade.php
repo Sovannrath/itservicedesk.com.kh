@@ -3,7 +3,6 @@
 Employee Accounts
 @endsection
 @section('style_css')
-@include('admin.scripts.employees_ajax')
 <!-- Add the slick-theme.css if you want default styling -->
 <link rel="stylesheet" type="text/css" href="{{ asset('slick/slick.css') }}"/>
 <!-- Add the slick-theme.css if you want default styling -->
@@ -49,10 +48,10 @@ Employee Accounts
                         <section class="regular">
                             @foreach($employees as $employee)
                             <div class="col-sm-3 col-xs-12" id="load-profile">
-                                <a href="#"> <div id="Employee{{$employee->EmployeeID}}" data-value="{{$employee->EmployeeID}}">
+                                <a href="#"> <div id="Employee" data-value="{{$employee->EmployeeID}}">
                                     <center>
                                     @if($employee->ProfileImage != null)
-                                    <img src="{{$employee->ProfileImage}}" style="border-radius:100%; height: 150px; width: 150px; border:5px solid #eee;" alt="Profile Image" class="" />
+                                    <img src="{{asset($employee->ProfileImage)}}" style="border-radius:100%; height: 150px; width: 150px; border:5px solid #eee;" alt="Profile Image" class="" />
                                     @elseif($employee->Gender == 'F')
                                     <img class="img-responsive" src="{{asset('img/user-profile/Female.png') }}" style="border-radius:100%; max-width: 150px; border:5px solid #eee;" alt="Profile Image" class="" />
                                     @else($employee->Gender == 'M')
@@ -296,35 +295,19 @@ $(document).ready(function() {
             // instead of a settings object
         ]
     });
-  $("#smart-mod-eg1").click(function(e) {
-            $.SmartMessageBox({
-                title : "Smart Alert!",
-                content : "This is a confirmation box. Can be programmed for button callback",
-                buttons : '[No][Yes]'
-            }, function(ButtonPressed) {
-                if (ButtonPressed === "Yes") {
 
-                    $.smallBox({
-                        title : "Callback function",
-                        content : " You pressed Yes...",
-                        color : "#659265",
-                        iconSmall : "fa fa-check fa-2x fadeInRight animated",
-                        timeout : 4000
-                    });
-                }
-                if (ButtonPressed === "No") {
-                    $.smallBox({
-                        title : "Callback function",
-                        content : " You pressed No...",
-                        color : "#C46A69",
-                        iconSmall : "fa fa-times fa-2x fadeInRight animated",
-                        timeout : 4000
-                    });
-                }
-
-            });
-            e.preventDefault();
-        })
+    $(".regular #Employee").click(function(){
+        var emp_id = $(this).attr('data-value');
+        $.ajax({
+            type: 'get',
+            dataType: 'html',
+            url: '/employee/'+emp_id,
+            success:function(response){
+                // console.log(response);
+                $("#emp_detail").html(response);
+            }
+        });
+    });
 });
 </script>
 @endsection

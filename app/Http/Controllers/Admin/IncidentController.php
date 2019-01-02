@@ -84,7 +84,7 @@ class IncidentController extends Controller
 		if($incident->CcManager == 1){
 			$this->sendNotifyManager($incident);
 		}
-	    $this->sendMailCreate($incident);
+//	    $this->sendMailCreate($incident);
 //		$this->sendNotify($incident);
 		$this->sendNotifyOperator($incident);
 //	    $this->sendUpdateNotifyToOwner($getID, $incident);
@@ -204,9 +204,9 @@ class IncidentController extends Controller
 			$Description = json_encode(['EmployeeID'=>$getEmpID, 'Subject'=>$subject, 'Description'=>$description]);
 			$Reason = $request->input('reason');
 			$RejectedBy = $this->getEmployeeID();
-			$AddedDate = Carbon::now();
+			$CreatedDate = Carbon::now();
 			$Timestamps = Carbon::now();
-			$CloseDate = null;
+			$UpdatedDate = null;
 			$UsersMaintains = $this->getEmployeeID();
 		$data = [
 			'ComplaintID'=> $this->getLastComplaintID(),
@@ -217,9 +217,9 @@ class IncidentController extends Controller
 			'Description' => $Description,
 			'Reason'=>$Reason,
 			'RejectedBy'=>$RejectedBy,
-			'AddedDate'=>$AddedDate,
+			'CreatedDate'=>$CreatedDate,
 			'Timestamps'=>$Timestamps,
-			'CloseDate'=>$CloseDate,
+			'UpdatedDate'=>$UpdatedDate,
 			'UsersMaintains'=>$UsersMaintains
 			];
 //		dd($data);
@@ -232,9 +232,9 @@ class IncidentController extends Controller
 				'Description' => $Description,
 				'Reason'=>$Reason,
 				'RejectedBy'=>$RejectedBy,
-				'AddedDate'=>$AddedDate,
+				'CreatedDate'=>$CreatedDate,
 				'Timestamp'=>$Timestamps,
-				'CloseDate'=>$CloseDate,
+				'UpdatedDate'=>$UpdatedDate,
 				'UsersMaintains'=>$UsersMaintains
 			]);
 			if($result){
@@ -258,9 +258,18 @@ class IncidentController extends Controller
     }
 	public function getLaseCaseID(){
 
-		$Incident = DB::select(DB::RAW('EXEC SelectAllIncidentCaseID'));
-		$CaseID = $Incident[0]->AllCaseID;
-//		dd($CaseID);
+		$Incident = DB::table('UserComplaints')
+			->rightJoin('Incident', 'UserComplaints.CaseID','=','Incident.CaseID')
+			->select(DB::RAW('CONCAT(UserComplaints.CaseID, Incident.CaseID) AS AllCaseID'))
+			->orderBy('AllCaseID', 'DESC')
+			->get();
+//		dd($Incident);
+		if(count($Incident) == 0){
+			return 'INC000001';
+		}
+		foreach($Incident as $incident){
+			$CaseID = $incident->AllCaseID;
+		}
 		$split_Case = preg_split('#(?<=[a-z])(?=\d)#i', $CaseID);
 		$insertCase = $split_Case[1]+1;
 		$width = 6;
@@ -270,6 +279,9 @@ class IncidentController extends Controller
 	}
 	public function getLastComplaintID(){
 		$getLastCompID = UserComplaint::select('ComplaintID')->max('ComplaintID');
+		if(count($getLastCompID)==0){
+			return 'COMP0001';
+		}
 		$split_ID = preg_split('#(?<=[a-z])(?=\d)#i', $getLastCompID);
 		$insertCompID = $split_ID[1]+1;
 		$width = 4;
@@ -317,10 +329,15 @@ class IncidentController extends Controller
 	*/
 
 	//
-	public function ajax_call()
+	public function ajaxGetIncidents()
 	{
-		$incidents = DB::select('EXEC GetIncident');
-
+//		$incidents = DB::select('EXEC GetIncident');
+		$incidents = DB::table('Incident')
+			->join('Status', 'Incident.Status', '=', 'Status.StatusID')
+			->join('Priority','Incident.Priority','=','Priority.PriorityID')
+			->join('Employee', 'Employee.EmployeeID', '=', 'Incident.EmployeeID')
+			->select('Incident.*', 'Priority.PriorityType', 'Status.StatusType', 'Employee.LastName', 'Employee.FirstName')
+			->get();
 //		dd($incidents);
 		$data =json_encode(['data'=>$incidents], true);
 //		$status = $incidents[0]->Status;

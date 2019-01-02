@@ -10,7 +10,7 @@
           @if(!$Employee)
           <img src="{{asset('img/user-profile/Male.png')}}" alt="me" class="online" />
           @elseif($Employee->ProfileImage != '')
-          <img src="{{$Employee->ProfileImage}}" alt="me" class="online" />
+          <img src="{{asset($Employee->ProfileImage)}}" alt="me" class="online" />
           @else
           <img src="{{asset('img/user-profile/Male.png')}}" alt="me" class="online" />
           @endif

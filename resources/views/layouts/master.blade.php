@@ -3,6 +3,7 @@
 <html lang="en-us">
 @include('admin.partials.head')
 	{{-- #BODY --}}
+@if(count(App\AppSetUp::getAppSetup()) > 0)
 	@foreach(App\AppSetUp::getAppSetup() as $SetUp)
 
 		@php
@@ -41,6 +42,7 @@
 		@endphp
 		<body class="{{$space.$mot}}{{$space.$theme}}{{$space.$other_opt}}{{$space.$rtl}}{{$space.$fh}}{{$space.$fn}}{{$space.$fr}}{{$space.$ff}}{{$space.$ic}}">
 	@endforeach
+@endif
 		{{-- #HEADER --}}
 			@include('admin.partials.dashboard-header')
 		{{-- END HEADER --}}

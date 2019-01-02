@@ -1,12 +1,16 @@
 
 <!-- widget content -->
 <div class="widget-body" id="emp_detail">
-            @foreach($data as $value)
-                @php
-                $managerID = $value->Manager;
-                $manager = App\Employee::where('EmployeeID','=', $managerID)->first();
+        @foreach($data as $value)
+            @php
+            $managerID = $value->Manager;
+            $manager = App\Employee::where('EmployeeID','=', $managerID)->first();
+            if(count($manager)== 0){
+                $managerFullName = '';
+            }else{
                 $managerFullName = $manager->LastName.' '.$manager->FirstName;
-                @endphp
+            }
+            @endphp
             <div class="col-sm-4">
               <dl class="dl-horizontal">
                       <dt>Employee ID : </dt>
@@ -79,7 +83,7 @@
                 <a class="btn icon-btn btn-lg btn-warning pull-right" style="font-size: 12px" href="/sendmail/{{$value->Email}}"><span class="glyphicon btn-glyphicon glyphicon-send img-circle" style="color:#FF9800"></span>Send Mail</a>
               <div>
                 @if($value->ProfileImage != null)
-                <img src="{{$value->ProfileImage}}" style="margin: 5px; width: 150px; height:150px; border-radius:100px; border:5px solid #eee;" alt="me" class="" />
+                <img src="{{asset($value->ProfileImage)}}" style="margin: 5px; width: 150px; height:150px; border-radius:100px; border:5px solid #eee;" alt="me" class="" />
                 @elseif($value->ProfileImage == 'F')
                   <img style="width: 150px; height:150px; border: 3px solid grey; border-radius: 100%;" id="blah" src="{{asset('img/user-profile/Female.png')}}" alt="your image" />
                 @else

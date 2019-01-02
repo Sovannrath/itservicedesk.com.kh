@@ -533,7 +533,7 @@
 		            		@foreach(App\Employee::all() as $employees)
 				                <li><div id="Employee{{$employees->EmployeeID}}" data-value="{{$employees->EmployeeID}}" class="text-center" style="padding: 2px; border: 1px solid #eee">
 				                    @if($employees->ProfileImage != null)
-				                    	<img src="{{$employees->ProfileImage}}" style="margin: 5px; width: 150px; height:150px; border-radius:100px; border:5px solid #eee;" alt="Profile Image" class="" />
+				                    	<img src="{{asset($employees->ProfileImage)}}" style="margin: 5px; width: 150px; height:150px; border-radius:100px; border:5px solid #eee;" alt="Profile Image" class="" />
 				                    @elseif($employees->Gender == 'F')
 					                	<img src="{{asset('img/user-profile/Female.png') }}" style="margin: 5px; width: 150px; height:150px; border-radius:100px; border:5px solid #eee;" alt="Profile Image" class="" />
 				                    @else($employees->Gender == 'M')

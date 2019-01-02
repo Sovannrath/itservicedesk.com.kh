@@ -12,7 +12,7 @@ Click here to confirm your identity
 <p>Default Password: ERP@2018</p>
 <p>Reason: {{ $userData[0]->Reason }}</p>
 <p>The link will be expired within a week and can be used only once. If the link above is not displayed or does not work, copy and paste the link below to the address bar of your browser:</p>
-<p style="font-size: 12px; text-align: center">http://itservicedesk.com.kh:800/api/user/approve/UserID={{$userData[0]->UserID}}/RequestID={{$userData[0]->RequestID}}</p>
+<p style="font-size: 12px; text-align: center">{{ url('/user-confirm/'.$userData[0]->UserID.'/'.$userData[0]->RequestID)}}</p>
 
 <p><center>Best Regards,<br>
 IT Operator Service and Group</center></p>

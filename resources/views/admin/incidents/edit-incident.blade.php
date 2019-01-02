@@ -183,7 +183,7 @@ Incident Edition
                                         <div class="col-md-4">
                                             <div class="icon-addon addon-sm">
                                                 <i class="icon-append fa fa-user"></i>
-                                                <input type="text" class="form-control"  value="{{ App\GlobalDeclare::getEmployeeName($Incident->AssignedTo) }}" name="assign" style="background-color: #fafafa" readonly>
+                                                <input type="text" class="form-control"  value="{{ App\Employee::getEmployeeName($Incident->AssignedTo) }}" name="assign" style="background-color: #fafafa" readonly>
                                             </div>
                                         </div>
                                         <label class="control-label col-md-2">Attach files</label>
